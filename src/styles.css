@@ -61,7 +61,18 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@theme inline {
+  --color-secondary-brand: var(--secondary-brand);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline-color);
+  --color-outline-variant: var(--outline-variant);
+}
+
 :root {
+  --secondary-brand: #FF6B00;
+  --on-surface-variant: #4A4A4A;
+  --outline-color: #E5E5E5;
+  --outline-variant: #F5F5F5;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
