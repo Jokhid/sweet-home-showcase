@@ -12,38 +12,31 @@ const contactSchema = z.object({
 export const submitContact = createServerFn({ method: "POST" })
   .inputValidator((input) => contactSchema.parse(input))
   .handler(async ({ data }) => {
-    const lovableKey = process.env.LOVABLE_API_KEY;
-    const gKey = process.env.GOOGLE_SHEETS_API_KEY;
-    const sheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
-    if (!lovableKey) throw new Error("Missing LOVABLE_API_KEY");
-    if (!gKey) throw new Error("Missing GOOGLE_SHEETS_API_KEY");
-    if (!sheetId) throw new Error("Missing GOOGLE_SHEETS_SPREADSHEET_ID");
+    const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
 
-    const range = "Sheet1!A:F";
-    const url = `https://connector-gateway.lovable.dev/google_sheets/v4/spreadsheets/${sheetId}/values/${range}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
+    if (!webhookUrl) {
+      throw new Error("Missing GOOGLE_SHEETS_WEBHOOK_URL");
+    }
 
-    const row = [
-      new Date().toISOString(),
-      data.name,
-      data.phone,
-      data.email,
-      data.topic,
-      data.message,
-    ];
-
-    const res = await fetch(url, {
+    const response = await fetch(webhookUrl, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${lovableKey}`,
-        "X-Connection-Api-Key": gKey,
-        "Content-Type": "application/json",
+        "Content-Type": "text/plain;charset=utf-8",
       },
-      body: JSON.stringify({ values: [row] }),
+      body: JSON.stringify({
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        topic: data.topic,
+        message: data.message,
+        origin: "Web José Carlos Hidalgo",
+      }),
     });
 
-    if (!res.ok) {
-      const text = await res.text();
-      throw new Error(`Google Sheets append failed (${res.status}): ${text}`);
+    const text = await response.text();
+
+    if (!response.ok) {
+      throw new Error(`Google Sheets webhook failed (${response.status}): ${text}`);
     }
 
     return { success: true };
