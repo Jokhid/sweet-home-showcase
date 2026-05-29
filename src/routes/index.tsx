@@ -290,8 +290,8 @@ function TrustStats() {
 
 function Diagnosis() {
   const items = [
-    { n: "01", t: "Ingresos y estabilidad", d: "¿Qué pasaría si mañana no pudieras facturar? Aseguramos tu motor financiero principal.", img: 2 },
-    { n: "02", t: "Hipoteca y endeudamiento", d: "Revisión de condiciones y viabilidad para que tu casa sea un activo, no una carga.", img: 3 },
+    { n: "01", t: "Ingresos y estabilidad", d: "¿Qué pasaría si mañana no pudieras facturar? Aseguramos tu motor financiero principal.", img: 3 },
+    { n: "02", t: "Hipoteca y endeudamiento", d: "Revisión de condiciones y viabilidad para que tu casa sea un activo, no una carga.", img: 2 },
     { n: "03", t: "Ahorro, pensión y protección", d: "Estrategias de largo plazo para que tu nivel de vida no dependa solo de tu trabajo actual.", img: 4 },
   ];
   return (
