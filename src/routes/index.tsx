@@ -1,4 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { useRef, useState } from "react";
+import { SmoothScroll } from "@/components/SmoothScroll";
+import { submitContact } from "@/lib/contact.functions";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -12,8 +17,13 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const HERO_IMG = "https://lh3.googleusercontent.com/aida/ADBb0ug-vCT7SVs3QtBoux8QXfErk-XR9Y_RCTcxZ3Gv3XnTsBxiEYWU8u92yXMAgslpgIXS1D1i54f1gZRcswk2BGGOLYLzl97JzOXgL5PVTv7M7wVvNpxV5YajAQCr15a7n2GW-MKjQ4_97Fdvo5vM15cqbaInz4D7v3pQRgrg_mrYrEoTKZYz-sh0T2kllDRzPVab7oZc9mcuUMkVN5uSKO5KzZH8QufU7m0Up1fRoHdpaW2hfC2f0yBjwIGc";
-const ABOUT_IMG = "https://lh3.googleusercontent.com/aida/ADBb0uhMA4Jivhq7ZDDARdEwtIWCcEAnX-m0NGbk-n9CkgPR2H6GDLP-IuPjkr4ko57cImINfzMkPmFajplWAtIqQ-pIDV8sZ-2lU0U1kJtzfVtFjKEfHK-hOSoZzlINnFqraObdf4CFUsI_nGDatp4mfICoFRXWAvb-kROLwFIDpBAUOJQvCCZ_i779kegbItC0dMWB5htJwjjsEYIxAtfVYP_j0eUiqtq_DpIaYjzNoit_5RpZlMginIoam634";
+const EMAIL = "josecarlos@hilolegal.es";
+const PHONE_DISPLAY = "647 50 60 40";
+const WHATSAPP = "https://wa.me/34647506040";
+
+// Photos in /public
+const IMG = (n: number) => `/${n}.png`;
+const LOGO = "/logo.png";
 
 const Icon = ({ name, className = "" }: { name: string; className?: string }) => (
   <span className={`material-symbols-outlined ${className}`}>{name}</span>
@@ -47,300 +57,705 @@ const faqs = [
   { q: "¿Atiendes presencialmente en Alicante?", a: "Atiendo presencialmente en toda la zona de Alicante, Altea y Marina Baixa. Si estás fuera, realizo consultas por videollamada con la misma eficacia." },
 ];
 
+// ----- Motion primitives -----
+const spring = { type: "spring" as const, stiffness: 90, damping: 20, mass: 0.9 };
+const easeOutExpo = [0.16, 1, 0.3, 1] as const;
+
+// Curtain reveal: a mask wipes upward to expose content
+function Curtain({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const reduce = useReducedMotion();
+  if (reduce) return <div className={className}>{children}</div>;
+  return (
+    <motion.div
+      className={`relative overflow-hidden ${className}`}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      <motion.div
+        variants={{
+          hidden: { y: "100%" },
+          visible: { y: "0%", transition: { duration: 1.05, ease: easeOutExpo, delay } },
+        }}
+      >
+        {children}
+      </motion.div>
+      <motion.div
+        aria-hidden
+        className="absolute inset-0 bg-[#FF6B00] origin-bottom"
+        variants={{
+          hidden: { scaleY: 1 },
+          visible: { scaleY: 0, transition: { duration: 1.05, ease: easeOutExpo, delay } },
+        }}
+        style={{ transformOrigin: "top" }}
+      />
+    </motion.div>
+  );
+}
+
+function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      initial={reduce ? false : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ ...spring, delay }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 function Index() {
   return (
-    <div className="bg-white text-[#1A1A1A]">
-      {/* Header */}
-      <header className="sticky top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-[#E5E5E5]">
-        <nav className="flex justify-between items-center w-full px-6 py-6 max-w-[1200px] mx-auto">
-          <a className="text-xl font-bold tracking-tighter uppercase" href="#">José Carlos Hidalgo</a>
-          <div className="hidden md:flex items-center gap-10">
-            {[["Servicios", "#services"], ["Método", "#method"], ["Sobre mí", "#about"], ["FAQ", "#faq"], ["Contacto", "#contact"]].map(([l, h]) => (
-              <a key={h} className="text-sm font-medium hover:text-[#FF6B00] transition-colors" href={h}>{l}</a>
-            ))}
-          </div>
-          <a className="bg-[#1A1A1A] text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-[#FF6B00] transition-all" href="https://wa.me/34647506040">WhatsApp</a>
-        </nav>
-      </header>
+    <div className="bg-white text-[#1A1A1A] selection:bg-[#FF6B00] selection:text-white">
+      <SmoothScroll />
+      <Header />
 
       <main>
-        {/* Hero */}
-        <section className="relative pt-20 pb-32 overflow-hidden border-b border-[#E5E5E5]">
-          <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-            <div className="lg:col-span-7 space-y-10">
-              <div className="inline-flex items-center gap-2 text-[#FF6B00] font-bold text-xs uppercase tracking-widest">
-                <span className="w-8 h-[2px] bg-[#FF6B00]" />
-                ASESORÍA FINANCIERA E HIPOTECARIA
-              </div>
-              <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight text-balance">
-                Protege tus ingresos, tu vivienda y tu futuro financiero
-              </h1>
-              <p className="text-xl text-[#4A4A4A] max-w-xl leading-relaxed">
-                Asesoramiento financiero e hipotecario para autónomos y familias que quieren tomar decisiones importantes sin improvisar. Analizo tu situación, detecto riesgos y te propongo un plan claro para proteger lo que has construido.
-              </p>
-              <div className="flex flex-wrap gap-6 pt-4">
-                <a className="bg-[#FF6B00] text-white px-10 py-5 font-bold uppercase text-xs tracking-widest hover:bg-[#1A1A1A] transition-all shadow-xl shadow-[#FF6B00]/10" href="#contact">Solicitar diagnóstico gratuito</a>
-                <a className="border border-[#1A1A1A] text-[#1A1A1A] px-10 py-5 font-bold uppercase text-xs tracking-widest hover:bg-[#1A1A1A] hover:text-white transition-all" href="#services">Ver servicios</a>
-              </div>
-            </div>
-            <div className="lg:col-span-5">
-              <div className="relative group">
-                <div className="absolute -inset-4 border border-[#E5E5E5] -z-10 group-hover:border-[#FF6B00] transition-colors" />
-                <img alt="Mortgage planning" className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700" src={HERO_IMG} />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Trust stats */}
-        <section className="py-16 border-b border-[#E5E5E5]">
-          <div className="max-w-[1200px] mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 divide-y md:divide-y-0 md:divide-x divide-[#E5E5E5]">
-              {[
-                { i: "visibility", t: "360º visión financiera y patrimonial" },
-                { i: "map", t: "1 plan claro antes de contratar" },
-                { i: "medical_services", t: "0€ diagnóstico inicial" },
-              ].map((s, idx) => (
-                <div key={s.i} className={`flex flex-col items-center md:items-start gap-4 ${idx === 0 ? "md:pl-0" : "md:pl-12"}`}>
-                  <Icon name={s.i} className="text-[#FF6B00] text-4xl" />
-                  <p className="text-sm font-bold uppercase tracking-wider">{s.t}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Initial Diagnosis */}
-        <section className="py-[100px]">
-          <div className="max-w-[1200px] mx-auto px-6">
-            <div className="mb-24 space-y-6">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-balance">Antes de decidir, mira bien dónde estás expuesto</h2>
-              <div className="w-20 h-2 bg-[#FF6B00]" />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-              {[
-                { n: "01", t: "Ingresos y estabilidad", d: "¿Qué pasaría si mañana no pudieras facturar? Aseguramos tu motor financiero principal." },
-                { n: "02", t: "Hipoteca y endeudamiento", d: "Revisión de condiciones y viabilidad para que tu casa sea un activo, no una carga." },
-                { n: "03", t: "Ahorro, pensión y protección", d: "Estrategias de largo plazo para que tu nivel de vida no dependa solo de tu trabajo actual." },
-              ].map((x) => (
-                <div key={x.n} className="space-y-8">
-                  <div className="text-[#FF6B00] font-black text-6xl opacity-20">{x.n}</div>
-                  <h3 className="text-2xl font-bold">{x.t}</h3>
-                  <p className="text-[#4A4A4A] leading-relaxed">{x.d}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Problem */}
-        <section className="py-[100px] bg-[#1A1A1A] text-white">
-          <div className="max-w-[1200px] mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
-              <div className="lg:sticky lg:top-32 space-y-8">
-                <h2 className="text-4xl md:text-6xl font-bold tracking-tight">La mayoría toma decisiones financieras demasiado tarde</h2>
-                <p className="text-xl text-gray-400">Evitar los errores comunes es el primer paso para una economía sana. Mi trabajo es anticiparme a ellos.</p>
-              </div>
-              <div className="space-y-12">
-                {errors.map((e) => (
-                  <div key={e.n} className="p-10 border border-white/10 hover:border-[#FF6B00] transition-colors">
-                    <span className="text-[#FF6B00] font-bold text-xs uppercase tracking-[0.2em] mb-6 block">Error Común {e.n}</span>
-                    <h4 className="text-2xl font-bold mb-4">{e.title}</h4>
-                    <p className="text-gray-400 leading-relaxed">{e.text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Services */}
-        <section id="services" className="py-[100px]">
-          <div className="max-w-[1200px] mx-auto px-6">
-            <div className="mb-24 space-y-6">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Soluciones para proteger tu economía</h2>
-              <p className="text-xl text-[#4A4A4A] max-w-2xl">Un enfoque integral para que todas las piezas de tu puzzle financiero encajen a la perfección.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#E5E5E5]">
-              {services.map((s) => (
-                <div key={s.title} className="bg-white p-12 hover:bg-[#FF6B00] group transition-colors">
-                  <Icon name={s.icon} className="text-[#FF6B00] text-4xl mb-8 group-hover:text-white transition-colors" />
-                  <h3 className="text-xl font-bold mb-4 group-hover:text-white transition-colors">{s.title}</h3>
-                  <p className="text-[#4A4A4A] mb-10 group-hover:text-white/80 transition-colors">{s.text}</p>
-                  <a className="text-xs font-black uppercase tracking-widest flex items-center gap-2 group-hover:text-white transition-colors" href="#contact">
-                    Saber más <Icon name="arrow_forward" className="text-sm" />
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Method */}
-        <section id="method" className="py-[100px] border-y border-[#E5E5E5]">
-          <div className="max-w-[1200px] mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
-              <div className="space-y-12">
-                <h2 className="text-4xl md:text-6xl font-bold tracking-tight">Decidir bien empieza por entender tu situación</h2>
-                <div className="space-y-12">
-                  {method.map((m) => (
-                    <div key={m.n} className="flex gap-8">
-                      <span className="text-3xl font-black text-[#FF6B00]">{m.n}</span>
-                      <div>
-                        <h4 className="text-xl font-bold mb-2 uppercase tracking-tight">{m.title}</h4>
-                        <p className="text-[#4A4A4A] leading-relaxed">{m.text}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="relative flex items-center justify-center">
-                <div className="w-full aspect-square border border-[#E5E5E5] rounded-full flex items-center justify-center p-12">
-                  <div className="w-full h-full border border-[#FF6B00] flex items-center justify-center rounded-full">
-                    <div className="text-center space-y-2">
-                      <Icon name="balance" className="text-[#FF6B00] text-6xl" />
-                      <p className="font-bold uppercase tracking-widest text-xs">Equilibrio Financiero</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* About */}
-        <section id="about" className="py-[100px]">
-          <div className="max-w-[1200px] mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
-              <div className="lg:col-span-5">
-                <div className="relative group">
-                  <div className="absolute inset-0 border border-[#FF6B00] translate-x-4 translate-y-4 -z-10 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500" />
-                  <img alt="José Carlos Hidalgo" className="w-full h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-1000" src={ABOUT_IMG} />
-                </div>
-              </div>
-              <div className="lg:col-span-7 space-y-10">
-                <div className="space-y-4">
-                  <span className="text-[#FF6B00] font-bold text-xs uppercase tracking-widest">SOBRE MÍ</span>
-                  <h2 className="text-5xl font-bold tracking-tight">José Carlos Hidalgo Ortega</h2>
-                  <p className="text-2xl font-medium text-[#FF6B00] italic">Tu compañero de viaje hacia la tranquilidad económica.</p>
-                </div>
-                <div className="space-y-6 text-xl text-[#4A4A4A] leading-relaxed">
-                  <p>Soy asesor financiero, gestor hipotecario y administrador de fincas. Mi enfoque no es vender productos, sino gestionar personas y sus miedos financieros.</p>
-                  <p>He visto a demasiadas familias sufrir por decisiones tomadas sin información. Mi misión es que tú seas el dueño de tus números, y no al revés.</p>
-                </div>
-                <div className="flex flex-wrap gap-4 pt-4">
-                  {["Autónomos", "Familias", "Hipotecas", "Protección"].map((t) => (
-                    <span key={t} className="border border-[#E5E5E5] px-6 py-2 text-xs font-bold uppercase tracking-widest">{t}</span>
-                  ))}
-                </div>
-                <div className="flex items-center gap-4 text-[#1A1A1A] font-bold">
-                  <Icon name="location_on" className="text-[#FF6B00]" />
-                  <span className="text-sm uppercase tracking-widest">Alicante · Altea · Marina Baixa · Online</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section id="faq" className="py-[100px] bg-[#F5F5F5]">
-          <div className="max-w-3xl mx-auto px-6">
-            <h2 className="text-4xl font-bold tracking-tight text-center mb-20 uppercase">Preguntas Frecuentes</h2>
-            <div className="space-y-px bg-[#E5E5E5]">
-              {faqs.map((f) => (
-                <details key={f.q} className="group bg-white">
-                  <summary className="flex justify-between items-center cursor-pointer p-8 list-none text-lg font-bold uppercase tracking-tight">
-                    <span>{f.q}</span>
-                    <Icon name="expand_more" className="group-open:rotate-180 transition-transform" />
-                  </summary>
-                  <div className="px-8 pb-8 text-[#4A4A4A] leading-relaxed">{f.a}</div>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Contact */}
-        <section id="contact" className="py-[100px]">
-          <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-32">
-            <div className="space-y-12">
-              <h2 className="text-5xl md:text-6xl font-bold tracking-tight">Hablemos de tu tranquilidad financiera</h2>
-              <p className="text-xl text-[#4A4A4A] leading-relaxed">Rellena el formulario y me pondré en contacto contigo en menos de 24 horas para agendar tu diagnóstico gratuito.</p>
-              <div className="space-y-10 pt-10 border-t border-[#E5E5E5]">
-                {[
-                  { i: "call", label: "Llámanos", v: "647 50 60 40" },
-                  { i: "mail", label: "Email", v: "jose.hidalgo@nnespana.es" },
-                ].map((c) => (
-                  <div key={c.i} className="flex items-center gap-8 group">
-                    <div className="w-16 h-16 bg-[#1A1A1A] flex items-center justify-center text-white group-hover:bg-[#FF6B00] transition-colors">
-                      <Icon name={c.i} />
-                    </div>
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-widest opacity-50 mb-1">{c.label}</p>
-                      <p className="text-2xl font-bold">{c.v}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <form className="space-y-10" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                  <Field label="Nombre" type="text" placeholder="Tu nombre" />
-                  <Field label="Teléfono" type="tel" placeholder="Tu número" />
-                </div>
-                <Field label="Email" type="email" placeholder="tu@email.com" />
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em]">¿Qué necesitas revisar?</label>
-                  <select className="w-full bg-transparent border-0 border-b border-[#E5E5E5] px-0 py-4 focus:ring-0 focus:border-[#FF6B00] transition-all outline-none">
-                    <option>Diagnóstico General</option>
-                    <option>Nueva Hipoteca</option>
-                    <option>Protección (Autónomos)</option>
-                    <option>Plan de Jubilación</option>
-                    <option>Administración de Fincas</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em]">Mensaje</label>
-                  <textarea rows={4} placeholder="Cuéntanos tu situación" className="w-full bg-transparent border-0 border-b border-[#E5E5E5] px-0 py-4 focus:ring-0 focus:border-[#FF6B00] transition-all outline-none placeholder:text-gray-300" />
-                </div>
-                <button type="submit" className="w-full bg-[#FF6B00] text-white py-6 font-black uppercase text-xs tracking-[0.3em] hover:bg-[#1A1A1A] transition-all shadow-2xl shadow-[#FF6B00]/20">
-                  Enviar Solicitud
-                </button>
-              </form>
-            </div>
-          </div>
-        </section>
+        <Hero />
+        <TrustStats />
+        <Diagnosis />
+        <Problem />
+        <Services />
+        <Method />
+        <About />
+        <FAQ />
+        <Contact />
       </main>
 
-      {/* Footer */}
-      <footer className="bg-[#1A1A1A] py-24 text-white">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-16">
-            <div className="space-y-6 text-center md:text-left">
-              <div className="text-2xl font-black tracking-tighter uppercase">José Carlos Hidalgo</div>
-              <p className="text-gray-500 text-sm tracking-widest uppercase">Professional Financial &amp; Mortgage Advisory.</p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-10">
-              {["Privacidad", "Legal", "Cookies", "LinkedIn"].map((l) => (
-                <a key={l} className="text-[10px] font-bold uppercase tracking-[0.2em] hover:text-[#FF6B00] transition-colors" href="#">{l}</a>
-              ))}
-            </div>
-          </div>
-          <div className="mt-20 pt-10 border-t border-white/5 text-center text-[10px] text-gray-600 uppercase tracking-widest">
-            © 2024 JOSÉ CARLOS HIDALGO. TODOS LOS DERECHOS RESERVADOS.
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
 
-function Field({ label, type, placeholder }: { label: string; type: string; placeholder: string }) {
+function Header() {
+  return (
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ ...spring, delay: 0.1 }}
+      className="sticky top-0 w-full z-50 bg-white/85 backdrop-blur-xl border-b border-[#E5E5E5]"
+    >
+      <nav className="flex justify-between items-center w-full px-6 py-5 max-w-[1200px] mx-auto">
+        <a className="flex items-center gap-3 group" href="#">
+          <motion.img
+            src={LOGO}
+            alt="Logo José Carlos Hidalgo"
+            className="h-9 w-9 object-contain"
+            whileHover={{ rotate: -6, scale: 1.05 }}
+            transition={spring}
+          />
+          <span className="text-base md:text-lg font-bold tracking-tight uppercase">
+            José Carlos Hidalgo
+          </span>
+        </a>
+        <div className="hidden md:flex items-center gap-10">
+          {[["Servicios", "#services"], ["Método", "#method"], ["Sobre mí", "#about"], ["FAQ", "#faq"], ["Contacto", "#contact"]].map(([l, h]) => (
+            <a
+              key={h}
+              className="relative text-sm font-medium text-[#1A1A1A] group"
+              href={h}
+            >
+              <span className="transition-colors group-hover:text-[#FF6B00]">{l}</span>
+              <span className="absolute left-0 -bottom-1 h-[1px] w-full origin-left scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+            </a>
+          ))}
+        </div>
+        <motion.a
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          transition={spring}
+          className="bg-[#1A1A1A] text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-[#FF6B00] transition-colors"
+          href={WHATSAPP}
+        >
+          WhatsApp
+        </motion.a>
+      </nav>
+    </motion.header>
+  );
+}
+
+function Hero() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const imgY = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -40]);
+
+  return (
+    <section ref={ref} className="relative pt-20 pb-32 overflow-hidden border-b border-[#E5E5E5]">
+      <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        <motion.div style={{ y: textY }} className="lg:col-span-7 space-y-10">
+          <FadeUp>
+            <div className="inline-flex items-center gap-3 text-[#FF6B00] font-bold text-xs uppercase tracking-widest">
+              <motion.span
+                initial={{ width: 0 }}
+                animate={{ width: 32 }}
+                transition={{ duration: 0.9, ease: easeOutExpo, delay: 0.4 }}
+                className="h-[2px] bg-[#FF6B00] block"
+              />
+              ASESORÍA FINANCIERA E HIPOTECARIA
+            </div>
+          </FadeUp>
+
+          <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.02] tracking-tight text-balance">
+            {["Protege tus ingresos,", "tu vivienda y tu", "futuro financiero"].map((line, i) => (
+              <Curtain key={i} delay={0.15 + i * 0.1} className="block">
+                <span className="block">{line}</span>
+              </Curtain>
+            ))}
+          </h1>
+
+          <FadeUp delay={0.6}>
+            <p className="text-xl text-[#4A4A4A] max-w-xl leading-relaxed">
+              Asesoramiento financiero e hipotecario para autónomos y familias que quieren tomar decisiones importantes sin improvisar. Analizo tu situación, detecto riesgos y te propongo un plan claro para proteger lo que has construido.
+            </p>
+          </FadeUp>
+
+          <FadeUp delay={0.75}>
+            <div className="flex flex-wrap gap-6 pt-2">
+              <motion.a
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={spring}
+                className="bg-[#FF6B00] text-white px-10 py-5 font-bold uppercase text-xs tracking-widest hover:bg-[#1A1A1A] transition-colors shadow-xl shadow-[#FF6B00]/10"
+                href="#contact"
+              >
+                Solicitar diagnóstico gratuito
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={spring}
+                className="border border-[#1A1A1A] text-[#1A1A1A] px-10 py-5 font-bold uppercase text-xs tracking-widest hover:bg-[#1A1A1A] hover:text-white transition-colors"
+                href="#services"
+              >
+                Ver servicios
+              </motion.a>
+            </div>
+          </FadeUp>
+        </motion.div>
+
+        <div className="lg:col-span-5">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ ...spring, delay: 0.4 }}
+            className="relative group"
+          >
+            <div className="absolute -inset-4 border border-[#E5E5E5] -z-10 transition-colors duration-500 group-hover:border-[#FF6B00]" />
+            <div className="relative overflow-hidden">
+              <motion.img
+                style={{ y: imgY, scale: imgScale }}
+                alt="Asesoramiento financiero e hipotecario"
+                className="w-full h-auto object-cover"
+                src={IMG(1)}
+              />
+              {/* Functional bottom-to-top dark gradient for text legibility */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent" />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TrustStats() {
+  const items = [
+    { i: "visibility", t: "360º visión financiera y patrimonial" },
+    { i: "map", t: "1 plan claro antes de contratar" },
+    { i: "medical_services", t: "0€ diagnóstico inicial" },
+  ];
+  return (
+    <section className="py-16 border-b border-[#E5E5E5]">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:divide-x divide-[#E5E5E5]">
+          {items.map((s, idx) => (
+            <FadeUp key={s.i} delay={idx * 0.1} className={idx === 0 ? "" : "md:pl-12"}>
+              <div className="flex flex-col items-center md:items-start gap-4">
+                <Icon name={s.i} className="text-[#FF6B00] text-4xl" />
+                <p className="text-sm font-bold uppercase tracking-wider text-center md:text-left">{s.t}</p>
+              </div>
+            </FadeUp>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Diagnosis() {
+  const items = [
+    { n: "01", t: "Ingresos y estabilidad", d: "¿Qué pasaría si mañana no pudieras facturar? Aseguramos tu motor financiero principal.", img: 2 },
+    { n: "02", t: "Hipoteca y endeudamiento", d: "Revisión de condiciones y viabilidad para que tu casa sea un activo, no una carga.", img: 3 },
+    { n: "03", t: "Ahorro, pensión y protección", d: "Estrategias de largo plazo para que tu nivel de vida no dependa solo de tu trabajo actual.", img: 4 },
+  ];
+  return (
+    <section className="py-[100px]">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <div className="mb-24 space-y-6 max-w-3xl">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-balance">
+            <Curtain>Antes de decidir, mira bien dónde estás expuesto</Curtain>
+          </h2>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: easeOutExpo }}
+            className="w-20 h-2 bg-[#FF6B00] origin-left"
+          />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {items.map((x, idx) => (
+            <FadeUp key={x.n} delay={idx * 0.1}>
+              <article className="space-y-6 group">
+                <div className="relative overflow-hidden aspect-[4/5]">
+                  <motion.img
+                    src={IMG(x.img)}
+                    alt={x.t}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    initial={{ scale: 1 }}
+                    whileHover={{ scale: 1.06 }}
+                    transition={{ duration: 1.2, ease: easeOutExpo }}
+                  />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/55 to-transparent" />
+                  <div className="absolute bottom-6 left-6 text-white">
+                    <div className="text-[#FF6B00] font-black text-2xl">{x.n}</div>
+                  </div>
+                </div>
+                <h3 className="text-2xl font-bold">{x.t}</h3>
+                <p className="text-[#4A4A4A] leading-relaxed">{x.d}</p>
+              </article>
+            </FadeUp>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Problem() {
+  return (
+    <section className="py-[100px] bg-[#1A1A1A] text-white">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+          <div className="lg:sticky lg:top-32 space-y-8">
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
+              <Curtain>La mayoría toma decisiones financieras demasiado tarde</Curtain>
+            </h2>
+            <FadeUp delay={0.2}>
+              <p className="text-xl text-gray-400">Evitar los errores comunes es el primer paso para una economía sana. Mi trabajo es anticiparme a ellos.</p>
+            </FadeUp>
+          </div>
+          <div className="space-y-12">
+            {errors.map((e, idx) => (
+              <FadeUp key={e.n} delay={idx * 0.1}>
+                <motion.div
+                  whileHover={{ x: 8 }}
+                  transition={spring}
+                  className="p-10 border border-white/10 hover:border-[#FF6B00] transition-colors"
+                >
+                  <span className="text-[#FF6B00] font-bold text-xs uppercase tracking-[0.2em] mb-6 block">Error Común {e.n}</span>
+                  <h4 className="text-2xl font-bold mb-4">{e.title}</h4>
+                  <p className="text-gray-400 leading-relaxed">{e.text}</p>
+                </motion.div>
+              </FadeUp>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Services() {
+  return (
+    <section id="services" className="py-[100px]">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <div className="mb-24 space-y-6 max-w-3xl">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+            <Curtain>Soluciones para proteger tu economía</Curtain>
+          </h2>
+          <FadeUp delay={0.15}>
+            <p className="text-xl text-[#4A4A4A] max-w-2xl">Un enfoque integral para que todas las piezas de tu puzzle financiero encajen a la perfección.</p>
+          </FadeUp>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#E5E5E5]">
+          {services.map((s, idx) => (
+            <FadeUp key={s.title} delay={(idx % 3) * 0.08}>
+              <motion.div
+                whileHover={{ y: -4 }}
+                transition={spring}
+                className="h-full bg-white p-12 hover:bg-[#FF6B00] group transition-colors"
+              >
+                <Icon name={s.icon} className="text-[#FF6B00] text-4xl mb-8 group-hover:text-white transition-colors" />
+                <h3 className="text-xl font-bold mb-4 group-hover:text-white transition-colors">{s.title}</h3>
+                <p className="text-[#4A4A4A] mb-10 group-hover:text-white/80 transition-colors">{s.text}</p>
+                <a className="text-xs font-black uppercase tracking-widest flex items-center gap-2 group-hover:text-white transition-colors" href="#contact">
+                  Saber más <Icon name="arrow_forward" className="text-sm" />
+                </a>
+              </motion.div>
+            </FadeUp>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Method() {
+  return (
+    <section id="method" className="py-[100px] border-y border-[#E5E5E5]">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <div className="space-y-12">
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
+              <Curtain>Decidir bien empieza por entender tu situación</Curtain>
+            </h2>
+            <div className="space-y-12">
+              {method.map((m, idx) => (
+                <FadeUp key={m.n} delay={idx * 0.1}>
+                  <div className="flex gap-8">
+                    <span className="text-3xl font-black text-[#FF6B00]">{m.n}</span>
+                    <div>
+                      <h4 className="text-xl font-bold mb-2 uppercase tracking-tight">{m.title}</h4>
+                      <p className="text-[#4A4A4A] leading-relaxed">{m.text}</p>
+                    </div>
+                  </div>
+                </FadeUp>
+              ))}
+            </div>
+          </div>
+          <FadeUp delay={0.1}>
+            <div className="relative overflow-hidden aspect-square">
+              <motion.img
+                src={IMG(5)}
+                alt="Método de asesoramiento"
+                className="absolute inset-0 w-full h-full object-cover"
+                initial={{ scale: 1.1 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.4, ease: easeOutExpo }}
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
+              <div className="absolute bottom-8 left-8 right-8 text-white space-y-2">
+                <Icon name="balance" className="text-white text-5xl" />
+                <p className="font-bold uppercase tracking-widest text-xs">Equilibrio Financiero</p>
+              </div>
+            </div>
+          </FadeUp>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function About() {
+  return (
+    <section id="about" className="py-[100px]">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
+          <FadeUp className="lg:col-span-5">
+            <div className="relative group">
+              <motion.div
+                initial={{ x: 16, y: 16 }}
+                whileInView={{ x: 16, y: 16 }}
+                whileHover={{ x: 0, y: 0 }}
+                transition={spring}
+                className="absolute inset-0 border border-[#FF6B00] -z-10"
+              />
+              <div className="relative overflow-hidden">
+                <motion.img
+                  alt="José Carlos Hidalgo"
+                  className="w-full h-[600px] object-cover"
+                  src={IMG(6)}
+                  initial={{ scale: 1.08 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.6, ease: easeOutExpo }}
+                />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent" />
+              </div>
+            </div>
+          </FadeUp>
+          <div className="lg:col-span-7 space-y-10">
+            <FadeUp>
+              <div className="space-y-4">
+                <span className="text-[#FF6B00] font-bold text-xs uppercase tracking-widest">SOBRE MÍ</span>
+                <h2 className="text-5xl font-bold tracking-tight">José Carlos Hidalgo Ortega</h2>
+                <p className="text-2xl font-medium text-[#FF6B00] italic">Tu compañero de viaje hacia la tranquilidad económica.</p>
+              </div>
+            </FadeUp>
+            <FadeUp delay={0.1}>
+              <div className="space-y-6 text-xl text-[#4A4A4A] leading-relaxed">
+                <p>Soy asesor financiero, gestor hipotecario y administrador de fincas. Mi enfoque no es vender productos, sino gestionar personas y sus miedos financieros.</p>
+                <p>He visto a demasiadas familias sufrir por decisiones tomadas sin información. Mi misión es que tú seas el dueño de tus números, y no al revés.</p>
+              </div>
+            </FadeUp>
+            <FadeUp delay={0.2}>
+              <div className="flex flex-wrap gap-3 pt-2">
+                {["Autónomos", "Familias", "Hipotecas", "Protección"].map((t) => (
+                  <motion.span
+                    key={t}
+                    whileHover={{ y: -2, backgroundColor: "#1A1A1A", color: "#FFFFFF" }}
+                    transition={spring}
+                    className="border border-[#E5E5E5] px-6 py-2 text-xs font-bold uppercase tracking-widest cursor-default"
+                  >
+                    {t}
+                  </motion.span>
+                ))}
+              </div>
+            </FadeUp>
+            <FadeUp delay={0.3}>
+              <div className="flex items-center gap-4 text-[#1A1A1A] font-bold">
+                <Icon name="location_on" className="text-[#FF6B00]" />
+                <span className="text-sm uppercase tracking-widest">Alicante · Altea · Marina Baixa · Online</span>
+              </div>
+            </FadeUp>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQ() {
+  const [open, setOpen] = useState<number | null>(0);
+  return (
+    <section id="faq" className="py-[100px] bg-[#F5F5F5]">
+      <div className="max-w-3xl mx-auto px-6">
+        <h2 className="text-4xl font-bold tracking-tight text-center mb-20 uppercase">
+          <Curtain>Preguntas Frecuentes</Curtain>
+        </h2>
+        <div className="space-y-px bg-[#E5E5E5]">
+          {faqs.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <FadeUp key={f.q} delay={i * 0.05}>
+                <div className="bg-white">
+                  <button
+                    onClick={() => setOpen(isOpen ? null : i)}
+                    className="w-full flex justify-between items-center text-left p-8 text-lg font-bold uppercase tracking-tight"
+                  >
+                    <span>{f.q}</span>
+                    <motion.span
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={spring}
+                      className="material-symbols-outlined text-[#FF6B00]"
+                    >
+                      expand_more
+                    </motion.span>
+                  </button>
+                  <motion.div
+                    initial={false}
+                    animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+                    transition={{ duration: 0.5, ease: easeOutExpo }}
+                    style={{ overflow: "hidden" }}
+                  >
+                    <div className="px-8 pb-8 text-[#4A4A4A] leading-relaxed">{f.a}</div>
+                  </motion.div>
+                </div>
+              </FadeUp>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  const submit = useServerFn(submitContact);
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    topic: "Diagnóstico General",
+    message: "",
+  });
+
+  const onChange = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      await submit({ data: form });
+      setStatus("ok");
+      setForm({ name: "", phone: "", email: "", topic: "Diagnóstico General", message: "" });
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(err instanceof Error ? err.message : "No se ha podido enviar el formulario.");
+    }
+  }
+
+  return (
+    <section id="contact" className="py-[100px]">
+      <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24">
+        <div className="space-y-12">
+          <h2 className="text-5xl md:text-6xl font-bold tracking-tight">
+            <Curtain>Hablemos de tu tranquilidad financiera</Curtain>
+          </h2>
+          <FadeUp delay={0.1}>
+            <p className="text-xl text-[#4A4A4A] leading-relaxed">
+              Rellena el formulario y me pondré en contacto contigo en menos de 24 horas para agendar tu diagnóstico gratuito.
+            </p>
+          </FadeUp>
+          <div className="space-y-10 pt-10 border-t border-[#E5E5E5]">
+            {[
+              { i: "call", label: "Llámanos", v: PHONE_DISPLAY, href: `tel:+34${PHONE_DISPLAY.replace(/\s/g, "")}` },
+              { i: "mail", label: "Email", v: EMAIL, href: `mailto:${EMAIL}` },
+            ].map((c, idx) => (
+              <FadeUp key={c.i} delay={idx * 0.1}>
+                <motion.a
+                  href={c.href}
+                  whileHover={{ x: 4 }}
+                  transition={spring}
+                  className="flex items-center gap-8 group"
+                >
+                  <div className="w-16 h-16 bg-[#1A1A1A] flex items-center justify-center text-white group-hover:bg-[#FF6B00] transition-colors">
+                    <Icon name={c.i} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-widest opacity-50 mb-1">{c.label}</p>
+                    <p className="text-2xl font-bold break-all">{c.v}</p>
+                  </div>
+                </motion.a>
+              </FadeUp>
+            ))}
+          </div>
+        </div>
+        <FadeUp>
+          <form className="space-y-10" onSubmit={onSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <Field label="Nombre" type="text" placeholder="Tu nombre" value={form.name} onChange={onChange("name")} required />
+              <Field label="Teléfono" type="tel" placeholder="Tu número" value={form.phone} onChange={onChange("phone")} required />
+            </div>
+            <Field label="Email" type="email" placeholder="tu@email.com" value={form.email} onChange={onChange("email")} required />
+            <div className="space-y-2">
+              <label className="text-[10px] font-black uppercase tracking-[0.2em]">¿Qué necesitas revisar?</label>
+              <select
+                value={form.topic}
+                onChange={onChange("topic")}
+                className="w-full bg-transparent border-0 border-b border-[#E5E5E5] px-0 py-4 focus:ring-0 focus:border-[#FF6B00] transition-colors outline-none"
+              >
+                <option>Diagnóstico General</option>
+                <option>Nueva Hipoteca</option>
+                <option>Protección (Autónomos)</option>
+                <option>Plan de Jubilación</option>
+                <option>Administración de Fincas</option>
+              </select>
+            </div>
+            <div className="space-y-2">
+              <label className="text-[10px] font-black uppercase tracking-[0.2em]">Mensaje</label>
+              <textarea
+                rows={4}
+                placeholder="Cuéntanos tu situación"
+                value={form.message}
+                onChange={onChange("message")}
+                className="w-full bg-transparent border-0 border-b border-[#E5E5E5] px-0 py-4 focus:ring-0 focus:border-[#FF6B00] transition-colors outline-none placeholder:text-gray-300"
+              />
+            </div>
+
+            <motion.button
+              whileHover={{ scale: status === "sending" ? 1 : 1.02 }}
+              whileTap={{ scale: status === "sending" ? 1 : 0.98 }}
+              transition={spring}
+              type="submit"
+              disabled={status === "sending"}
+              className="w-full bg-[#FF6B00] text-white py-6 font-black uppercase text-xs tracking-[0.3em] hover:bg-[#1A1A1A] transition-colors shadow-2xl shadow-[#FF6B00]/20 disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {status === "sending" ? "Enviando…" : status === "ok" ? "¡Enviado!" : "Enviar Solicitud"}
+            </motion.button>
+
+            {status === "ok" && (
+              <motion.p
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-sm text-[#1A1A1A] font-bold uppercase tracking-widest"
+              >
+                Gracias. Te contactaré en menos de 24h.
+              </motion.p>
+            )}
+            {status === "error" && (
+              <motion.p
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-sm text-red-600"
+              >
+                {errorMsg || "Algo ha ido mal. Inténtalo de nuevo en unos minutos."}
+              </motion.p>
+            )}
+          </form>
+        </FadeUp>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="bg-[#1A1A1A] py-24 text-white">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-16">
+          <div className="flex items-center gap-4 text-center md:text-left">
+            <img src={LOGO} alt="Logo" className="h-10 w-10 object-contain invert" />
+            <div className="space-y-2">
+              <div className="text-2xl font-black tracking-tighter uppercase">José Carlos Hidalgo</div>
+              <p className="text-gray-500 text-xs tracking-widest uppercase">Asesoría Financiera e Hipotecaria</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap justify-center gap-10">
+            {["Privacidad", "Legal", "Cookies", "LinkedIn"].map((l) => (
+              <a key={l} className="relative text-[10px] font-bold uppercase tracking-[0.2em] group" href="#">
+                <span className="transition-colors group-hover:text-[#FF6B00]">{l}</span>
+                <span className="absolute left-0 -bottom-1 h-[1px] w-full origin-left scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+              </a>
+            ))}
+          </div>
+        </div>
+        <div className="mt-20 pt-10 border-t border-white/5 text-center text-[10px] text-gray-600 uppercase tracking-widest">
+          © {new Date().getFullYear()} JOSÉ CARLOS HIDALGO. TODOS LOS DERECHOS RESERVADOS.
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function Field({
+  label,
+  type,
+  placeholder,
+  value,
+  onChange,
+  required,
+}: {
+  label: string;
+  type: string;
+  placeholder: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
+}) {
   return (
     <div className="space-y-2">
       <label className="text-[10px] font-black uppercase tracking-[0.2em]">{label}</label>
-      <input type={type} placeholder={placeholder} className="w-full bg-transparent border-0 border-b border-[#E5E5E5] px-0 py-4 focus:ring-0 focus:border-[#FF6B00] transition-all outline-none placeholder:text-gray-300" />
+      <input
+        type={type}
+        value={value}
+        onChange={onChange}
+        required={required}
+        placeholder={placeholder}
+        className="w-full bg-transparent border-0 border-b border-[#E5E5E5] px-0 py-4 focus:ring-0 focus:border-[#FF6B00] transition-colors outline-none placeholder:text-gray-300"
+      />
     </div>
   );
 }
