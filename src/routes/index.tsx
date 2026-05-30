@@ -37,8 +37,8 @@ const Icon = ({ name, className = "" }: { name: string; className?: string }) =>
 );
 
 const services = [
-  { icon: "analytics", title: "Planificación financiera personal", text: "Análisis completo de flujos de caja y objetivos vitales para diseñar una hoja de ruta a medida." },
-  { icon: "real_estate_agent", title: "Hipotecas en Alicante", text: "Búsqueda y negociación de las mejores condiciones del mercado para tu vivienda en la zona." },
+  { icon: "analytics", title: "Planificación financiera personal", text: "Análisis completo de objetivos vitales para diseñar una hoja de ruta a medida." },
+  { icon: "real_estate_agent", title: "Hipotecas en Altea, Benidorm y Alicante", text: "Consigue hasta el 100% de financiación para tu vivienda en la zona." },
   { icon: "assured_workload", title: "Protección de ingresos", text: "Seguros de baja laboral y contingencias diseñados específicamente para el perfil autónomo." },
   { icon: "trending_up", title: "Ahorro e inversión", text: "Vehículos eficientes para que tus ahorros batan a la inflación con el riesgo bajo control." },
   { icon: "family_restroom", title: "Salud y protección familiar", text: "Cobertura médica privada y seguros de vida para garantizar la tranquilidad de los tuyos." },
@@ -46,7 +46,7 @@ const services = [
 ];
 
 const errors = [
-  { n: "01", title: "Piden la hipoteca sin preparar su perfil", text: "Llegan al banco con prisas y sin saber que una preparación de 6 meses ahorra miles en intereses." },
+  { n: "01", title: "Piden la hipoteca sin preparar su perfil", text: "Llegan al banco con prisas y sin saber que una preparación previa ahorra miles de euros en intereses." },
   { n: "02", title: "Confían todo a sus ingresos actuales", text: "Especialmente autónomos. El bienestar de hoy no garantiza la seguridad de mañana sin un plan B real." },
   { n: "03", title: "Preparan la jubilación demasiado tarde", text: "El interés compuesto necesita tiempo. Cada año que esperas, el coste de oportunidad es mayor." },
 ];
