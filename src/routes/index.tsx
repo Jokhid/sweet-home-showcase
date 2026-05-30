@@ -59,13 +59,34 @@ const method = [
 ];
 
 const faqs = [
-  { q: "¿Realmente es gratuito el primer diagnóstico?", a: "Sí, totalmente. Mi objetivo en esta primera toma de contacto es entender si puedo ayudarte. Tú obtienes claridad sobre tu situación y yo entiendo el reto. Sin compromisos." },
-  { q: "¿Trabajas con todos los bancos para las hipotecas?", a: "Trabajo con ING y ABANCA, dos bancos muy competitivos con los que puedes llegar a conseguir hasta el 100% de financiación." },
-  { q: "¿Puedes ayudarme a conseguir una hipoteca?", a: "Sí. Analizo tu perfil financiero, ingresos, ahorro disponible, estabilidad laboral, nivel de endeudamiento y viabilidad de la operación. Después vemos qué opciones hipotecarias pueden encajar mejor con tu caso." },
-  { q: "¿Atiendes presencialmente en Alicante?", a: "Atiendo presencialmente en toda la zona de Alicante, Marina Baixa, Benidorm y Altea. Si estás fuera, realizo consultas por videollamada con la misma eficacia." },
-  { q: "¿Puedo mejorar mi hipoteca actual?", a: "Sí. Podemos revisar tu hipoteca actual, tipo de interés, cuota, vinculaciones, seguros asociados y condiciones. En algunos casos puede ser interesante estudiar una novación, subrogación o cambio de estrategia financiera." },
-  { q: "¿Por qué es importante para un autónomo revisar su protección financiera?", a: "Porque muchos autónomos tienen ingresos variables y una cobertura pública limitada si dejan de trabajar por enfermedad, accidente o incapacidad. Una mala planificación puede afectar directamente a su familia, su negocio y su patrimonio." },
-  { q: "¿También trabajas ahorro e inversión?", a: "Sí. Analizo tu capacidad de ahorro, horizonte temporal, tolerancia al riesgo y objetivos. A partir de ahí, podemos valorar soluciones de ahorro, inversión, previsión social o jubilación adaptadas a tu perfil." },
+  {
+    q: "¿Realmente es gratuito el primer diagnóstico?",
+    a: "Sí, totalmente. Mi objetivo en esta primera toma de contacto es entender si puedo ayudarte. Tú obtienes claridad sobre tu situación y yo entiendo el reto. Sin compromisos.",
+  },
+  {
+    q: "¿Trabajas con todos los bancos para las hipotecas?",
+    a: "Trabajo con ING y ABANCA, dos bancos muy competitivos con los que puedes llegar a conseguir hasta el 100% de financiación.",
+  },
+  {
+    q: "¿Puedes ayudarme a conseguir una hipoteca?",
+    a: "Sí. Analizo tu perfil financiero, ingresos, ahorro disponible, estabilidad laboral, nivel de endeudamiento y viabilidad de la operación. Después vemos qué opciones hipotecarias pueden encajar mejor con tu caso.",
+  },
+  {
+    q: "¿Atiendes presencialmente en Alicante?",
+    a: "Atiendo presencialmente en toda la zona de Alicante, Marina Baixa, Benidorm y Altea. Si estás fuera, realizo consultas por videollamada con la misma eficacia.",
+  },
+  {
+    q: "¿Puedo mejorar mi hipoteca actual?",
+    a: "Sí. Podemos revisar tu hipoteca actual, tipo de interés, cuota, vinculaciones, seguros asociados y condiciones. En algunos casos puede ser interesante estudiar una novación, subrogación o cambio de estrategia financiera.",
+  },
+  {
+    q: "¿Por qué es importante para un autónomo revisar su protección financiera?",
+    a: "Porque muchos autónomos tienen ingresos variables y una cobertura pública limitada si dejan de trabajar por enfermedad, accidente o incapacidad. Una mala planificación puede afectar directamente a su familia, su negocio y su patrimonio.",
+  },
+  {
+    q: "¿También trabajas ahorro e inversión?",
+    a: "Sí. Analizo tu capacidad de ahorro, horizonte temporal, tolerancia al riesgo y objetivos. A partir de ahí, podemos valorar soluciones de ahorro, inversión, previsión social o jubilación adaptadas a tu perfil.",
+  },
 ];
 
 
