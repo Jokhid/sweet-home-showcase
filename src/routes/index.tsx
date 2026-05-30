@@ -1,7 +1,7 @@
+import React, { useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { useRef, useState } from "react";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { submitContact } from "@/lib/contact.functions";
 
@@ -43,7 +43,6 @@ const services = [
   { icon: "trending_up", title: "Ahorro e inversión", text: "Vehículos eficientes para que tus ahorros batan a la inflación con el riesgo bajo control." },
   { icon: "family_restroom", title: "Salud y protección familiar", text: "Cobertura médica privada y seguros de vida para garantizar la tranquilidad de los tuyos." },
   { icon: "domain", title: "Administración de fincas", text: "Gestión profesional de comunidades, optimizando costes y garantizando la convivencia." },
-
 ];
 
 const errors = [
@@ -88,8 +87,6 @@ const faqs = [
     a: "Sí. Analizo tu capacidad de ahorro, horizonte temporal, tolerancia al riesgo y objetivos. A partir de ahí, podemos valorar soluciones de ahorro, inversión, previsión social o jubilación adaptadas a tu perfil.",
   },
 ];
-
-
 
 // ----- Motion primitives -----
 const spring = { type: "spring" as const, stiffness: 90, damping: 20, mass: 0.9 };
@@ -496,7 +493,7 @@ function About() {
           <FadeUp className="lg:col-span-5">
             <div className="relative group">
               <motion.div
-                initial={{ x: 16, y: 16 }}
+                initial={{ x: 24, y: 24 }}
                 whileInView={{ x: 16, y: 16 }}
                 whileHover={{ x: 0, y: 0 }}
                 transition={spring}
@@ -645,7 +642,7 @@ function Contact() {
           </FadeUp>
           <div className="space-y-10 pt-10 border-t border-[#E5E5E5]">
             {[
-              { i: "call", label: "Llámanos", v: PHONE_DISPLAY, href: `tel:+34${PHONE_DISPLAY.replace(/\s/g, "")}` },
+              { i: "call", label: "Llámanos", v: PHONE_DISPLAY, href: `tel:+34647506040` },
               { i: "mail", label: "Email", v: EMAIL, href: `mailto:${EMAIL}` },
             ].map((c, idx) => (
               <FadeUp key={c.i} delay={idx * 0.1}>
@@ -792,4 +789,4 @@ function Field({
       />
     </div>
   );
-}
+              }
