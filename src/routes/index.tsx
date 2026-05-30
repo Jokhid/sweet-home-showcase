@@ -7,13 +7,20 @@ import { submitContact } from "@/lib/contact.functions";
 
 export const Route = createFileRoute("/")({
   head: () => ({
+    title: "José Carlos Hidalgo | Asesoramiento Financiero e Hipotecario",
     meta: [
-      { title: "José Carlos Hidalgo | Asesoramiento Financiero e Hipotecario" },
-      { name: "description", content: "Asesoramiento financiero e hipotecario para autónomos y familias. Protege tus ingresos, tu familia y tu futuro. Diagnóstico gratuito en Altea, Benidorm y Alicante." },
+      {
+        name: "description",
+        content:
+          "Asesoramiento financiero e hipotecario para autónomos y familias. Protege tus ingresos, tu familia y tu futuro. Diagnóstico gratuito en Altea, Benidorm y Alicante.",
+      },
       { property: "og:title", content: "José Carlos Hidalgo | Asesor Financiero" },
-      { property: "og:description", content: "Protege tus ingresos, tu familia y tu futuro financiero." },
-      [
-      }),
+      {
+        property: "og:description",
+        content: "Protege tus ingresos, tu familia y tu futuro financiero.",
+      },
+    ],
+  }),
   component: Index,
 });
 
