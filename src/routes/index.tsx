@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "José Carlos Hidalgo | Asesoramiento Financiero e Hipotecario" },
-      { name: "description", content: "Asesoramiento financiero e hipotecario para autónomos y familias. Protege tus ingresos, tu vivienda y tu futuro. Diagnóstico gratuito en Alicante." },
+      { name: "description", content: "Asesoramiento financiero e hipotecario para autónomos y familias. Protege tus ingresos, tu familia y tu futuro. Diagnóstico gratuito en Altea, Benidorm y Alicante." },
       { property: "og:title", content: "José Carlos Hidalgo | Asesor Financiero" },
       { property: "og:description", content: "Protege tus ingresos, tu familia y tu futuro financiero." },
   }),
@@ -46,7 +46,7 @@ const errors = [
 
 const method = [
   { n: "01.", title: "Analizo tu punto de partida", text: "Sin juicios. Recopilamos datos reales de tu economía actual para tener una base sólida sobre la que construir." },
-  { n: "02.", title: "Detecto riesgos y oportunidades", text: "Puntos ciegos donde estás perdiendo dinero o asumiendo un riesgo que no conocías." },
+  { n: "02.", title: "Detecto riesgos y debilidades", text: "Puntos ciegos donde estás asumiendo un riesgo que no conocías." },
   { n: "03.", title: "Diseño un plan accionable", text: "Recibirás recomendaciones claras y pasos a seguir que tú decides si ejecutar o no." },
 ];
 
