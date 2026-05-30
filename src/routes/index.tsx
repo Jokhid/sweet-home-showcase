@@ -8,11 +8,10 @@ import { submitContact } from "@/lib/contact.functions";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "José Carlos Hidalgo | Asesor Financiero e Hipotecario" },
+      { title: "José Carlos Hidalgo | Asesoramiento Financiero e Hipotecario" },
       { name: "description", content: "Asesoramiento financiero e hipotecario para autónomos y familias. Protege tus ingresos, tu vivienda y tu futuro. Diagnóstico gratuito en Alicante." },
       { property: "og:title", content: "José Carlos Hidalgo | Asesor Financiero" },
-      { property: "og:description", content: "Protege tus ingresos, tu vivienda y tu futuro financiero." },
-    ],
+      { property: "og:description", content: "Protege tus ingresos, tu familia y tu futuro financiero." },
   }),
   component: Index,
 });
@@ -36,6 +35,7 @@ const services = [
   { icon: "trending_up", title: "Ahorro e inversión", text: "Vehículos eficientes para que tus ahorros batan a la inflación con el riesgo bajo control." },
   { icon: "family_restroom", title: "Salud y protección familiar", text: "Cobertura médica privada y seguros de vida para garantizar la tranquilidad de los tuyos." },
   { icon: "domain", title: "Administración de fincas", text: "Gestión profesional de comunidades, optimizando costes y garantizando la convivencia." },
+
 ];
 
 const errors = [
@@ -52,10 +52,15 @@ const method = [
 
 const faqs = [
   { q: "¿Realmente es gratuito el primer diagnóstico?", a: "Sí, totalmente. Mi objetivo en esta primera toma de contacto es entender si puedo ayudarte. Tú obtienes claridad sobre tu situación y yo entiendo el reto. Sin compromisos." },
-  { q: "¿Trabajas con todos los bancos para las hipotecas?", a: "Trabajo con las principales entidades nacionales e internacionales para asegurar que la oferta que te presento es la más competitiva para tu perfil específico." },
-  { q: "¿Cuál es la diferencia entre un asesor y el banco?", a: "El director del banco es un empleado de su entidad y vende sus productos. Yo soy un asesor independiente que busca el producto que mejor encaja contigo entre todo el mercado." },
-  { q: "¿Atiendes presencialmente en Alicante?", a: "Atiendo presencialmente en toda la zona de Alicante, Altea y Marina Baixa. Si estás fuera, realizo consultas por videollamada con la misma eficacia." },
+  { q: "¿Trabajas con todos los bancos para las hipotecas?", a: "Trabajo con ING y ABANCA, dos bancos muy competitivos con los que puedes llegar a conseguir hasta el 100% de financiación." },
+  { q: "¿Puedes ayudarme a conseguir una hipoteca?", a: "Sí. Analizo tu perfil financiero, ingresos, ahorro disponible, estabilidad laboral, nivel de endeudamiento y viabilidad de la operación. Después vemos qué opciones hipotecarias pueden encajar mejor con tu caso." },
+  { q: "¿Atiendes presencialmente en Alicante?", a: "Atiendo presencialmente en toda la zona de Alicante, Marina Baixa, Benidorm y Altea. Si estás fuera, realizo consultas por videollamada con la misma eficacia." },
+  { q: "¿Puedo mejorar mi hipoteca actual?", a: "Sí. Podemos revisar tu hipoteca actual, tipo de interés, cuota, vinculaciones, seguros asociados y condiciones. En algunos casos puede ser interesante estudiar una novación, subrogación o cambio de estrategia financiera." },
+  { q: "¿Por qué es importante para un autónomo revisar su protección financiera?", a: "Porque muchos autónomos tienen ingresos variables y una cobertura pública limitada si dejan de trabajar por enfermedad, accidente o incapacidad. Una mala planificación puede afectar directamente a su familia, su negocio y su patrimonio." },
+  { q: "¿También trabajas ahorro e inversión?", a: "Sí. Analizo tu capacidad de ahorro, horizonte temporal, tolerancia al riesgo y objetivos. A partir de ahí, podemos valorar soluciones de ahorro, inversión, previsión social o jubilación adaptadas a tu perfil." },
 ];
+
+
 
 // ----- Motion primitives -----
 const spring = { type: "spring" as const, stiffness: 90, damping: 20, mass: 0.9 };
