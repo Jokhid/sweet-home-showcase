@@ -242,7 +242,7 @@ function Hero() {
 
           <FadeUp delay={0.6}>
             <p className="text-xl text-[#4A4A4A] max-w-xl leading-relaxed">
-              Asesoramiento financiero e hipotecario para autónomos y familias que quieren tomar decisiones importantes sin improvisar. Analizo tu situación, detecto riesgos y te propongo un plan claro para proteger lo que has construido.
+              Analizo tu situación, detecto riesgos y te propongo un plan claro para proteger tus ingresos, financiar tu vivienda y preparar tu futuro con criterio.
             </p>
           </FadeUp>
 
