@@ -544,7 +544,7 @@ function About() {
             <FadeUp delay={0.3}>
               <div className="flex items-center gap-4 text-[#1A1A1A] font-bold">
                 <Icon name="location_on" className="text-[#FF6B00]" />
-                <span className="text-sm uppercase tracking-widest">Alicante · Altea · Marina Baixa · Online</span>
+                <span className="text-sm uppercase tracking-widest">Altea · Benidorm · Costa Blanca · Alicante · Online</span>
               </div>
             </FadeUp>
           </div>
