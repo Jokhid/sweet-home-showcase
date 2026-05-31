@@ -255,7 +255,7 @@ function Hero() {
                 className="bg-[#FF6B00] text-white px-10 py-5 font-bold uppercase text-xs tracking-widest hover:bg-[#1A1A1A] transition-colors shadow-xl shadow-[#FF6B00]/10"
                 href="#contact"
               >
-                Solicitar diagnóstico gratuito
+                Quiero mi diagnóstico gratuito
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.03 }}
@@ -264,7 +264,7 @@ function Hero() {
                 className="border border-[#1A1A1A] text-[#1A1A1A] px-10 py-5 font-bold uppercase text-xs tracking-widest hover:bg-[#1A1A1A] hover:text-white transition-colors"
                 href="#services"
               >
-                Ver servicios
+                Conocer cómo trabajo
               </motion.a>
             </div>
           </FadeUp>
