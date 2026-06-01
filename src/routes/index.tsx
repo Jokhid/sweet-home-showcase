@@ -292,6 +292,12 @@ function Hero() {
             ))}
           </h1>
 
+          <FadeUp delay={0.55}>
+            <p className="text-lg md:text-xl text-[#6B6B6B] font-normal max-w-2xl">
+              Asesor financiero e hipotecario en Altea, Benidorm y la Costa Blanca
+            </p>
+          </FadeUp>
+
           <FadeUp delay={0.6}>
             <p className="text-xl text-[#4A4A4A] max-w-xl leading-relaxed">
               Analizo tu situación, detecto riesgos y te propongo un plan claro para proteger tus ingresos, financiar tu vivienda y preparar tu futuro con criterio.
