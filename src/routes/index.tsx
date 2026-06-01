@@ -41,8 +41,8 @@ const services = [
   { icon: "real_estate_agent", title: "Hipotecas en Altea, Benidorm y Alicante", text: "Consigue hasta el 100% de financiación para tu vivienda en la zona." },
   { icon: "assured_workload", title: "Servicios de protección inteligente", text: "Especializado en blindar tu patrimonio y asegurar que el futuro de tu familia esté siempre bajo control." },
   { icon: "trending_up", title: "Pensión, ahorro e inversión", text: "Vehículos eficientes para que tus ahorros batan a la inflación con el riesgo bajo control. Rentabilidad con garantías y beneficios fiscales." },
-  { icon: "family_restroom", title: "Salud Premium", text: "Acceso preferente a la mejor medicina privada sin esperas ni colas. Seguro médico total. Sin copagos. Especialistas top." },
-  { icon: "domain", title: "Administración de fincas", text: "Gestión profesional de comunidades, optimizando costes y garantizando la convivencia." },
+  { icon: "family_restroom", title: "Salud Premium", text: "Acceso preferente a la mejor medicina privada sin esperas ni colas. Seguro médico total. Co o sin copagos. Especialistas top." },
+  { icon: "domain", title: "Administración de fincas", text: "Gestión profesional de comunidades, optimizando costes, con claridad y transparencia, utilizando herramientas innovadoras." },
 ];
 
 const errors = [
@@ -228,7 +228,7 @@ function Hero() {
                 transition={{ duration: 0.9, ease: easeOutExpo, delay: 0.4 }}
                 className="h-[2px] bg-[#FF6B00] block"
               />
-              ASESORÍA FINANCIERA E HIPOTECARIA
+              GESTIÓN FINANCIERA E HIPOTECARIA
             </div>
           </FadeUp>
 
