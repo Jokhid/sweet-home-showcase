@@ -524,6 +524,7 @@ function Method() {
             <div className="relative overflow-hidden aspect-square">
               <motion.img
                 src={IMG(5)}
+                loading="lazy"
                 alt="Método de asesoramiento"
                 className="absolute inset-0 w-full h-full object-cover"
                 initial={{ scale: 1.1 }}
