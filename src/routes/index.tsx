@@ -894,3 +894,118 @@ function Field({
     </div>
   );
               }
+
+const partners = [
+  { name: "Nationale-Nederlanden", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Nationale-Nederlanden_logo.svg/320px-Nationale-Nederlanden_logo.svg.png" },
+  { name: "ING", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/ING_Group_N.V._Logo.svg/320px-ING_Group_N.V._Logo.svg.png" },
+  { name: "ABANCA", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/ABANCA_logo.svg/320px-ABANCA_logo.svg.png" },
+  { name: "Sanitas", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Sanitas_logo.svg/320px-Sanitas_logo.svg.png" },
+  { name: "Caser", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Caser_logo.svg/320px-Caser_logo.svg.png" },
+];
+
+function Partners() {
+  return (
+    <section aria-label="Entidades colaboradoras" className="py-16 bg-[#FAFAFA] border-y border-[#EEEEEE]">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <p className="text-center text-xs font-bold uppercase tracking-[0.25em] text-[#7A7A7A] mb-10">
+          Colaboro con entidades líderes del sector
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
+          {partners.map((p) => (
+            <img
+              key={p.name}
+              src={p.src}
+              alt={p.name}
+              loading="lazy"
+              className="h-8 md:h-10 w-auto object-contain grayscale opacity-70 hover:opacity-100 transition-opacity"
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const testimonials = [
+  {
+    name: "Ana M.",
+    text: "Gracias a José Carlos conseguimos financiación al 100% para nuestra primera vivienda. El proceso fue mucho más sencillo de lo que esperábamos.",
+    detail: "Primera vivienda, Benidorm",
+  },
+  {
+    name: "Marcos R.",
+    text: "Como autónomo nunca había pensado en lo expuesto que estaba. Me ayudó a ver riesgos que no veía y a poner solución sin complicarme la vida.",
+    detail: "Autónomo, Altea",
+  },
+  {
+    name: "Familia López",
+    text: "La administración de nuestra comunidad ha mejorado radicalmente. Transparente, puntual y siempre disponible.",
+    detail: "Comunidad de propietarios, Alicante",
+  },
+];
+
+function Testimonials() {
+  return (
+    <section id="testimonios" className="py-[100px] bg-white border-t border-[#E5E5E5]">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <div className="mb-20 max-w-3xl">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+            <Curtain>Lo que dicen quienes ya trabajan conmigo</Curtain>
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {testimonials.map((t, i) => (
+            <FadeUp key={t.name} delay={i * 0.1}>
+              <article className="relative h-full bg-white border border-[#E5E5E5] p-10 hover:border-[#FF6B00] transition-colors">
+                <span aria-hidden="true" className="absolute top-2 left-6 text-7xl leading-none font-black text-[#FF6B00] select-none">
+                  “
+                </span>
+                <p className="relative text-[#4A4A4A] leading-relaxed pt-8">{t.text}</p>
+                <div className="mt-8 pt-6 border-t border-[#EEEEEE]">
+                  <p className="font-bold text-[#1A1A1A]">{t.name}</p>
+                  <p className="text-xs text-[#9A9A9A] mt-1">{t.detail}</p>
+                </div>
+              </article>
+            </FadeUp>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CookieBanner() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    try {
+      if (localStorage.getItem("cookies_accepted") !== "true") setShow(true);
+    } catch {}
+  }, []);
+  if (!show) return null;
+  const accept = () => {
+    try {
+      localStorage.setItem("cookies_accepted", "true");
+    } catch {}
+    setShow(false);
+  };
+  return (
+    <div
+      role="dialog"
+      aria-label="Aviso de cookies"
+      className="fixed bottom-0 inset-x-0 z-[100] bg-[#0F0F0F] text-white px-6 py-5 shadow-2xl"
+    >
+      <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center gap-4 md:gap-8">
+        <p className="text-sm text-white/85 leading-relaxed text-center md:text-left flex-1">
+          Esta web utiliza cookies para analizar el tráfico y mejorar tu experiencia. Al continuar navegando aceptas su uso.{" "}
+          <a href="/privacidad" className="underline hover:text-[#FF6B00]">Más información</a>
+        </p>
+        <button
+          onClick={accept}
+          className="bg-[#FF6B00] text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-[#1A1A1A] transition-colors shrink-0"
+        >
+          Aceptar
+        </button>
+      </div>
+    </div>
+  );
+}
