@@ -199,14 +199,17 @@ function Index() {
         <TrustStats />
         <Diagnosis />
         <Problem />
+        <Partners />
         <Services />
         <Method />
         <About />
+        <Testimonials />
         <FAQ />
         <Contact />
       </main>
 
       <Footer />
+      <CookieBanner />
     </div>
   );
 }
