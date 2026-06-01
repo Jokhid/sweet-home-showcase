@@ -405,6 +405,7 @@ function Diagnosis() {
                 <div className="relative overflow-hidden aspect-[4/5]">
                   <motion.img
                     src={IMG(x.img)}
+                    loading="lazy"
                     alt={x.t}
                     className="absolute inset-0 w-full h-full object-cover"
                     initial={{ scale: 1 }}
