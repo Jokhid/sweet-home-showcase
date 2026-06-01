@@ -848,8 +848,17 @@ function Footer() {
             ))}
           </div>
         </div>
-        <div className="mt-20 pt-10 border-t border-white/5 text-center text-[10px] text-gray-600 uppercase tracking-widest">
-          © {new Date().getFullYear()} JOSÉ CARLOS HIDALGO. TODOS LOS DERECHOS RESERVADOS.
+        <div className="mt-20 pt-10 border-t border-white/5 flex flex-col items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[12px] text-gray-400">
+            <a href="/aviso-legal" className="hover:text-[#FF6B00] transition-colors">Aviso legal</a>
+            <span aria-hidden="true">·</span>
+            <a href="/privacidad" className="hover:text-[#FF6B00] transition-colors">Política de privacidad</a>
+            <span aria-hidden="true">·</span>
+            <a href="https://share.google/GlqwXv7lO958pDPDS" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF6B00] transition-colors">Ver en Google Maps</a>
+          </div>
+          <div className="text-center text-[10px] text-gray-600 uppercase tracking-widest">
+            © {new Date().getFullYear()} JOSÉ CARLOS HIDALGO. TODOS LOS DERECHOS RESERVADOS.
+          </div>
         </div>
       </div>
     </footer>
