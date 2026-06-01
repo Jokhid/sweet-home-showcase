@@ -41,8 +41,8 @@ const services = [
   { icon: "real_estate_agent", title: "Hipotecas en Altea, Benidorm y Alicante", text: "Consigue hasta el 100% de financiación para tu vivienda en la zona." },
   { icon: "assured_workload", title: "Servicios de protección inteligente", text: "Especializado en blindar tu patrimonio y asegurar que el futuro de tu familia esté siempre bajo control." },
   { icon: "trending_up", title: "Pensión, ahorro e inversión", text: "Vehículos eficientes para que tus ahorros batan a la inflación con el riesgo bajo control. Rentabilidad con garantías y beneficios fiscales." },
-  { icon: "family_restroom", title: "Salud Premium", text: "Acceso preferente a la mejor medicina privada sin esperas ni colas. Seguro médico total. Sin copagos. Especialistas top." },
-  { icon: "domain", title: "Administración de fincas", text: "Gestión profesional de comunidades, optimizando costes y garantizando la convivencia." },
+  { icon: "family_restroom", title: "Salud Premium", text: "Acceso preferente a la mejor medicina privada sin esperas ni colas. Seguro médico total. Co o sin copagos. Especialistas top." },
+  { icon: "domain", title: "Administración de fincas", text: "Gestión profesional de comunidades, optimizando costes, con claridad y transparencia, utilizando herramientas innovadoras." },
 ];
 
 const errors = [
@@ -228,7 +228,7 @@ function Hero() {
                 transition={{ duration: 0.9, ease: easeOutExpo, delay: 0.4 }}
                 className="h-[2px] bg-[#FF6B00] block"
               />
-              ASESORÍA FINANCIERA E HIPOTECARIA
+              GESTIÓN FINANCIERA E HIPOTECARIA
             </div>
           </FadeUp>
 
@@ -523,8 +523,8 @@ function About() {
             </FadeUp>
             <FadeUp delay={0.1}>
               <div className="space-y-6 text-xl text-[#4A4A4A] leading-relaxed">
-                <p>Soy asesor financiero, gestor hipotecario y administrador de fincas. Mi enfoque no es vender productos, sino gestionar personas y sus miedos financieros.</p>
-                <p>He visto a demasiadas familias sufrir por decisiones tomadas sin información. Mi misión es que tú seas el dueño de tus números, y no al revés.</p>
+                <p>Soy especialista en protección patrimonial e hipotecas. No parto de productos, parto de riesgos, prioridades y decisiones bien planteadas.</p>
+                <p>He visto a demasiadas familias y negocios sufrir por decisiones impulsivas y sin información. Mi objetivo es que no tomes decisiones importantes desde la duda, la prisa o el miedo, sino con información, criterio y tranquilidad.</p>
               </div>
             </FadeUp>
             <FadeUp delay={0.2}>
@@ -652,12 +652,12 @@ function Contact() {
                   transition={spring}
                   className="flex items-center gap-8 group"
                 >
-                  <div className="w-16 h-16 bg-[#1A1A1A] flex items-center justify-center text-white group-hover:bg-[#FF6B00] transition-colors">
-                    <Icon name={c.i} />
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-[#1A1A1A] flex items-center justify-center text-white group-hover:bg-[#FF6B00] transition-colors shrink-0">
+                    <Icon name={c.i} className="text-lg md:text-2xl" />
                   </div>
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-widest opacity-50 mb-1">{c.label}</p>
-                    <p className="text-2xl font-bold break-all">{c.v}</p>
+                    <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-50 mb-1">{c.label}</p>
+                    <p className="text-lg md:text-2xl font-bold">{c.v}</p>
                   </div>
                 </motion.a>
               </FadeUp>
