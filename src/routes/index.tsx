@@ -825,7 +825,7 @@ function Footer() {
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-16">
           <div className="flex items-center gap-4 text-center md:text-left">
-            <img src="/logo-white.png" alt="Logo" className="h-10 w-10 object-contain" />
+            <img src="/logo-white.png" alt="Logo" loading="lazy" className="h-10 w-10 object-contain" />
             <div className="space-y-2">
               <div className="text-2xl font-black tracking-tighter uppercase">José Carlos Hidalgo</div>
               <p className="text-gray-500 text-xs tracking-widest uppercase">Asesoría Financiera e Hipotecaria</p>
