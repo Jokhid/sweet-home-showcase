@@ -82,7 +82,7 @@ const IMG = (n: number) => `/${n}.png`;
 const LOGO = "/logo.png";
 
 const Icon = ({ name, className = "" }: { name: string; className?: string }) => (
-  <span className={`material-symbols-outlined ${className}`}>{name}</span>
+  <span aria-hidden="true" className={`material-symbols-outlined ${className}`}>{name}</span>
 );
 
 const services = [
