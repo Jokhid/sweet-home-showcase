@@ -608,6 +608,17 @@ function About() {
                 <span className="text-sm uppercase tracking-widest">Altea · Benidorm · Costa Blanca · Alicante · Online</span>
               </div>
             </FadeUp>
+            <FadeUp delay={0.4}>
+              <a
+                href="https://share.google/GlqwXv7lO958pDPDS"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-bold text-[#FF6B00] hover:text-[#1A1A1A] transition-colors"
+              >
+                <Icon name="travel_explore" className="text-base" />
+                Ver mi perfil en Google
+              </a>
+            </FadeUp>
           </div>
         </div>
       </div>
