@@ -39,9 +39,9 @@ const Icon = ({ name, className = "" }: { name: string; className?: string }) =>
 const services = [
   { icon: "analytics", title: "Planificación financiera personal", text: "Análisis completo de objetivos vitales para diseñar una hoja de ruta a medida." },
   { icon: "real_estate_agent", title: "Hipotecas en Altea, Benidorm y Alicante", text: "Consigue hasta el 100% de financiación para tu vivienda en la zona." },
-  { icon: "assured_workload", title: "Protección de ingresos", text: "Seguros de baja laboral y contingencias diseñados específicamente para el perfil autónomo." },
-  { icon: "trending_up", title: "Ahorro e inversión", text: "Vehículos eficientes para que tus ahorros batan a la inflación con el riesgo bajo control." },
-  { icon: "family_restroom", title: "Salud y protección familiar", text: "Cobertura médica privada y seguros de vida para garantizar la tranquilidad de los tuyos." },
+  { icon: "assured_workload", title: "Servicios de protección inteligente", text: "Especializado en blindar tu patrimonio y asegurar que el futuro de tu familia esté siempre bajo control." },
+  { icon: "trending_up", title: "Pensión, ahorro e inversión", text: "Vehículos eficientes para que tus ahorros batan a la inflación con el riesgo bajo control. Rentabilidad con garantías y beneficios fiscales." },
+  { icon: "family_restroom", title: "Salud Premium", text: "Acceso preferente a la mejor medicina privada sin esperas ni colas. Seguro médico total. Sin copagos. Especialistas top." },
   { icon: "domain", title: "Administración de fincas", text: "Gestión profesional de comunidades, optimizando costes y garantizando la convivencia." },
 ];
 
@@ -445,7 +445,7 @@ function Method() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <div className="space-y-12">
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
-              <Curtain>Decidir bien empieza por entender tu situación</Curtain>
+              <Curtain>No se trata de contratar más. Se trata de decidir mejor</Curtain>
             </h2>
             <div className="space-y-12">
               {method.map((m, idx) => (
