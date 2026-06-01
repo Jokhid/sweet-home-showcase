@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
@@ -20,6 +20,55 @@ export const Route = createFileRoute("/")({
         content: "Protege tus ingresos, tu familia y tu futuro financiero.",
       },
     ],
+    links: [
+      { rel: "canonical", href: "https://josecarlos.hilolegal.es/" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Person",
+              name: "José Carlos Hidalgo Ortega",
+              jobTitle: "Asesor Financiero e Hipotecario",
+              url: "https://josecarlos.hilolegal.es",
+              telephone: "+34647506040",
+              email: "josecarlos@hilolegal.es",
+              sameAs: [
+                "https://www.linkedin.com/in/jos%C3%A9carloshidalgo/",
+                "https://www.instagram.com/jokhid/",
+                "https://www.facebook.com/josecarlos.hidalgoortega/",
+              ],
+              worksFor: {
+                "@type": "Organization",
+                name: "HiloLegal",
+                url: "https://www.hilolegal.es",
+              },
+            },
+            {
+              "@type": "FinancialService",
+              name: "José Carlos Hidalgo — Asesoría Financiera e Hipotecaria",
+              url: "https://josecarlos.hilolegal.es",
+              telephone: "+34647506040",
+              email: "josecarlos@hilolegal.es",
+              description:
+                "Asesoramiento financiero e hipotecario para autónomos y familias en Altea, Benidorm y Alicante. Hipotecas, seguros, pensiones y administración de fincas.",
+              areaServed: ["Altea", "Benidorm", "Alicante", "Marina Baixa", "Costa Blanca"],
+              priceRange: "€€",
+              openingHours: "Mo-Fr 09:00-19:00",
+              hasMap: "https://share.google/GlqwXv7lO958pDPDS",
+              image: "https://josecarlos.hilolegal.es/6.png",
+              founder: {
+                "@type": "Person",
+                name: "José Carlos Hidalgo Ortega",
+              },
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: Index,
 });
@@ -33,7 +82,7 @@ const IMG = (n: number) => `/${n}.png`;
 const LOGO = "/logo.png";
 
 const Icon = ({ name, className = "" }: { name: string; className?: string }) => (
-  <span className={`material-symbols-outlined ${className}`}>{name}</span>
+  <span aria-hidden="true" className={`material-symbols-outlined ${className}`}>{name}</span>
 );
 
 const services = [
@@ -150,14 +199,17 @@ function Index() {
         <TrustStats />
         <Diagnosis />
         <Problem />
+        <Partners />
         <Services />
         <Method />
         <About />
+        <Testimonials />
         <FAQ />
         <Contact />
       </main>
 
       <Footer />
+      <CookieBanner />
     </div>
   );
 }
@@ -239,6 +291,12 @@ function Hero() {
               </Curtain>
             ))}
           </h1>
+
+          <FadeUp delay={0.55}>
+            <p className="text-lg md:text-xl text-[#6B6B6B] font-normal max-w-2xl">
+              Asesor financiero e hipotecario en Altea, Benidorm y la Costa Blanca
+            </p>
+          </FadeUp>
 
           <FadeUp delay={0.6}>
             <p className="text-xl text-[#4A4A4A] max-w-xl leading-relaxed">
@@ -347,6 +405,7 @@ function Diagnosis() {
                 <div className="relative overflow-hidden aspect-[4/5]">
                   <motion.img
                     src={IMG(x.img)}
+                    loading="lazy"
                     alt={x.t}
                     className="absolute inset-0 w-full h-full object-cover"
                     initial={{ scale: 1 }}
@@ -465,6 +524,7 @@ function Method() {
             <div className="relative overflow-hidden aspect-square">
               <motion.img
                 src={IMG(5)}
+                loading="lazy"
                 alt="Método de asesoramiento"
                 className="absolute inset-0 w-full h-full object-cover"
                 initial={{ scale: 1.1 }}
@@ -504,6 +564,7 @@ function About() {
                   alt="José Carlos Hidalgo"
                   className="w-full h-[600px] object-cover"
                   src={IMG(6)}
+                  loading="lazy"
                   initial={{ scale: 1.08 }}
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
@@ -546,6 +607,17 @@ function About() {
                 <Icon name="location_on" className="text-[#FF6B00]" />
                 <span className="text-sm uppercase tracking-widest">Altea · Benidorm · Costa Blanca · Alicante · Online</span>
               </div>
+            </FadeUp>
+            <FadeUp delay={0.4}>
+              <a
+                href="https://share.google/GlqwXv7lO958pDPDS"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-bold text-[#FF6B00] hover:text-[#1A1A1A] transition-colors"
+              >
+                <Icon name="travel_explore" className="text-base" />
+                Ver mi perfil en Google
+              </a>
             </FadeUp>
           </div>
         </div>
@@ -753,7 +825,7 @@ function Footer() {
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-16">
           <div className="flex items-center gap-4 text-center md:text-left">
-            <img src="/logo-white.png" alt="Logo" className="h-10 w-10 object-contain" />
+            <img src="/logo-white.png" alt="Logo" loading="lazy" className="h-10 w-10 object-contain" />
             <div className="space-y-2">
               <div className="text-2xl font-black tracking-tighter uppercase">José Carlos Hidalgo</div>
               <p className="text-gray-500 text-xs tracking-widest uppercase">Asesoría Financiera e Hipotecaria</p>
@@ -776,8 +848,17 @@ function Footer() {
             ))}
           </div>
         </div>
-        <div className="mt-20 pt-10 border-t border-white/5 text-center text-[10px] text-gray-600 uppercase tracking-widest">
-          © {new Date().getFullYear()} JOSÉ CARLOS HIDALGO. TODOS LOS DERECHOS RESERVADOS.
+        <div className="mt-20 pt-10 border-t border-white/5 flex flex-col items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[12px] text-gray-400">
+            <a href="/aviso-legal" className="hover:text-[#FF6B00] transition-colors">Aviso legal</a>
+            <span aria-hidden="true">·</span>
+            <a href="/privacidad" className="hover:text-[#FF6B00] transition-colors">Política de privacidad</a>
+            <span aria-hidden="true">·</span>
+            <a href="https://share.google/GlqwXv7lO958pDPDS" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF6B00] transition-colors">Ver en Google Maps</a>
+          </div>
+          <div className="text-center text-[10px] text-gray-600 uppercase tracking-widest">
+            © {new Date().getFullYear()} JOSÉ CARLOS HIDALGO. TODOS LOS DERECHOS RESERVADOS.
+          </div>
         </div>
       </div>
     </footer>
@@ -813,3 +894,118 @@ function Field({
     </div>
   );
               }
+
+const partners = [
+  { name: "Nationale-Nederlanden", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Nationale-Nederlanden_logo.svg/320px-Nationale-Nederlanden_logo.svg.png" },
+  { name: "ING", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/ING_Group_N.V._Logo.svg/320px-ING_Group_N.V._Logo.svg.png" },
+  { name: "ABANCA", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/ABANCA_logo.svg/320px-ABANCA_logo.svg.png" },
+  { name: "Sanitas", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Sanitas_logo.svg/320px-Sanitas_logo.svg.png" },
+  { name: "Caser", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Caser_logo.svg/320px-Caser_logo.svg.png" },
+];
+
+function Partners() {
+  return (
+    <section aria-label="Entidades colaboradoras" className="py-16 bg-[#FAFAFA] border-y border-[#EEEEEE]">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <p className="text-center text-xs font-bold uppercase tracking-[0.25em] text-[#7A7A7A] mb-10">
+          Colaboro con entidades líderes del sector
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
+          {partners.map((p) => (
+            <img
+              key={p.name}
+              src={p.src}
+              alt={p.name}
+              loading="lazy"
+              className="h-8 md:h-10 w-auto object-contain grayscale opacity-70 hover:opacity-100 transition-opacity"
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const testimonials = [
+  {
+    name: "Ana M.",
+    text: "Gracias a José Carlos conseguimos financiación al 100% para nuestra primera vivienda. El proceso fue mucho más sencillo de lo que esperábamos.",
+    detail: "Primera vivienda, Benidorm",
+  },
+  {
+    name: "Marcos R.",
+    text: "Como autónomo nunca había pensado en lo expuesto que estaba. Me ayudó a ver riesgos que no veía y a poner solución sin complicarme la vida.",
+    detail: "Autónomo, Altea",
+  },
+  {
+    name: "Familia López",
+    text: "La administración de nuestra comunidad ha mejorado radicalmente. Transparente, puntual y siempre disponible.",
+    detail: "Comunidad de propietarios, Alicante",
+  },
+];
+
+function Testimonials() {
+  return (
+    <section id="testimonios" className="py-[100px] bg-white border-t border-[#E5E5E5]">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <div className="mb-20 max-w-3xl">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+            <Curtain>Lo que dicen quienes ya trabajan conmigo</Curtain>
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {testimonials.map((t, i) => (
+            <FadeUp key={t.name} delay={i * 0.1}>
+              <article className="relative h-full bg-white border border-[#E5E5E5] p-10 hover:border-[#FF6B00] transition-colors">
+                <span aria-hidden="true" className="absolute top-2 left-6 text-7xl leading-none font-black text-[#FF6B00] select-none">
+                  “
+                </span>
+                <p className="relative text-[#4A4A4A] leading-relaxed pt-8">{t.text}</p>
+                <div className="mt-8 pt-6 border-t border-[#EEEEEE]">
+                  <p className="font-bold text-[#1A1A1A]">{t.name}</p>
+                  <p className="text-xs text-[#9A9A9A] mt-1">{t.detail}</p>
+                </div>
+              </article>
+            </FadeUp>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CookieBanner() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    try {
+      if (localStorage.getItem("cookies_accepted") !== "true") setShow(true);
+    } catch {}
+  }, []);
+  if (!show) return null;
+  const accept = () => {
+    try {
+      localStorage.setItem("cookies_accepted", "true");
+    } catch {}
+    setShow(false);
+  };
+  return (
+    <div
+      role="dialog"
+      aria-label="Aviso de cookies"
+      className="fixed bottom-0 inset-x-0 z-[100] bg-[#0F0F0F] text-white px-6 py-5 shadow-2xl"
+    >
+      <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center gap-4 md:gap-8">
+        <p className="text-sm text-white/85 leading-relaxed text-center md:text-left flex-1">
+          Esta web utiliza cookies para analizar el tráfico y mejorar tu experiencia. Al continuar navegando aceptas su uso.{" "}
+          <a href="/privacidad" className="underline hover:text-[#FF6B00]">Más información</a>
+        </p>
+        <button
+          onClick={accept}
+          className="bg-[#FF6B00] text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-[#1A1A1A] transition-colors shrink-0"
+        >
+          Aceptar
+        </button>
+      </div>
+    </div>
+  );
+}
