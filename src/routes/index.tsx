@@ -20,6 +20,55 @@ export const Route = createFileRoute("/")({
         content: "Protege tus ingresos, tu familia y tu futuro financiero.",
       },
     ],
+    links: [
+      { rel: "canonical", href: "https://josecarlos.hilolegal.es/" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Person",
+              name: "José Carlos Hidalgo Ortega",
+              jobTitle: "Asesor Financiero e Hipotecario",
+              url: "https://josecarlos.hilolegal.es",
+              telephone: "+34647506040",
+              email: "josecarlos@hilolegal.es",
+              sameAs: [
+                "https://www.linkedin.com/in/jos%C3%A9carloshidalgo/",
+                "https://www.instagram.com/jokhid/",
+                "https://www.facebook.com/josecarlos.hidalgoortega/",
+              ],
+              worksFor: {
+                "@type": "Organization",
+                name: "HiloLegal",
+                url: "https://www.hilolegal.es",
+              },
+            },
+            {
+              "@type": "FinancialService",
+              name: "José Carlos Hidalgo — Asesoría Financiera e Hipotecaria",
+              url: "https://josecarlos.hilolegal.es",
+              telephone: "+34647506040",
+              email: "josecarlos@hilolegal.es",
+              description:
+                "Asesoramiento financiero e hipotecario para autónomos y familias en Altea, Benidorm y Alicante. Hipotecas, seguros, pensiones y administración de fincas.",
+              areaServed: ["Altea", "Benidorm", "Alicante", "Marina Baixa", "Costa Blanca"],
+              priceRange: "€€",
+              openingHours: "Mo-Fr 09:00-19:00",
+              hasMap: "https://share.google/GlqwXv7lO958pDPDS",
+              image: "https://josecarlos.hilolegal.es/6.png",
+              founder: {
+                "@type": "Person",
+                name: "José Carlos Hidalgo Ortega",
+              },
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: Index,
 });
