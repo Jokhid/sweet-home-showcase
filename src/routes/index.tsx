@@ -916,11 +916,11 @@ function Field({
               }
 
 const partners = [
-  { name: "Nationale-Nederlanden", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Nationale-Nederlanden_logo.svg/320px-Nationale-Nederlanden_logo.svg.png" },
-  { name: "ING", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/ING_Group_N.V._Logo.svg/320px-ING_Group_N.V._Logo.svg.png" },
-  { name: "ABANCA", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/ABANCA_logo.svg/320px-ABANCA_logo.svg.png" },
-  { name: "Sanitas", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Sanitas_logo.svg/320px-Sanitas_logo.svg.png" },
-  { name: "Caser", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Caser_logo.svg/320px-Caser_logo.svg.png" },
+  { name: "Nationale-Nederlanden", className: "font-serif italic" },
+  { name: "ING", className: "font-extrabold tracking-tight" },
+  { name: "ABANCA", className: "font-bold tracking-[0.15em]" },
+  { name: "Sanitas", className: "font-semibold" },
+  { name: "Caser", className: "font-bold tracking-wide" },
 ];
 
 function Partners() {
@@ -930,15 +930,14 @@ function Partners() {
         <p className="text-center text-xs font-bold uppercase tracking-[0.25em] text-[#7A7A7A] mb-10">
           Colaboro con entidades líderes del sector
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
+        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
           {partners.map((p) => (
-            <img
+            <span
               key={p.name}
-              src={p.src}
-              alt={p.name}
-              loading="lazy"
-              className="h-8 md:h-10 w-auto object-contain grayscale opacity-70 hover:opacity-100 transition-opacity"
-            />
+              className={`text-xl md:text-2xl text-[#555] opacity-80 hover:opacity-100 transition-opacity ${p.className}`}
+            >
+              {p.name}
+            </span>
           ))}
         </div>
       </div>
