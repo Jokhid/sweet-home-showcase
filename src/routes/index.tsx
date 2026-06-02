@@ -285,7 +285,7 @@ function Hero() {
           </FadeUp>
 
           <h1 className="text-4xl md:text-6xl font-extrabold leading-[1.08] tracking-tight text-balance">
-            {["Tu hipoteca, tus seguros y", "tu futuro financiero", "no deberían decidirse por intuición."].map((line, i) => (
+            {["Tu hipoteca, tus seguros y", <span className="text-[#FF6B00]">tu futuro financiero</span>, "no deberían decidirse por intuición."].map((line, i) => (
               <Curtain key={i} delay={0.15 + i * 0.1} className="block">
                 <span className="block">{line}</span>
               </Curtain>
