@@ -280,7 +280,7 @@ function Hero() {
                 transition={{ duration: 0.9, ease: easeOutExpo, delay: 0.4 }}
                 className="h-[2px] bg-[#FF6B00] block"
               />
-              GESTIÓN FINANCIERA E HIPOTECARIA
+              HIPOTECAS, AHORRO, PENSION, SEGUROS Y ADMINISTRACIÓN DE FINCAS EN ALTEA
             </div>
           </FadeUp>
 
@@ -292,11 +292,6 @@ function Hero() {
             ))}
           </h1>
 
-          <FadeUp delay={0.55}>
-            <p className="text-lg md:text-xl text-[#6B6B6B] font-normal max-w-2xl">
-              Asesor financiero e hipotecario en Altea, Benidorm y la Costa Blanca
-            </p>
-          </FadeUp>
 
           <FadeUp delay={0.6}>
             <p className="text-xl text-[#4A4A4A] max-w-xl leading-relaxed">
@@ -675,6 +670,7 @@ function Contact() {
   const submit = useServerFn(submitContact);
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [accepted, setAccepted] = useState(false);
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -688,12 +684,18 @@ function Contact() {
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!accepted) {
+      setStatus("error");
+      setErrorMsg("Debes aceptar la política de privacidad para continuar.");
+      return;
+    }
     setStatus("sending");
     setErrorMsg("");
     try {
       await submit({ data: form });
       setStatus("ok");
       setForm({ name: "", phone: "", email: "", topic: "Diagnóstico General", message: "" });
+      setAccepted(false);
     } catch (err) {
       setStatus("error");
       setErrorMsg(err instanceof Error ? err.message : "No se ha podido enviar el formulario.");
@@ -768,6 +770,23 @@ function Contact() {
               />
             </div>
 
+            <label className="flex items-start gap-3 text-sm text-[#4A4A4A] leading-relaxed cursor-pointer">
+              <input
+                type="checkbox"
+                checked={accepted}
+                onChange={(e) => setAccepted(e.target.checked)}
+                required
+                className="mt-1 w-4 h-4 accent-[#FF6B00] shrink-0"
+              />
+              <span>
+                He leído y acepto la{" "}
+                <a href="/privacidad.html" target="_blank" rel="noopener noreferrer" className="text-[#FF6B00] underline hover:no-underline">
+                  política de privacidad
+                </a>
+                .
+              </span>
+            </label>
+
             <motion.button
               whileHover={{ scale: status === "sending" ? 1 : 1.02 }}
               whileTap={{ scale: status === "sending" ? 1 : 0.98 }}
@@ -778,6 +797,7 @@ function Contact() {
             >
               {status === "sending" ? "Enviando…" : status === "ok" ? "¡Enviado!" : "Enviar Solicitud"}
             </motion.button>
+
 
             {status === "ok" && (
               <motion.p
@@ -850,9 +870,9 @@ function Footer() {
         </div>
         <div className="mt-20 pt-10 border-t border-white/5 flex flex-col items-center gap-4">
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[12px] text-gray-400">
-            <a href="/aviso-legal" className="hover:text-[#FF6B00] transition-colors">Aviso legal</a>
+            <a href="/terminos.html" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF6B00] transition-colors">Términos y condiciones</a>
             <span aria-hidden="true">·</span>
-            <a href="/privacidad" className="hover:text-[#FF6B00] transition-colors">Política de privacidad</a>
+            <a href="/privacidad.html" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF6B00] transition-colors">Política de privacidad</a>
             <span aria-hidden="true">·</span>
             <a href="https://share.google/GlqwXv7lO958pDPDS" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF6B00] transition-colors">Ver en Google Maps</a>
           </div>
