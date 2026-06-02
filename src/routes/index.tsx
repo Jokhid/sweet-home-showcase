@@ -1017,7 +1017,7 @@ function CookieBanner() {
       <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center gap-4 md:gap-8">
         <p className="text-sm text-white/85 leading-relaxed text-center md:text-left flex-1">
           Esta web utiliza cookies para analizar el tráfico y mejorar tu experiencia. Al continuar navegando aceptas su uso.{" "}
-          <a href="/privacidad" className="underline hover:text-[#FF6B00]">Más información</a>
+          <a href="/privacidad.html" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#FF6B00]">Más información</a>
         </p>
         <button
           onClick={accept}
