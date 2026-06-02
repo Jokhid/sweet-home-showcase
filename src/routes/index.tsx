@@ -383,7 +383,7 @@ function Diagnosis() {
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="mb-24 space-y-6 max-w-3xl">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-balance">
-            <Curtain>Antes de decidir, mira bien dónde estás expuesto</Curtain>
+            <Curtain>Antes de decidir, mira bien <span className="text-[#FF6B00]">dónde estás expuesto</span></Curtain>
           </h2>
           <motion.div
             initial={{ scaleX: 0 }}
@@ -430,7 +430,7 @@ function Problem() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
           <div className="lg:sticky lg:top-32 space-y-8">
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
-              <Curtain>La mayoría toma decisiones financieras demasiado tarde</Curtain>
+              <Curtain>La mayoría toma <span className="text-[#FF6B00]">decisiones financieras</span> demasiado tarde</Curtain>
             </h2>
             <FadeUp delay={0.2}>
               <p className="text-xl text-gray-400">Evitar los errores comunes es el primer paso para una economía sana. Mi trabajo es anticiparme a ellos.</p>
@@ -463,7 +463,7 @@ function Services() {
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="mb-24 space-y-6 max-w-3xl">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-            <Curtain>Soluciones para proteger tu economía</Curtain>
+            <Curtain><span className="text-[#FF6B00]">Soluciones</span> para proteger tu economía</Curtain>
           </h2>
           <FadeUp delay={0.15}>
             <p className="text-xl text-[#4A4A4A] max-w-2xl">Un enfoque integral para que todas las piezas de tu puzzle financiero encajen a la perfección.</p>
@@ -499,7 +499,7 @@ function Method() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <div className="space-y-12">
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
-              <Curtain>No se trata de contratar más. Se trata de decidir mejor</Curtain>
+              <Curtain>No se trata de contratar más. Se trata de <span className="text-[#FF6B00]">decidir mejor</span></Curtain>
             </h2>
             <div className="space-y-12">
               {method.map((m, idx) => (
@@ -707,7 +707,7 @@ function Contact() {
       <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24">
         <div className="space-y-12">
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight">
-            <Curtain>Hablemos de tu tranquilidad financiera</Curtain>
+            <Curtain>Hablemos de tu <span className="text-[#FF6B00]">tranquilidad financiera</span></Curtain>
           </h2>
           <FadeUp delay={0.1}>
             <p className="text-xl text-[#4A4A4A] leading-relaxed">
