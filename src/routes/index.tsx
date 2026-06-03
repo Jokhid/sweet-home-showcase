@@ -269,7 +269,7 @@ function Header() {
           </span>
         </a>
         <div className="hidden md:flex items-center gap-10">
-          {[["Servicios", "#services"], ["Método", "#method"], ["Sobre mí", "#about"], ["FAQ", "#faq"], ["Contacto", "#contact"]].map(([l, h]) => (
+          {[["Servicios", "/#services"], ["Método", "/#method"], ["Sobre mí", "/#about"], ["Blog", "/blog"], ["FAQ", "/#faq"], ["Contacto", "/#contact"]].map(([l, h]) => (
             <a
               key={h}
               className="relative text-sm font-medium text-[#1A1A1A] group"
