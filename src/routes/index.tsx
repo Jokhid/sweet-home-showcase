@@ -1032,13 +1032,13 @@ function CookieBanner() {
   const [show, setShow] = useState(false);
   useEffect(() => {
     try {
-      if (localStorage.getItem("cookies_accepted") !== "true") setShow(true);
+      if (localStorage.getItem("cookies_ok") !== "true" && localStorage.getItem("cookies_ok") !== "necessary") setShow(true);
     } catch {}
   }, []);
   if (!show) return null;
-  const accept = () => {
+  const choose = (v: "true" | "necessary") => {
     try {
-      localStorage.setItem("cookies_accepted", "true");
+      localStorage.setItem("cookies_ok", v);
     } catch {}
     setShow(false);
   };
@@ -1046,19 +1046,27 @@ function CookieBanner() {
     <div
       role="dialog"
       aria-label="Aviso de cookies"
-      className="fixed bottom-0 inset-x-0 z-[100] bg-[#0F0F0F] text-white px-6 py-5 shadow-2xl"
+      className="fixed bottom-0 inset-x-0 z-[9999] bg-[#1a1a2e] text-white px-6 py-4 shadow-2xl"
     >
       <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center gap-4 md:gap-8">
         <p className="text-sm text-white/85 leading-relaxed text-center md:text-left flex-1">
-          Esta web utiliza cookies para analizar el tráfico y mejorar tu experiencia. Al continuar navegando aceptas su uso.{" "}
+          Utilizamos cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia. Puedes aceptar todas las cookies o configurar tus preferencias.{" "}
           <a href="/privacidad.html" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#FF6B00]">Más información</a>
         </p>
-        <button
-          onClick={accept}
-          className="bg-[#FF6B00] text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-[#1A1A1A] transition-colors shrink-0"
-        >
-          Aceptar
-        </button>
+        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto shrink-0">
+          <button
+            onClick={() => choose("necessary")}
+            className="border border-white text-white bg-transparent px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-[#1a1a2e] transition-colors"
+          >
+            Solo necesarias
+          </button>
+          <button
+            onClick={() => choose("true")}
+            className="bg-[#FF6B00] text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-[#1a1a2e] transition-colors"
+          >
+            Aceptar todas
+          </button>
+        </div>
       </div>
     </div>
   );
