@@ -370,6 +370,8 @@ function Hero() {
                 alt="Asesoramiento financiero e hipotecario"
                 className="w-full h-auto object-cover"
                 src={IMG(1)}
+                loading="eager"
+                fetchPriority="high"
               />
               {/* Functional bottom-to-top dark gradient for text legibility */}
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent" />
