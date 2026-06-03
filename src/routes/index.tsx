@@ -36,16 +36,27 @@ export const Route = createFileRoute("/")({
               url: "https://josecarlos.hilolegal.es",
               telephone: "+34647506040",
               email: "josecarlos@hilolegal.es",
+              image: "https://josecarlos.hilolegal.es/6.png",
               sameAs: [
                 "https://www.linkedin.com/in/jos%C3%A9carloshidalgo/",
                 "https://www.instagram.com/jokhid/",
                 "https://www.facebook.com/josecarlos.hidalgoortega/",
+                "https://share.google/GlqwXv7lO958pDPDS",
               ],
               worksFor: {
                 "@type": "Organization",
                 name: "HiloLegal",
                 url: "https://www.hilolegal.es",
               },
+              knowsAbout: [
+                "Hipotecas",
+                "Seguros de vida",
+                "Seguros de salud",
+                "Planificación financiera",
+                "Ahorro e inversión",
+                "Administración de fincas",
+                "Protección patrimonial",
+              ],
             },
             {
               "@type": "FinancialService",
@@ -53,17 +64,39 @@ export const Route = createFileRoute("/")({
               url: "https://josecarlos.hilolegal.es",
               telephone: "+34647506040",
               email: "josecarlos@hilolegal.es",
+              image: "https://josecarlos.hilolegal.es/6.png",
               description:
-                "Asesoramiento financiero e hipotecario para autónomos y familias en Altea, Benidorm y Alicante. Hipotecas, seguros, pensiones y administración de fincas.",
-              areaServed: ["Altea", "Benidorm", "Alicante", "Marina Baixa", "Costa Blanca"],
+                "Asesoramiento financiero e hipotecario para autónomos y familias en Altea, Benidorm y Alicante. Hipotecas hasta el 100%, seguros, pensiones y administración de fincas en la Costa Blanca.",
               priceRange: "€€",
               openingHours: "Mo-Fr 09:00-19:00",
               hasMap: "https://share.google/GlqwXv7lO958pDPDS",
-              image: "https://josecarlos.hilolegal.es/6.png",
-              founder: {
-                "@type": "Person",
-                name: "José Carlos Hidalgo Ortega",
-              },
+              currenciesAccepted: "EUR",
+              areaServed: [
+                { "@type": "City", name: "Altea" },
+                { "@type": "City", name: "Benidorm" },
+                { "@type": "City", name: "Alicante" },
+                { "@type": "AdministrativeArea", name: "Marina Baixa" },
+                { "@type": "AdministrativeArea", name: "Costa Blanca" },
+              ],
+              founder: { "@type": "Person", name: "José Carlos Hidalgo Ortega" },
+              makesOffer: [
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Hipotecas hasta el 100% de financiación" } },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Seguros de vida y salud" } },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Planificación financiera personal" } },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Ahorro, pensión e inversión" } },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Administración de fincas" } },
+              ],
+            },
+            {
+              "@type": "FAQPage",
+              mainEntity: [
+                { "@type": "Question", name: "¿Realmente es gratuito el primer diagnóstico?", acceptedAnswer: { "@type": "Answer", text: "Sí, totalmente. Mi objetivo en esta primera toma de contacto es entender si puedo ayudarte. Tú obtienes claridad sobre tu situación y yo entiendo el reto. Sin compromisos." } },
+                { "@type": "Question", name: "¿Trabajas con todos los bancos para las hipotecas?", acceptedAnswer: { "@type": "Answer", text: "Trabajo con ING y ABANCA, dos bancos muy competitivos con los que puedes llegar a conseguir hasta el 100% de financiación." } },
+                { "@type": "Question", name: "¿Puedes ayudarme a conseguir una hipoteca?", acceptedAnswer: { "@type": "Answer", text: "Sí. Analizo tu perfil financiero, ingresos, ahorro disponible, estabilidad laboral, nivel de endeudamiento y viabilidad de la operación. Después vemos qué opciones hipotecarias pueden encajar mejor con tu caso." } },
+                { "@type": "Question", name: "¿Atiendes presencialmente en Alicante?", acceptedAnswer: { "@type": "Answer", text: "Atiendo presencialmente en toda la zona de Alicante, Marina Baixa, Benidorm y Altea. Si estás fuera, realizo consultas por videollamada con la misma eficacia." } },
+                { "@type": "Question", name: "¿Por qué es importante para un autónomo revisar su protección financiera?", acceptedAnswer: { "@type": "Answer", text: "Porque muchos autónomos tienen ingresos variables y una cobertura pública limitada si dejan de trabajar por enfermedad, accidente o incapacidad. Una mala planificación puede afectar directamente a su familia, su negocio y su patrimonio." } },
+                { "@type": "Question", name: "¿También trabajas ahorro e inversión?", acceptedAnswer: { "@type": "Answer", text: "Sí. Analizo tu capacidad de ahorro, horizonte temporal, tolerancia al riesgo y objetivos. A partir de ahí, podemos valorar soluciones de ahorro, inversión, previsión social o jubilación adaptadas a tu perfil." } },
+              ],
             },
           ],
         }),
@@ -236,7 +269,7 @@ function Header() {
           </span>
         </a>
         <div className="hidden md:flex items-center gap-10">
-          {[["Servicios", "#services"], ["Método", "#method"], ["Sobre mí", "#about"], ["FAQ", "#faq"], ["Contacto", "#contact"]].map(([l, h]) => (
+          {[["Servicios", "/#services"], ["Método", "/#method"], ["Sobre mí", "/#about"], ["Blog", "/blog"], ["FAQ", "/#faq"], ["Contacto", "/#contact"]].map(([l, h]) => (
             <a
               key={h}
               className="relative text-sm font-medium text-[#1A1A1A] group"
@@ -337,6 +370,8 @@ function Hero() {
                 alt="Asesoramiento financiero e hipotecario"
                 className="w-full h-auto object-cover"
                 src={IMG(1)}
+                loading="eager"
+                fetchPriority="high"
               />
               {/* Functional bottom-to-top dark gradient for text legibility */}
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent" />
@@ -997,13 +1032,13 @@ function CookieBanner() {
   const [show, setShow] = useState(false);
   useEffect(() => {
     try {
-      if (localStorage.getItem("cookies_accepted") !== "true") setShow(true);
+      if (localStorage.getItem("cookies_ok") !== "true" && localStorage.getItem("cookies_ok") !== "necessary") setShow(true);
     } catch {}
   }, []);
   if (!show) return null;
-  const accept = () => {
+  const choose = (v: "true" | "necessary") => {
     try {
-      localStorage.setItem("cookies_accepted", "true");
+      localStorage.setItem("cookies_ok", v);
     } catch {}
     setShow(false);
   };
@@ -1011,19 +1046,27 @@ function CookieBanner() {
     <div
       role="dialog"
       aria-label="Aviso de cookies"
-      className="fixed bottom-0 inset-x-0 z-[100] bg-[#0F0F0F] text-white px-6 py-5 shadow-2xl"
+      className="fixed bottom-0 inset-x-0 z-[9999] bg-[#1a1a2e] text-white px-6 py-4 shadow-2xl"
     >
       <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center gap-4 md:gap-8">
         <p className="text-sm text-white/85 leading-relaxed text-center md:text-left flex-1">
-          Esta web utiliza cookies para analizar el tráfico y mejorar tu experiencia. Al continuar navegando aceptas su uso.{" "}
+          Utilizamos cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia. Puedes aceptar todas las cookies o configurar tus preferencias.{" "}
           <a href="/privacidad.html" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#FF6B00]">Más información</a>
         </p>
-        <button
-          onClick={accept}
-          className="bg-[#FF6B00] text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-[#1A1A1A] transition-colors shrink-0"
-        >
-          Aceptar
-        </button>
+        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto shrink-0">
+          <button
+            onClick={() => choose("necessary")}
+            className="border border-white text-white bg-transparent px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-[#1a1a2e] transition-colors"
+          >
+            Solo necesarias
+          </button>
+          <button
+            onClick={() => choose("true")}
+            className="bg-[#FF6B00] text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-[#1a1a2e] transition-colors"
+          >
+            Aceptar todas
+          </button>
+        </div>
       </div>
     </div>
   );
