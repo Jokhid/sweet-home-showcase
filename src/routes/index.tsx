@@ -119,12 +119,12 @@ const Icon = ({ name, className = "" }: { name: string; className?: string }) =>
 );
 
 const services = [
-  { icon: "analytics", title: "Planificación financiera personal", text: "Análisis completo de objetivos vitales para diseñar una hoja de ruta a medida." },
-  { icon: "real_estate_agent", title: "Hipotecas en Altea, Benidorm y Alicante", text: "Consigue hasta el 100% de financiación para tu vivienda en la zona." },
-  { icon: "assured_workload", title: "Servicios de protección inteligente", text: "Especializado en blindar tu patrimonio y asegurar que el futuro de tu familia esté siempre bajo control." },
-  { icon: "trending_up", title: "Pensión, ahorro e inversión", text: "Vehículos eficientes para que tus ahorros batan a la inflación con el riesgo bajo control. Rentabilidad con garantías y beneficios fiscales." },
-  { icon: "family_restroom", title: "Salud Premium", text: "Acceso preferente a la mejor medicina privada sin esperas ni colas. Seguro médico total. Co o sin copagos. Especialistas top." },
-  { icon: "domain", title: "Administración de fincas", text: "Gestión profesional de comunidades, optimizando costes, con claridad y transparencia, utilizando herramientas innovadoras." },
+  { icon: "analytics", title: "Planificación financiera personal", text: "Análisis completo de objetivos vitales para diseñar una hoja de ruta a medida.", cta: "Planificación financiera" },
+  { icon: "real_estate_agent", title: "Hipotecas en Altea, Benidorm y Alicante", text: "Consigue hasta el 100% de financiación para tu vivienda en la zona.", cta: "Estudiar mi hipoteca" },
+  { icon: "assured_workload", title: "Servicios de protección inteligente", text: "Especializado en blindar tu patrimonio y asegurar que el futuro de tu familia esté siempre bajo control.", cta: "Proteger mis ingresos" },
+  { icon: "trending_up", title: "Pensión, ahorro e inversión", text: "Vehículos eficientes para que tus ahorros batan a la inflación con el riesgo bajo control. Rentabilidad con garantías y beneficios fiscales.", cta: "Planificar mi jubilación" },
+  { icon: "family_restroom", title: "Salud Premium", text: "Acceso preferente a la mejor medicina privada sin esperas ni colas. Seguro médico total. Adaptado a ti. Especialistas top.", cta: "Ver opciones de salud" },
+  { icon: "domain", title: "Administración de fincas", text: "Gestión profesional de comunidades, optimizando costes, con claridad y transparencia, utilizando herramientas innovadoras.", cta: "Administración de comunidades" },
 ];
 
 const errors = [
@@ -248,6 +248,15 @@ function Index() {
 }
 
 function Header() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const navLinks: [string, string][] = [
+    ["Servicios", "/#services"],
+    ["Método", "/#method"],
+    ["Sobre mí", "/#about"],
+    ["Blog", "/blog"],
+    ["FAQ", "/#faq"],
+    ["Contacto", "/#contact"],
+  ];
   return (
     <motion.header
       initial={{ y: -80, opacity: 0 }}
@@ -269,7 +278,7 @@ function Header() {
           </span>
         </a>
         <div className="hidden md:flex items-center gap-10">
-          {[["Servicios", "/#services"], ["Método", "/#method"], ["Sobre mí", "/#about"], ["Blog", "/blog"], ["FAQ", "/#faq"], ["Contacto", "/#contact"]].map(([l, h]) => (
+          {navLinks.map(([l, h]) => (
             <a
               key={h}
               className="relative text-sm font-medium text-[#1A1A1A] group"
@@ -280,16 +289,61 @@ function Header() {
             </a>
           ))}
         </div>
-        <motion.a
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          transition={spring}
-          className="bg-[#1A1A1A] text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-[#FF6B00] transition-colors"
-          href={WHATSAPP}
-        >
-          WhatsApp
-        </motion.a>
+        <div className="flex items-center gap-3">
+          <motion.a
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={spring}
+            className="hidden sm:inline-block bg-[#1A1A1A] text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-[#FF6B00] transition-colors"
+            href={WHATSAPP}
+          >
+            WhatsApp
+          </motion.a>
+          <button
+            type="button"
+            onClick={() => setMobileOpen(true)}
+            aria-label="Abrir menú"
+            className="md:hidden p-2 -mr-2 text-[#1A1A1A]"
+          >
+            <Icon name="menu" className="text-3xl" />
+          </button>
+        </div>
       </nav>
+
+      {mobileOpen && (
+        <div className="md:hidden fixed inset-0 z-[60] bg-white flex flex-col">
+          <div className="flex justify-between items-center px-6 py-5 border-b border-[#E5E5E5]">
+            <span className="text-base font-bold tracking-tight uppercase">Menú</span>
+            <button
+              type="button"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Cerrar menú"
+              className="p-2 -mr-2 text-[#1A1A1A]"
+            >
+              <Icon name="close" className="text-3xl" />
+            </button>
+          </div>
+          <div className="flex flex-col px-6 py-8 gap-2">
+            {navLinks.map(([l, h]) => (
+              <a
+                key={h}
+                href={h}
+                onClick={() => setMobileOpen(false)}
+                className="py-4 border-b border-[#E5E5E5] text-xl font-bold tracking-tight text-[#1A1A1A] hover:text-[#FF6B00]"
+              >
+                {l}
+              </a>
+            ))}
+            <a
+              href={WHATSAPP}
+              onClick={() => setMobileOpen(false)}
+              className="mt-6 inline-block text-center bg-[#1A1A1A] text-white px-6 py-4 text-xs font-bold uppercase tracking-widest hover:bg-[#FF6B00] transition-colors"
+            >
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      )}
     </motion.header>
   );
 }
@@ -313,7 +367,7 @@ function Hero() {
                 transition={{ duration: 0.9, ease: easeOutExpo, delay: 0.4 }}
                 className="h-[2px] bg-[#FF6B00] block"
               />
-              HIPOTECAS, AHORRO, PENSION, SEGUROS Y ADMINISTRACIÓN DE FINCAS EN ALTEA
+              HIPOTECAS, AHORRO, PENSIÓN, SEGUROS Y ADMINISTRACIÓN DE FINCAS EN ALTEA
             </div>
           </FadeUp>
 
@@ -516,7 +570,7 @@ function Services() {
                 <h3 className="text-xl font-bold mb-4 group-hover:text-white transition-colors">{s.title}</h3>
                 <p className="text-[#4A4A4A] mb-10 group-hover:text-white/80 transition-colors">{s.text}</p>
                 <a className="text-xs font-black uppercase tracking-widest flex items-center gap-2 group-hover:text-white transition-colors" href="#contact">
-                  Saber más <Icon name="arrow_forward" className="text-sm" />
+                  {s.cta} <Icon name="arrow_forward" className="text-sm" />
                 </a>
               </motion.div>
             </FadeUp>
@@ -609,18 +663,23 @@ function About() {
               <div className="space-y-4">
                 <span className="text-[#FF6B00] font-bold text-xs uppercase tracking-widest">SOBRE MÍ</span>
                 <h2 className="text-5xl font-bold tracking-tight">José Carlos Hidalgo Ortega</h2>
-                <p className="text-2xl font-medium text-[#FF6B00] italic">Tu compañero de viaje hacia la tranquilidad económica.</p>
+                <p className="text-2xl font-medium text-[#FF6B00] italic">Especialista en protección patrimonial e hipotecas en Altea · Costa Blanca · Alicante</p>
               </div>
             </FadeUp>
             <FadeUp delay={0.1}>
               <div className="space-y-6 text-xl text-[#4A4A4A] leading-relaxed">
-                <p>Soy especialista en protección patrimonial e hipotecas. No parto de productos, parto de riesgos, prioridades y decisiones bien planteadas.</p>
-                <p>He visto a demasiadas familias y negocios sufrir por decisiones impulsivas y sin información. Mi objetivo es que no tomes decisiones importantes desde la duda, la prisa o el miedo, sino con información, criterio y tranquilidad.</p>
+                <p>Hay una frase que escucho con frecuencia en mi trabajo: «Ojalá hubiera hablado con alguien antes de firmar esto.»</p>
+                <p>Mi objetivo es que tú nunca tengas que decirla.</p>
+                <p>Llevo años acompañando a familias y autónomos de la Costa Blanca en las decisiones financieras que más pesan: conseguir una hipoteca en las mejores condiciones posibles, proteger los ingresos ante lo inesperado, planificar el ahorro o su jubilación con cabeza o gestionar la comunidad de vecinos sin dramas.</p>
+                <p>No soy el asesor que te recomienda el producto del mes. Soy el que se sienta contigo, revisa tu situación real y te dice lo que necesitas escuchar, aunque no siempre sea lo más fácil.</p>
+                <p>Trabajo como gestor en Nationale-Nederlanden, ING y ABANCA. Eso me permite comparar y negociar en tu nombre, no defender los intereses de un banco concreto.</p>
+                <p>Además, soy cofundador de HiloLegal, una firma legal y de administración de fincas que nació de la misma convicción: que la gente merece profesionales que hablen claro y cumplan lo que dicen.</p>
+                <p>Si estás en Altea, Benidorm, la Marina Baixa o la provincia de Alicante y quieres un diagnóstico honesto de tu situación financiera, el primer paso no cuesta nada.</p>
               </div>
             </FadeUp>
             <FadeUp delay={0.2}>
               <div className="flex flex-wrap gap-3 pt-2">
-                {["Autónomos", "Familias", "Hipotecas", "Protección"].map((t) => (
+                {["Autónomos", "Familias", "Hipotecas", "Protección", "Ahorrar", "Administración de fincas"].map((t) => (
                   <motion.span
                     key={t}
                     whileHover={{ y: -2, backgroundColor: "#1A1A1A", color: "#FFFFFF" }}
