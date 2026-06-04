@@ -25,13 +25,3 @@
     <priority>0.2</priority>
   </url>
 </urlset>
-
-3. Confirma también que el archivo robots.txt está en /public 
-   con este contenido:
-
-User-agent: *
-Allow: /
-Disallow: /privacidad.html
-Disallow: /terminos.html
-
-Sitemap: https://josecarlos.hilolegal.es/sitemap.xml
