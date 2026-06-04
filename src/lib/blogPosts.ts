@@ -502,6 +502,103 @@ No es imposible. Pero requiere empezar hoy, no a los 60.
 
 **Si quieres calcular tu brecha de jubilación y construir un plan real para cubrirla, escríbeme. Lo hacemos juntos.**`,
   },
+  {
+    slug: "preparar-perfil-financiero-hipoteca-2026",
+    title: "Cómo preparar tu perfil financiero antes de pedir una hipoteca: la guía paso a paso (2026)",
+    category: "Hipotecas",
+    readingTime: "7 min",
+    keyword: "cómo preparar perfil financiero hipoteca",
+    excerpt: "Antes de buscar piso, necesitas preparar tu perfil financiero. Los bancos usan algoritmos estrictos que van mucho más allá del sueldo.",
+    metaDescription: "Antes de buscar piso, necesitas preparar tu perfil financiero. Los bancos usan algoritmos estrictos que van mucho más allá del sueldo. Te explico qué revisan exactamente y cómo llegar en las mejores condiciones.",
+    content: `## El error que comete la mayoría antes de pedir una hipoteca
+
+Abrir Idealista o Fotocasa. Enamorarse de un piso. Llamar para visitar. Negociar el precio. Y después, sentarse con el banco.
+
+Ese orden es el más común. Y también es el más caro.
+
+Porque si el banco te dice que no —o te ofrece condiciones peores de las que mereces— ya habrás invertido semanas de ilusión, tiempo y energía en una operación que no tenía base sólida.
+
+> Antes de enamorarte de un piso, necesitas enamorar al banco. Y para eso, hay que prepararse.
+
+Hoy los bancos no aprueban hipotecas por empatía ni por la relación con el director de sucursal. Lo hacen mediante algoritmos de scoring que analizan tu comportamiento financiero al milímetro. Conocer esas reglas de antemano puede marcar la diferencia entre aprobar o denegar tu operación.
+
+## 1. Tolerancia cero con la morosidad
+
+Este es el punto que más sorprende a mis clientes. Creen que un buen sueldo compensa cualquier imperfección en su historial. No es así.
+
+El sistema de scoring bancario analiza tu comportamiento de pago con una precisión que va más allá de lo que la mayoría imagina. Un retraso puntual en el pago de un recibo de luz, una letra que se devolvió aunque fuera por un error bancario, un préstamo pequeño pagado con retraso hace años... cualquiera de estos elementos puede activar una señal de alerta que bloquee tu expediente de forma automática.
+
+Para el algoritmo, pagar mal o tarde tiene solo dos interpretaciones posibles: que tu economía está ajustada o que tienes mala disciplina financiera. Ninguna de las dos es una buena carta de presentación ante un banco que va a prestarte cientos de miles de euros.
+
+> **Acción previa:** revisa tus domiciliaciones y asegúrate de que ningún recibo ha quedado pendiente en los últimos 24 meses. Si tienes algún apunte negativo en ASNEF o en ficheros de morosidad, resuélvelo antes de iniciar el proceso.
+
+## 2. Lo que tus nóminas cuentan de ti (más de lo que crees)
+
+Los analistas de riesgos no se limitan a mirar el neto que cobras a final de mes. Leen tu nómina como si fuera un informe completo de tu situación económica real.
+
+Dos elementos concretos que disparan alarmas inmediatas:
+
+- **Anticipos de sueldo:** si has pedido un anticipo a tu empresa, el banco lo interpreta como que vas económicamente muy ajustado ante cualquier imprevisto. Es una señal de vulnerabilidad financiera que puede pesar mucho en la decisión.
+- **Embargos en nómina:** cualquier embargo reflejado en tu nómina —incluso por algo aparentemente menor como una multa de tráfico no pagada— es una línea roja absoluta. Bloquea el expediente y puede dejarte marcado en el sistema durante años.
+
+La recomendación es clara: durante los seis meses previos a solicitar una hipoteca, mantén una nómina limpia, sin movimientos que puedan interpretarse como señales de tensión económica.
+
+## 3. La CIRBE: el informe que el banco siempre consulta
+
+La Central de Información de Riesgos del Banco de España (CIRBE) recoge todos tus préstamos, créditos y tarjetas con saldo dispuesto superior a 1.000 euros. Es el primero de los documentos que cualquier entidad consultará antes de evaluar tu operación.
+
+Hay tres errores frecuentes que arruinan operaciones hipotecarias perfectamente viables:
+
+1. **Olvidar avales del pasado:** es muy habitual que los clientes aseguren no tener deudas, sin recordar que hace diez o quince años avalaron la compra del coche de un familiar. Ese aval sigue en tu CIRBE y reduce drásticamente tu capacidad real de endeudamiento.
+2. **Pedir un préstamo personal justo antes de firmar:** algunos compradores solicitan un crédito para pagar muebles o gastos de la mudanza pocas semanas antes de la firma. Si el banco vuelve a consultar la CIRBE el día de la firma ante notario y detecta ese nuevo crédito, la operación puede quedar denegada de forma definitiva.
+3. **Microcréditos y créditos de tarjetas:** si estás acostumbrado a solicitarlos y, al pedir la hipoteca, tienes varias deudas pequeñas, los bancos interpretan que tienes problemas de liquidez, sobreendeudamiento o malos hábitos financieros. Además de perjudicar tu ratio de endeudamiento.
+
+> **Acción previa:** solicita tu informe CIRBE en el Banco de España (es gratuito y puedes hacerlo online). Revísalo con calma antes de iniciar ningún proceso. Cualquier sorpresa es mejor descubrirla tú antes que el banco.
+
+## 4. Tu contrato de trabajo importa más de lo que imaginas
+
+No todos los contratos estables se evalúan de la misma manera. El algoritmo hace distinciones importantes:
+
+- **Contrato indefinido ordinario:** el perfil más favorable. Cuanta más antigüedad en la empresa, mejor.
+- **Contrato fijo discontinuo:** muchos bancos exigen un mínimo de 18 meses de antigüedad continuada para considerarlo como ingreso estable. Nunca programes la firma de tu hipoteca durante tu período de inactividad: el banco pedirá tu vida laboral actualizada antes de la firma ante notario y, si constas como desempleado, la operación puede caer.
+- **Contratos temporales recientes:** generan incertidumbre en el scoring. Si llevas menos de dos años en tu empresa actual, el proceso puede ser más difícil o requerir condiciones adicionales.
+
+## 5. Tus ingresos tienen que ser oficiales y demostrables al 100%
+
+La normativa hipotecaria vigente en España exige que la financiación se conceda basándose exclusivamente en ingresos justificables documentalmente ante Hacienda.
+
+### Alquileres como fuente de ingresos
+
+Si tienes pisos en alquiler, el banco no sumará lo que cobras bruto cada mes. Aplicará el rendimiento neto que declaras en tu IRPF. Si tras restar gastos deducibles —seguros, reparaciones, amortizaciones— el rendimiento neto queda en cero o negativo, esos ingresos no te servirán para calcular tu capacidad de pago.
+
+## La lupa especial del banco sobre los autónomos
+
+Si eres trabajador por cuenta propia, las reglas del juego cambian. El banco no mira lo que entra en tu cuenta: mira lo que declaras a Hacienda.
+
+### Autónomos en estimación directa
+
+Al banco no le importa tu facturación bruta. Le importa tu rendimiento neto declarado. Si facturas 170.000 € al año pero deduces gastos elevados y tu beneficio neto se queda en 15.000 €, el banco calculará tu viabilidad sobre esos 15.000 €.
+
+Revisarán con detalle tu declaración de la renta y tus modelos trimestrales (modelo 130) para comprobar la consistencia de tus ingresos durante al menos los dos últimos años.
+
+### Autónomos por módulos
+
+Los profesionales que tributan por módulos (taxistas, comerciantes, agricultores…) declaran un rendimiento oficial fijo que suele estar muy por debajo de sus ingresos reales. Esa diferencia los convierte en perfiles complicados para los algoritmos automáticos de la banca online. Tu mejor opción suele ser la banca tradicional, donde el gestor tiene margen para evaluar tu perfil de forma global.
+
+### Autónomos societarios
+
+Muchos socios o gerentes creen que, al asignarse una nómina mensual, el banco los tratará como empleados. Es un error. Para los analistas, sigues siendo autónomo: la exigencia es un mínimo de tres años de antigüedad continuada al frente de tu empresa, con cuentas anuales que demuestren estabilidad y capacidad de pago sostenida.
+
+## El paso previo que todo comprador inteligente da primero
+
+Antes de visitar un solo piso, antes de hablar con ninguna inmobiliaria, reúne toda tu documentación financiera —nóminas de los últimos seis meses, declaración de la renta de los dos últimos años, vida laboral e informe CIRBE— y siéntate con alguien que te ayude a hacer un diagnóstico real de tu capacidad hipotecaria.
+
+Ese diagnóstico te dirá tres cosas: cuánto puedes pedir, a qué condiciones puedes aspirar y qué aspectos de tu perfil conviene mejorar antes de iniciar el proceso formal.
+
+> Un comprador informado no pierde el tiempo con viviendas o bancos que no encajan con su perfil. Llega a las negociaciones con ventaja.
+
+**¿Quieres saber si tu perfil está listo para una hipoteca en 2026? Escríbeme y hacemos juntos ese diagnóstico previo. Es gratuito, sin compromiso y puede ahorrarte meses de proceso.**`,
+  },
 ];
 
 export const findPost = (slug: string) => blogPosts.find((p) => p.slug === slug);
