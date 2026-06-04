@@ -1,17 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Página principal -->
   <url>
     <loc>https://josecarlos.hilolegal.es/</loc>
     <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Blog (índice) -->
   <url>
     <loc>https://josecarlos.hilolegal.es/blog</loc>
     <lastmod>2026-06-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- Artículos del blog -->
+  <url>
+    <loc>https://josecarlos.hilolegal.es/blog/base-minima-autonomos-baja-2026</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://josecarlos.hilolegal.es/blog/plan-de-pensiones-o-sialp</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://josecarlos.hilolegal.es/blog/jubilacion-en-espana</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://josecarlos.hilolegal.es/blog/preparar-perfil-financiero-hipoteca-2026</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://josecarlos.hilolegal.es/blog/sialp-2026-ahorro-sin-impuestos</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://josecarlos.hilolegal.es/blog/dinero-parado-en-el-banco</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://josecarlos.hilolegal.es/blog/que-pasaria-con-tu-familia-si-no-pudieras-trabajar</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://josecarlos.hilolegal.es/blog/prevision-financiera-vision</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://josecarlos.hilolegal.es/blog/contigo-senior-nationale-nederlanden</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://josecarlos.hilolegal.es/blog/autonomo-ahorros-cuenta-corriente</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://josecarlos.hilolegal.es/blog/educacion-financiera-lo-que-el-colegio-no-te-enseno</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://josecarlos.hilolegal.es/blog/flujo-caja-vs-riqueza-real-autonomo</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Páginas legales (excluidas del índice principal) -->
   <url>
     <loc>https://josecarlos.hilolegal.es/privacidad.html</loc>
     <lastmod>2026-06-04</lastmod>
@@ -24,4 +104,5 @@
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
+
 </urlset>
