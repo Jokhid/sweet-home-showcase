@@ -328,26 +328,26 @@ function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.45 }}
-              className="md:hidden fixed top-0 right-0 bottom-0 z-[60] w-1/2 min-w-[260px] bg-white/85 backdrop-blur-xl border-l border-[#E5E5E5] flex flex-col shadow-2xl"
+              className="md:hidden fixed top-0 right-0 bottom-0 z-[60] w-[85%] min-w-[300px] bg-white/85 backdrop-blur-xl border-l border-[#E5E5E5] flex flex-col shadow-2xl"
             >
-              <div className="flex justify-between items-center px-5 py-5 border-b border-[#E5E5E5]">
-                <span className="text-sm font-bold tracking-tight uppercase">Menú</span>
+              <div className="flex justify-between items-center px-6 py-6 border-b border-[#E5E5E5]">
+                <span className="text-base font-bold tracking-tight uppercase">Menú</span>
                 <button
                   type="button"
                   onClick={() => setMobileOpen(false)}
                   aria-label="Cerrar menú"
                   className="p-2 -mr-2 text-[#1A1A1A]"
                 >
-                  <Icon name="close" className="text-2xl" />
+                  <Icon name="close" className="text-3xl" />
                 </button>
               </div>
-              <div className="flex flex-col px-5 py-6 gap-1 overflow-y-auto">
+              <div className="flex flex-col justify-center flex-1 px-6 py-4 gap-2">
                 {navLinks.map(([l, h]) => (
                   <a
                     key={h}
                     href={h}
                     onClick={() => setMobileOpen(false)}
-                    className="py-3 border-b border-[#E5E5E5] text-base font-bold tracking-tight text-[#1A1A1A] hover:text-[#FF6B00]"
+                    className="py-4 border-b border-[#E5E5E5] text-lg font-bold tracking-tight text-[#1A1A1A] hover:text-[#FF6B00]"
                   >
                     {l}
                   </a>
@@ -355,7 +355,7 @@ function Header() {
                 <a
                   href={WHATSAPP}
                   onClick={() => setMobileOpen(false)}
-                  className="mt-5 inline-block text-center bg-[#1A1A1A] text-white px-4 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-[#FF6B00] transition-colors"
+                  className="mt-6 inline-block text-center bg-[#1A1A1A] text-white px-6 py-4 text-xs font-bold uppercase tracking-widest hover:bg-[#FF6B00] transition-colors"
                 >
                   WhatsApp
                 </a>
