@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion, AnimatePresence } from "framer-motion";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { submitContact } from "@/lib/contact.functions";
 
@@ -310,40 +310,60 @@ function Header() {
         </div>
       </nav>
 
-      {mobileOpen && (
-        <div className="md:hidden fixed inset-0 z-[60] bg-white flex flex-col">
-          <div className="flex justify-between items-center px-6 py-5 border-b border-[#E5E5E5]">
-            <span className="text-base font-bold tracking-tight uppercase">Menú</span>
-            <button
-              type="button"
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
               onClick={() => setMobileOpen(false)}
-              aria-label="Cerrar menú"
-              className="p-2 -mr-2 text-[#1A1A1A]"
+              className="md:hidden fixed inset-0 z-[55] bg-black/40"
+            />
+            <motion.div
+              key="panel"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.45 }}
+              className="md:hidden fixed top-0 right-0 bottom-0 z-[60] w-1/2 min-w-[260px] bg-white/85 backdrop-blur-xl border-l border-[#E5E5E5] flex flex-col shadow-2xl"
             >
-              <Icon name="close" className="text-3xl" />
-            </button>
-          </div>
-          <div className="flex flex-col px-6 py-8 gap-2">
-            {navLinks.map(([l, h]) => (
-              <a
-                key={h}
-                href={h}
-                onClick={() => setMobileOpen(false)}
-                className="py-4 border-b border-[#E5E5E5] text-xl font-bold tracking-tight text-[#1A1A1A] hover:text-[#FF6B00]"
-              >
-                {l}
-              </a>
-            ))}
-            <a
-              href={WHATSAPP}
-              onClick={() => setMobileOpen(false)}
-              className="mt-6 inline-block text-center bg-[#1A1A1A] text-white px-6 py-4 text-xs font-bold uppercase tracking-widest hover:bg-[#FF6B00] transition-colors"
-            >
-              WhatsApp
-            </a>
-          </div>
-        </div>
-      )}
+              <div className="flex justify-between items-center px-5 py-5 border-b border-[#E5E5E5]">
+                <span className="text-sm font-bold tracking-tight uppercase">Menú</span>
+                <button
+                  type="button"
+                  onClick={() => setMobileOpen(false)}
+                  aria-label="Cerrar menú"
+                  className="p-2 -mr-2 text-[#1A1A1A]"
+                >
+                  <Icon name="close" className="text-2xl" />
+                </button>
+              </div>
+              <div className="flex flex-col px-5 py-6 gap-1 overflow-y-auto">
+                {navLinks.map(([l, h]) => (
+                  <a
+                    key={h}
+                    href={h}
+                    onClick={() => setMobileOpen(false)}
+                    className="py-3 border-b border-[#E5E5E5] text-base font-bold tracking-tight text-[#1A1A1A] hover:text-[#FF6B00]"
+                  >
+                    {l}
+                  </a>
+                ))}
+                <a
+                  href={WHATSAPP}
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-5 inline-block text-center bg-[#1A1A1A] text-white px-4 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-[#FF6B00] transition-colors"
+                >
+                  WhatsApp
+                </a>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }
@@ -831,6 +851,23 @@ function Contact() {
               </FadeUp>
             ))}
           </div>
+          <FadeUp>
+            <div className="pt-10 border-t border-[#E5E5E5] space-y-4">
+              <div className="flex items-center gap-3">
+                <Icon name="location_on" className="text-[#FF6B00] text-xl" />
+                <p className="text-sm font-bold uppercase tracking-widest">Calle Calitx 9, 03590 Altea</p>
+              </div>
+              <div className="w-full aspect-[4/3] overflow-hidden border border-[#E5E5E5]">
+                <iframe
+                  title="Mapa Calle Calitx 9, Altea"
+                  src="https://www.google.com/maps?q=Calle+Calitx+9,+03590+Altea,+Alicante&output=embed"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-full border-0"
+                />
+              </div>
+            </div>
+          </FadeUp>
         </div>
         <FadeUp>
           <form className="space-y-10" onSubmit={onSubmit}>
@@ -942,7 +979,7 @@ function Footer() {
             <img src="/logo-white.png" alt="Logo" loading="lazy" className="h-10 w-10 object-contain" />
             <div className="space-y-2">
               <div className="text-2xl font-black tracking-tighter uppercase">José Carlos Hidalgo</div>
-              <p className="text-gray-500 text-xs tracking-widest uppercase">Asesoría Financiera e Hipotecaria</p>
+              <p className="text-gray-500 text-xs tracking-widest uppercase">Gestión patrimonial e hipotecaria</p>
             </div>
           </div>
           <div className="flex items-center gap-6">
