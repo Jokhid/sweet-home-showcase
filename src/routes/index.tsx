@@ -37,7 +37,7 @@ export const Route = createFileRoute("/")({
               url: "https://josecarlos.hilolegal.es",
               telephone: "+34647506040",
               email: "josecarlos@hilolegal.es",
-              image: "https://josecarlos.hilolegal.es/6.png",
+              image: "https://josecarlos.hilolegal.es/8.jpg",
               sameAs: [
                 "https://www.linkedin.com/in/jos%C3%A9carloshidalgo/",
                 "https://www.instagram.com/jokhid/",
@@ -65,7 +65,7 @@ export const Route = createFileRoute("/")({
               url: "https://josecarlos.hilolegal.es",
               telephone: "+34647506040",
               email: "josecarlos@hilolegal.es",
-              image: "https://josecarlos.hilolegal.es/6.png",
+              image: "https://josecarlos.hilolegal.es/8.jpg",
               description:
                 "Asesoramiento financiero e hipotecario para autónomos y familias en Altea, Benidorm y Alicante. Hipotecas hasta el 100%, seguros, pensiones y administración de fincas en la Costa Blanca.",
               priceRange: "€€",
@@ -112,7 +112,7 @@ const PHONE_DISPLAY = "647 50 60 40";
 const WHATSAPP = "https://wa.me/34647506040";
 
 // Photos in /public
-const IMG = (n: number) => `/${n}.png`;
+const IMG = (n: number) => `/${n}.jpg`;
 const LOGO = "/logo.png";
 
 const Icon = ({ name, className = "" }: { name: string; className?: string }) => (
@@ -719,7 +719,7 @@ function Method() {
           <FadeUp delay={0.1}>
             <div className="relative overflow-hidden aspect-square">
               <motion.img
-                src={IMG(5)}
+                src={IMG(9)}
                 loading="lazy"
                 alt="Método de asesoramiento"
                 className="absolute inset-0 w-full h-full object-cover"
