@@ -851,6 +851,23 @@ function Contact() {
               </FadeUp>
             ))}
           </div>
+          <FadeUp>
+            <div className="pt-10 border-t border-[#E5E5E5] space-y-4">
+              <div className="flex items-center gap-3">
+                <Icon name="location_on" className="text-[#FF6B00] text-xl" />
+                <p className="text-sm font-bold uppercase tracking-widest">Calle Calitx 9, 03590 Altea</p>
+              </div>
+              <div className="w-full aspect-[4/3] overflow-hidden border border-[#E5E5E5]">
+                <iframe
+                  title="Mapa Calle Calitx 9, Altea"
+                  src="https://www.google.com/maps?q=Calle+Calitx+9,+03590+Altea,+Alicante&output=embed"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-full border-0"
+                />
+              </div>
+            </div>
+          </FadeUp>
         </div>
         <FadeUp>
           <form className="space-y-10" onSubmit={onSubmit}>
