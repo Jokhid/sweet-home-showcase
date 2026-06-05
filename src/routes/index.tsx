@@ -494,7 +494,7 @@ function Hero() {
 
           <FadeUp delay={0.6}>
             <p className="text-xl text-[#4A4A4A] max-w-xl leading-relaxed">
-              Analizo tu situación, detecto riesgos y te propongo un plan claro para proteger tus ingresos, financiar tu vivienda y preparar tu futuro con criterio.
+              Analizo tu situación, detecto riesgos y te propongo un plan claro para proteger tus ingresos, financiar tu vivienda o preparar tu futuro con criterio.
             </p>
           </FadeUp>
 
