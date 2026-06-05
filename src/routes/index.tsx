@@ -575,9 +575,9 @@ function TrustStats() {
 
 function Diagnosis() {
   const items = [
-    { n: "01", t: "Ingresos y estabilidad", d: "¿Qué pasaría si mañana no pudieras facturar? Aseguramos tu motor financiero principal.", img: 3 },
+    { n: "01", t: "Ingresos y estabilidad", d: "¿Qué pasaría si mañana no pudieras facturar? Aseguramos tu motor financiero principal. No se trata de miedo, se trata de amor y responsabilidad", img: 3 },
     { n: "02", t: "Hipoteca y endeudamiento", d: "Revisión de condiciones y viabilidad para que tu casa sea un activo, no una carga.", img: 2 },
-    { n: "03", t: "Ahorro, pensión y protección", d: "Estrategias de largo plazo para que tu nivel de vida no dependa solo de tu trabajo actual.", img: 4 },
+    { n: "03", t: "Ahorro, pensión y protección", d: "Estrategias de medio y largo plazo para que tu nivel de vida no dependa solo de tu trabajo actual.", img: 4 },
   ];
   return (
     <section className="py-[100px]">
