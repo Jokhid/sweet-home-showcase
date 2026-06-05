@@ -173,3 +173,9 @@
 
   .text-balance { text-wrap: balance; }
 }
+
+img[src="/1.jpg"],
+img[src="/8.jpg"],
+img[src="/9.jpg"] {
+  filter: grayscale(100%);
+}
