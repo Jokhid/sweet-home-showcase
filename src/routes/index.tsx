@@ -759,7 +759,7 @@ function About() {
                 <motion.img
                   alt="José Carlos Hidalgo"
                   className="w-full h-[600px] object-cover"
-                  src={IMG(6)}
+                  src={IMG(8)}
                   loading="lazy"
                   initial={{ scale: 1.08 }}
                   whileInView={{ scale: 1 }}
