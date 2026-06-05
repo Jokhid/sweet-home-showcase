@@ -328,7 +328,7 @@ function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.45 }}
-              className="md:hidden fixed top-0 right-0 bottom-0 z-[60] w-[85%] min-w-[300px] bg-white/85 backdrop-blur-xl border-l border-[#E5E5E5] flex flex-col shadow-2xl"
+              className="md:hidden fixed top-0 right-0 bottom-0 z-[60] w-[85%] min-w-[300px] bg-white border-l border-[#E5E5E5] flex flex-col shadow-2xl"
             >
               <div className="flex justify-between items-center px-6 py-6 border-b border-[#E5E5E5]">
                 <span className="text-base font-bold tracking-tight uppercase">Menú</span>
