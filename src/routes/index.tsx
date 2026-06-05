@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { motion, useScroll, useTransform, useReducedMotion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { submitContact } from "@/lib/contact.functions";
 
@@ -249,6 +249,7 @@ function Index() {
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+
   const navLinks: [string, string][] = [
     ["Servicios", "/#services"],
     ["Método", "/#method"],
@@ -257,6 +258,15 @@ function Header() {
     ["FAQ", "/#faq"],
     ["Contacto", "/#contact"],
   ];
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   return (
     <motion.header
       initial={{ y: -80, opacity: 0 }}
@@ -277,6 +287,7 @@ function Header() {
             José Carlos Hidalgo
           </span>
         </a>
+
         <div className="hidden md:flex items-center gap-10">
           {navLinks.map(([l, h]) => (
             <a
@@ -284,11 +295,14 @@ function Header() {
               className="relative text-sm font-medium text-[#1A1A1A] group"
               href={h}
             >
-              <span className="transition-colors group-hover:text-[#FF6B00]">{l}</span>
+              <span className="transition-colors group-hover:text-[#FF6B00]">
+                {l}
+              </span>
               <span className="absolute left-0 -bottom-1 h-[1px] w-full origin-left scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
             </a>
           ))}
         </div>
+
         <div className="flex items-center gap-3">
           <motion.a
             whileHover={{ scale: 1.03 }}
@@ -299,10 +313,12 @@ function Header() {
           >
             WhatsApp
           </motion.a>
+
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
             aria-label="Abrir menú"
+            aria-expanded={mobileOpen}
             className="md:hidden p-2 -mr-2 text-[#1A1A1A]"
           >
             <Icon name="menu" className="text-3xl" />
@@ -312,56 +328,110 @@ function Header() {
 
       <AnimatePresence>
         {mobileOpen && (
-          <>
-            <motion.div
-              key="backdrop"
+          <motion.div
+            className="md:hidden fixed inset-0 z-[999] overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.button
+              type="button"
+              aria-label="Cerrar menú"
+              onClick={() => setMobileOpen(false)}
+              className="absolute inset-0 w-full h-full bg-[#1A1A1A]/45 backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => setMobileOpen(false)}
-              className="md:hidden fixed inset-0 z-[55] bg-black/40"
             />
-            <motion.div
-              key="panel"
+
+            <motion.aside
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "tween", ease: [0.16, 1, 0.3, 1], duration: 0.45 }}
-              className="md:hidden fixed top-0 right-0 bottom-0 z-[60] w-[85%] min-w-[300px] bg-white border-l border-[#E5E5E5] flex flex-col shadow-2xl"
+              transition={{ duration: 0.65, ease: easeOutExpo }}
+              className="absolute right-0 top-0 h-full w-[min(88vw,430px)] overflow-hidden border-l border-white/60 bg-white/82 backdrop-blur-2xl shadow-[-24px_0_80px_rgba(26,26,26,0.28)]"
             >
-              <div className="flex justify-between items-center px-6 py-6 border-b border-[#E5E5E5]">
-                <span className="text-base font-bold tracking-tight uppercase">Menú</span>
-                <button
-                  type="button"
-                  onClick={() => setMobileOpen(false)}
-                  aria-label="Cerrar menú"
-                  className="p-2 -mr-2 text-[#1A1A1A]"
-                >
-                  <Icon name="close" className="text-3xl" />
-                </button>
-              </div>
-              <div className="flex flex-col justify-center flex-1 px-6 py-4 gap-2">
-                {navLinks.map(([l, h]) => (
-                  <a
-                    key={h}
-                    href={h}
+              <motion.div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 z-20 bg-[#FF6B00]"
+                initial={{ scaleX: 1 }}
+                animate={{ scaleX: 0 }}
+                exit={{ scaleX: 1 }}
+                transition={{ duration: 0.75, ease: easeOutExpo, delay: 0.05 }}
+                style={{ transformOrigin: "left" }}
+              />
+
+              <div className="relative z-10 flex h-full flex-col">
+                <div className="flex items-center justify-between border-b border-white/60 bg-white/72 px-6 py-5 backdrop-blur-xl">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={LOGO}
+                      alt="Logo José Carlos Hidalgo"
+                      className="h-9 w-9 object-contain"
+                    />
+                    <span className="text-base font-bold uppercase tracking-tight text-[#1A1A1A]">
+                      Menú
+                    </span>
+                  </div>
+
+                  <button
+                    type="button"
                     onClick={() => setMobileOpen(false)}
-                    className="py-4 border-b border-[#E5E5E5] text-lg font-bold tracking-tight text-[#1A1A1A] hover:text-[#FF6B00]"
+                    aria-label="Cerrar menú"
+                    className="rounded-full border border-[#E5E5E5]/80 bg-white/70 p-2 text-[#1A1A1A] backdrop-blur-xl transition-colors hover:bg-[#FF6B00] hover:text-white"
                   >
-                    {l}
-                  </a>
-                ))}
-                <a
-                  href={WHATSAPP}
-                  onClick={() => setMobileOpen(false)}
-                  className="mt-6 inline-block text-center bg-[#1A1A1A] text-white px-6 py-4 text-xs font-bold uppercase tracking-widest hover:bg-[#FF6B00] transition-colors"
-                >
-                  WhatsApp
-                </a>
+                    <Icon name="close" className="text-3xl" />
+                  </button>
+                </div>
+
+                <div className="flex flex-1 flex-col gap-3 px-5 py-7">
+                  {navLinks.map(([l, h], index) => (
+                    <motion.a
+                      key={h}
+                      href={h}
+                      onClick={() => setMobileOpen(false)}
+                      initial={{ opacity: 0, x: 48 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{
+                        duration: 0.55,
+                        ease: easeOutExpo,
+                        delay: 0.16 + index * 0.06,
+                      }}
+                      className="group relative overflow-hidden rounded-2xl border border-white/70 bg-white/72 px-5 py-4 text-xl font-bold tracking-tight text-[#1A1A1A] shadow-[0_12px_40px_rgba(26,26,26,0.08)] backdrop-blur-xl transition-transform duration-300 active:scale-[0.98]"
+                    >
+                      <span className="absolute inset-0 origin-right scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+                      <span className="relative z-10 flex items-center justify-between transition-colors group-hover:text-white">
+                        {l}
+                        <Icon
+                          name="arrow_forward"
+                          className="text-xl text-[#FF6B00] transition-colors group-hover:text-white"
+                        />
+                      </span>
+                    </motion.a>
+                  ))}
+
+                  <motion.a
+                    href={WHATSAPP}
+                    onClick={() => setMobileOpen(false)}
+                    initial={{ opacity: 0, x: 48 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{
+                      duration: 0.55,
+                      ease: easeOutExpo,
+                      delay: 0.54,
+                    }}
+                    className="mt-3 rounded-2xl border border-[#1A1A1A]/20 bg-[#1A1A1A]/90 px-6 py-5 text-center text-xs font-bold uppercase tracking-widest text-white shadow-[0_18px_45px_rgba(26,26,26,0.22)] backdrop-blur-xl transition-colors hover:bg-[#FF6B00]"
+                  >
+                    WhatsApp
+                  </motion.a>
+                </div>
+
+                <div className="border-t border-white/60 bg-white/62 px-6 py-5 text-xs font-medium leading-relaxed text-[#4A4A4A] backdrop-blur-xl">
+                  Asesoramiento financiero e hipotecario en Altea, Benidorm y Alicante.
+                </div>
               </div>
-            </motion.div>
-          </>
+            </motion.aside>
+          </motion.div>
         )}
       </AnimatePresence>
     </motion.header>
