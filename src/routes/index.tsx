@@ -979,7 +979,7 @@ function Footer() {
             <img src="/logo-white.png" alt="Logo" loading="lazy" className="h-10 w-10 object-contain" />
             <div className="space-y-2">
               <div className="text-2xl font-black tracking-tighter uppercase">José Carlos Hidalgo</div>
-              <p className="text-gray-500 text-xs tracking-widest uppercase">Asesoría Financiera e Hipotecaria</p>
+              <p className="text-gray-500 text-xs tracking-widest uppercase">Gestión patrimonial e hipotecaria</p>
             </div>
           </div>
           <div className="flex items-center gap-6">
