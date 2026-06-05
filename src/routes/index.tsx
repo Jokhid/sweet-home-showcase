@@ -746,7 +746,7 @@ function About() {
     <section id="about" className="py-[100px]">
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
-          <FadeUp className="lg:col-span-5 lg:-mt-50">
+          <FadeUp className="lg:col-span-5 lg:-mt-95">
             <div className="relative group">
               <motion.div
                 initial={{ x: 24, y: 24 }}
