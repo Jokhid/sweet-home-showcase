@@ -154,26 +154,26 @@
     section.innerHTML = `
       <div class="jc-tools-wrap">
         <p class="jc-tools-kicker">Herramientas</p>
-        <h2 class="jc-tools-title">Calculadoras para decidir con numeros, no por intuicion</h2>
-        <p class="jc-tools-intro">Recursos practicos para medir ahorro, vulnerabilidad financiera y escenarios hipotecarios antes de tomar decisiones importantes.</p>
+        <h2 class="jc-tools-title">Calculadoras para decidir con números, no por intuición</h2>
+        <p class="jc-tools-intro">Recursos prácticos para medir ahorro, vulnerabilidad financiera y escenarios hipotecarios antes de tomar decisiones importantes.</p>
         <div class="jc-tools-grid">
           <a class="jc-tool-card" href="/herramientas/ahorro-potencial/">
             <span class="jc-tool-icon" aria-hidden="true">savings</span>
             <h3>Calculadora de ahorro potencial</h3>
-            <p>Calcula cuanto dinero se escapa en pequenos gastos recurrentes y visualiza tu ahorro anual recuperable.</p>
+            <p>Calcula cuánto dinero se escapa en pequeños gastos recurrentes y visualiza tu ahorro anual recuperable.</p>
             <span class="jc-tool-action">Abrir calculadora <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></span>
           </a>
           <article class="jc-tool-card" aria-disabled="true">
             <span class="jc-tool-icon" aria-hidden="true">health_and_safety</span>
             <h3>Test de vulnerabilidad financiera</h3>
-            <p>Detecta puntos debiles en ingresos, proteccion y planificacion para saber donde conviene actuar primero.</p>
-            <span class="jc-tool-action">Proximamente</span>
+            <p>Detecta puntos débiles en ingresos, protección y planificación para saber dónde conviene actuar primero.</p>
+            <span class="jc-tool-action">Próximamente</span>
           </article>
           <article class="jc-tool-card" aria-disabled="true">
             <span class="jc-tool-icon" aria-hidden="true">real_estate_agent</span>
             <h3>Calculadora hipotecaria</h3>
-            <p>Estima cuota, intereses y escenarios de financiacion para valorar una hipoteca con mas criterio.</p>
-            <span class="jc-tool-action">Proximamente</span>
+            <p>Estima cuota, intereses y escenarios de financiación para valorar una hipoteca con más criterio.</p>
+            <span class="jc-tool-action">Próximamente</span>
           </article>
         </div>
       </div>
