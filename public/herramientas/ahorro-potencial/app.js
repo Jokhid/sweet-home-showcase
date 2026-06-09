@@ -32,7 +32,14 @@ const charts = { distribucion: null, tiempo: null };
 const chartColors = ["#C5A566", "#1A1A1A", "#737373", "#A3A3A3", "#D4C29D", "#57534E", "#0F766E", "#B45309", "#7F1D1D", "#3F3F46"];
 
 function formatCurrency(amount) {
-  return new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(Number.isFinite(amount) ? amount : 0);
+  const safeAmount = Number.isFinite(amount) ? amount : 0;
+  const hasDecimals = Math.round(safeAmount * 100) % 100 !== 0;
+  const formatted = new Intl.NumberFormat("de-DE", {
+    minimumFractionDigits: hasDecimals ? 2 : 0,
+    maximumFractionDigits: 2,
+  }).format(safeAmount);
+
+  return `${formatted} €`;
 }
 
 function initializeState() {
@@ -70,7 +77,7 @@ function renderGastos() {
             <p>${categoria.descripcion}</p>
           </div>
         </div>
-        <button class="gasto-toggle ${gasto.activo ? "active" : ""}" type="button" aria-label="Activar ${categoria.nombre}" data-categoria="${categoria.id}"></button>
+        <button class="gasto-toggle ${gasto.activo ? "active" : ""}" type="button" role="switch" aria-checked="${gasto.activo}" aria-label="Activar ${categoria.nombre}" data-categoria="${categoria.id}"></button>
       </div>
       <div class="gasto-controls">
         <input type="number" value="${gasto.monto}" step="0.01" min="0" data-categoria="${categoria.id}" data-type="monto" ${!gasto.activo ? "disabled" : ""} aria-label="Importe" />
