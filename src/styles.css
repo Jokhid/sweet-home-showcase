@@ -284,12 +284,12 @@ img[src="/9.jpg"] {
   :is(a, div).flex.items-center.gap-3:has(> img[src="/logo.png"])::before {
     width: 2.25rem;
     height: 2.25rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23C5A566'/%3E%3Cpath fill='%23000000' d='M12 13h6v16c0 5-3 8-8 8H8v-6h2c1.4 0 2-.8 2-2V13zm10 0h6v9h8v-9h6v24h-6v-9h-8v9h-6V13z'/%3E%3C/svg%3E");
+    background-image: url("/logo-black.svg");
   }
 
   div.flex.items-center.gap-4:has(> img[src="/logo-white.png"])::before {
     width: 2.5rem;
     height: 2.5rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23C5A566'/%3E%3Cpath fill='%23ffffff' d='M12 13h6v16c0 5-3 8-8 8H8v-6h2c1.4 0 2-.8 2-2V13zm10 0h6v9h8v-9h6v24h-6v-9h-8v9h-6V13z'/%3E%3C/svg%3E");
+    background-image: url("/logo-white.svg");
   }
 }
