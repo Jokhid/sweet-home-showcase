@@ -1,5 +1,6 @@
 (() => {
   const GOLD = "#C5A566";
+  const TOOLS_HREF = "/#herramientas";
 
   function injectStyles() {
     if (document.getElementById("jc-tools-styles")) return;
@@ -133,30 +134,28 @@
     return Boolean(link.closest('[role="dialog"]')) || link.className.toString().includes("rounded-2xl");
   }
 
-  function renderToolsLink(link, sourceLink) {
-    const sourceClass = sourceLink?.className?.toString() || "";
+  function paintToolsLink(link, faqLink) {
+    const mobile = isMobileMenuLink(faqLink || link);
 
-    link.setAttribute("href", "/#herramientas");
+    link.setAttribute("href", TOOLS_HREF);
+    link.setAttribute("data-jc-tools-link", "true");
+    link.className = faqLink.className;
     link.removeAttribute("style");
-    link.style.opacity = "1";
-    link.style.transform = "none";
-    link.className = sourceClass;
 
-    if (isMobileMenuLink(sourceLink || link)) {
+    if (mobile) {
       link.innerHTML = `
         <span class="absolute inset-0 origin-right scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"></span>
         <span class="relative z-10 flex items-center justify-between transition-colors group-hover:text-white">
-          Herramientas
+          <span>Herramientas</span>
           <span aria-hidden="true" class="material-symbols-outlined text-xl text-[#FF6B00] transition-colors group-hover:text-white">arrow_forward</span>
         </span>
       `;
-      return;
+    } else {
+      link.innerHTML = `
+        <span class="transition-colors group-hover:text-[#FF6B00]">Herramientas</span>
+        <span class="absolute -bottom-1 left-0 h-[1px] w-full origin-left scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"></span>
+      `;
     }
-
-    link.innerHTML = `
-      <span class="transition-colors group-hover:text-[#FF6B00]">Herramientas</span>
-      <span class="absolute -bottom-1 left-0 h-[1px] w-full origin-left scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"></span>
-    `;
   }
 
   function ensureToolsNav() {
@@ -166,12 +165,14 @@
 
       const existingToolsLink = parent.querySelector('a[href="/#herramientas"]');
       if (existingToolsLink) {
-        renderToolsLink(existingToolsLink, faqLink);
+        if (existingToolsLink.getAttribute("data-jc-tools-link") !== "true" || !existingToolsLink.textContent.includes("Herramientas")) {
+          paintToolsLink(existingToolsLink, faqLink);
+        }
         return;
       }
 
       const link = document.createElement("a");
-      renderToolsLink(link, faqLink);
+      paintToolsLink(link, faqLink);
 
       if (isMobileMenuLink(faqLink)) {
         link.addEventListener("click", () => {
@@ -230,12 +231,18 @@
     ensureToolsSection();
   }
 
+  function scheduleEnhance() {
+    window.setTimeout(enhanceHome, 80);
+    window.setTimeout(enhanceHome, 250);
+  }
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", enhanceHome, { once: true });
   } else {
     enhanceHome();
   }
 
-  const observer = new MutationObserver(() => enhanceHome());
-  observer.observe(document.documentElement, { childList: true, subtree: true });
+  document.addEventListener("click", scheduleEnhance, true);
+  window.setTimeout(enhanceHome, 500);
+  window.setTimeout(enhanceHome, 1200);
 })();
