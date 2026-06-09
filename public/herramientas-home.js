@@ -136,7 +136,7 @@
   }
 
   function ensureToolsNav() {
-    document.querySelectorAll('header a[href="/#faq"]').forEach((faqLink) => {
+    document.querySelectorAll('a[href="/#faq"]').forEach((faqLink) => {
       const parent = faqLink.parentElement;
       if (!parent || parent.querySelector('a[href="/#herramientas"]')) return;
 
