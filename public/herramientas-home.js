@@ -129,20 +129,43 @@
     document.head.appendChild(style);
   }
 
-  function replaceFirstText(node, text) {
-    const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
-    const firstText = walker.nextNode();
-    if (firstText) firstText.nodeValue = text;
+  function setToolsLinkLabel(link) {
+    const walker = document.createTreeWalker(link, NodeFilter.SHOW_TEXT);
+    let current;
+
+    while ((current = walker.nextNode())) {
+      const value = current.nodeValue || "";
+      if (value.trim() === "FAQ" || value.trim() === "Herramientas") {
+        current.nodeValue = value.replace(value.trim(), "Herramientas");
+        return;
+      }
+    }
+
+    const labelSpan = Array.from(link.querySelectorAll("span")).find((span) =>
+      span.className.toString().includes("relative")
+    );
+
+    if (labelSpan) {
+      labelSpan.insertBefore(document.createTextNode("Herramientas"), labelSpan.firstChild);
+    } else {
+      link.textContent = "Herramientas";
+    }
   }
 
   function ensureToolsNav() {
     document.querySelectorAll('a[href="/#faq"]').forEach((faqLink) => {
       const parent = faqLink.parentElement;
-      if (!parent || parent.querySelector('a[href="/#herramientas"]')) return;
+      if (!parent) return;
+
+      const existingToolsLink = parent.querySelector('a[href="/#herramientas"]');
+      if (existingToolsLink) {
+        setToolsLinkLabel(existingToolsLink);
+        return;
+      }
 
       const link = faqLink.cloneNode(true);
       link.setAttribute("href", "/#herramientas");
-      replaceFirstText(link, "Herramientas");
+      setToolsLinkLabel(link);
       faqLink.insertAdjacentElement("afterend", link);
     });
   }
