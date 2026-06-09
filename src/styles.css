@@ -248,7 +248,48 @@ img[src="/9.jpg"] {
     color: #1A1A1A !important;
   }
 
-  img[src="/logo.png"] {
-    filter: sepia(34%) saturate(595%) hue-rotate(359deg) brightness(86%) contrast(88%);
+  main > section:nth-of-type(4) {
+    background-color: #000000 !important;
+    color: #ffffff;
+  }
+
+  main > section:nth-of-type(4) h2,
+  main > section:nth-of-type(4) h4 {
+    color: #ffffff;
+  }
+
+  main > section:nth-of-type(4) p {
+    color: rgb(255 255 255 / 0.68) !important;
+  }
+
+  main > section:nth-of-type(4) [class*="border-white/10"] {
+    border-color: rgb(255 255 255 / 0.1) !important;
+  }
+
+  :is(a, div).flex.items-center.gap-3:has(> img[src="/logo.png"]) > img[src="/logo.png"],
+  div.flex.items-center.gap-4:has(> img[src="/logo-white.png"]) > img[src="/logo-white.png"] {
+    display: none;
+  }
+
+  :is(a, div).flex.items-center.gap-3:has(> img[src="/logo.png"])::before,
+  div.flex.items-center.gap-4:has(> img[src="/logo-white.png"])::before {
+    content: "";
+    display: block;
+    flex: 0 0 auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  :is(a, div).flex.items-center.gap-3:has(> img[src="/logo.png"])::before {
+    width: 2.25rem;
+    height: 2.25rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23C5A566'/%3E%3Ctext x='24' y='29' text-anchor='middle' font-family='Arial, Helvetica, sans-serif' font-size='14' font-weight='900' letter-spacing='-1' fill='%23000000'%3EJH%3C/text%3E%3C/svg%3E");
+  }
+
+  div.flex.items-center.gap-4:has(> img[src="/logo-white.png"])::before {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23C5A566'/%3E%3Ctext x='24' y='29' text-anchor='middle' font-family='Arial, Helvetica, sans-serif' font-size='14' font-weight='900' letter-spacing='-1' fill='%23ffffff'%3EJH%3C/text%3E%3C/svg%3E");
   }
 }
