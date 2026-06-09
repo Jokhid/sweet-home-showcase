@@ -129,27 +129,34 @@
     document.head.appendChild(style);
   }
 
-  function setToolsLinkLabel(link) {
-    const walker = document.createTreeWalker(link, NodeFilter.SHOW_TEXT);
-    let current;
+  function isMobileMenuLink(link) {
+    return Boolean(link.closest('[role="dialog"]')) || link.className.toString().includes("rounded-2xl");
+  }
 
-    while ((current = walker.nextNode())) {
-      const value = current.nodeValue || "";
-      if (value.trim() === "FAQ" || value.trim() === "Herramientas") {
-        current.nodeValue = value.replace(value.trim(), "Herramientas");
-        return;
-      }
+  function renderToolsLink(link, sourceLink) {
+    const sourceClass = sourceLink?.className?.toString() || "";
+
+    link.setAttribute("href", "/#herramientas");
+    link.removeAttribute("style");
+    link.style.opacity = "1";
+    link.style.transform = "none";
+    link.className = sourceClass;
+
+    if (isMobileMenuLink(sourceLink || link)) {
+      link.innerHTML = `
+        <span class="absolute inset-0 origin-right scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"></span>
+        <span class="relative z-10 flex items-center justify-between transition-colors group-hover:text-white">
+          Herramientas
+          <span aria-hidden="true" class="material-symbols-outlined text-xl text-[#FF6B00] transition-colors group-hover:text-white">arrow_forward</span>
+        </span>
+      `;
+      return;
     }
 
-    const labelSpan = Array.from(link.querySelectorAll("span")).find((span) =>
-      span.className.toString().includes("relative")
-    );
-
-    if (labelSpan) {
-      labelSpan.insertBefore(document.createTextNode("Herramientas"), labelSpan.firstChild);
-    } else {
-      link.textContent = "Herramientas";
-    }
+    link.innerHTML = `
+      <span class="transition-colors group-hover:text-[#FF6B00]">Herramientas</span>
+      <span class="absolute -bottom-1 left-0 h-[1px] w-full origin-left scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"></span>
+    `;
   }
 
   function ensureToolsNav() {
@@ -159,13 +166,20 @@
 
       const existingToolsLink = parent.querySelector('a[href="/#herramientas"]');
       if (existingToolsLink) {
-        setToolsLinkLabel(existingToolsLink);
+        renderToolsLink(existingToolsLink, faqLink);
         return;
       }
 
-      const link = faqLink.cloneNode(true);
-      link.setAttribute("href", "/#herramientas");
-      setToolsLinkLabel(link);
+      const link = document.createElement("a");
+      renderToolsLink(link, faqLink);
+
+      if (isMobileMenuLink(faqLink)) {
+        link.addEventListener("click", () => {
+          const closeButton = document.querySelector('[aria-label="Cerrar menú"]');
+          if (closeButton instanceof HTMLButtonElement) closeButton.click();
+        });
+      }
+
       faqLink.insertAdjacentElement("afterend", link);
     });
   }
