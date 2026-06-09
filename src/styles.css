@@ -69,7 +69,7 @@
 }
 
 :root {
-  --secondary-brand: #FF6B00;
+  --secondary-brand: #C5A566;
   --on-surface-variant: #4A4A4A;
   --outline-color: #E5E5E5;
   --outline-variant: #F5F5F5;
@@ -178,4 +178,67 @@ img[src="/1.jpg"],
 img[src="/8.jpg"],
 img[src="/9.jpg"] {
   filter: grayscale(100%);
+}
+
+@layer base {
+  [class*="text-\[\#FF6B00\]"],
+  [class*="hover\:text-\[\#FF6B00\]"]:hover,
+  [class*="group-hover\:text-\[\#FF6B00\]"]:is(:where(.group):hover *) {
+    color: #C5A566 !important;
+  }
+
+  [class*="bg-\[\#FF6B00\]"],
+  [class*="hover\:bg-\[\#FF6B00\]"]:hover,
+  [class*="group-hover\:bg-\[\#FF6B00\]"]:is(:where(.group):hover *) {
+    background-color: #C5A566 !important;
+  }
+
+  [class*="border-\[\#FF6B00\]"],
+  [class*="hover\:border-\[\#FF6B00\]"]:hover,
+  [class*="group-hover\:border-\[\#FF6B00\]"]:is(:where(.group):hover *),
+  [class*="focus\:border-\[\#FF6B00\]"]:focus {
+    border-color: #C5A566 !important;
+  }
+
+  [class*="accent-\[\#FF6B00\]"] {
+    accent-color: #C5A566 !important;
+  }
+
+  [class*="selection\:bg-\[\#FF6B00\]"]::selection {
+    background-color: #C5A566 !important;
+  }
+
+  [class*="shadow-\[\#FF6B00\]"] {
+    --tw-shadow-color: rgb(197 165 102 / 0.2) !important;
+    --tw-shadow: var(--tw-shadow-colored) !important;
+  }
+
+  main > section:first-child {
+    background-color: #000000;
+    border-bottom-color: #000000;
+    color: #ffffff;
+  }
+
+  main > section:first-child h1,
+  main > section:first-child h1 span:not([class*="text-\[\#FF6B00\]"]) {
+    color: #ffffff;
+  }
+
+  main > section:first-child p {
+    color: rgb(255 255 255 / 0.82) !important;
+  }
+
+  main > section:first-child a[href="#services"] {
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+  }
+
+  main > section:first-child a[href="#services"]:hover {
+    background-color: #ffffff !important;
+    color: #1A1A1A !important;
+  }
+
+  img[src="/logo.png"] {
+    filter: sepia(34%) saturate(595%) hue-rotate(359deg) brightness(86%) contrast(88%);
+  }
 }
