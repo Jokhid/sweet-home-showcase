@@ -148,8 +148,12 @@
     border-color: var(--color-border);
   }
 
+  html,
   body {
-    background-color: var(--color-background);
+    background-color: #ffffff !important;
+  }
+
+  body {
     color: var(--color-foreground);
     font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -213,8 +217,14 @@ img[src="/9.jpg"] {
     --tw-shadow: var(--tw-shadow-colored) !important;
   }
 
+  body > div,
+  main,
+  main > section:not(:first-child) {
+    background-color: #ffffff !important;
+  }
+
   main > section:first-child {
-    background-color: #000000;
+    background-color: #000000 !important;
     border-bottom-color: #000000;
     color: #ffffff;
   }
