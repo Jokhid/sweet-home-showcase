@@ -74,10 +74,36 @@ img { display: block; max-width: 100%; }
 .gasto-details h5 { margin: 0 0 6px; font-size: 18px; }
 .gasto-details p { margin: 0; color: var(--muted); line-height: 1.45; }
 .gasto-card.active .gasto-details p { color: rgba(255,255,255,.65); }
-.gasto-toggle { width: 48px; height: 28px; border: 1px solid var(--line); background: #fff; position: relative; cursor: pointer; flex: 0 0 auto; }
-.gasto-toggle::after { content: ""; width: 20px; height: 20px; position: absolute; left: 3px; top: 3px; background: var(--ink); transition: transform .2s ease, background .2s ease; }
-.gasto-toggle.active { background: var(--gold); border-color: var(--gold); }
-.gasto-toggle.active::after { transform: translateX(20px); background: #fff; }
+.gasto-toggle {
+  width: 58px;
+  height: 34px;
+  border: 0;
+  border-radius: 999px;
+  background: #D8D8D8;
+  position: relative;
+  cursor: pointer;
+  flex: 0 0 auto;
+  padding: 0;
+  box-shadow: inset 0 0 0 1px rgba(26,26,26,.08);
+  transition: background .22s ease, box-shadow .22s ease;
+}
+.gasto-toggle::after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(26,26,26,.28), 0 1px 2px rgba(26,26,26,.18);
+  transition: transform .22s cubic-bezier(.4,0,.2,1), box-shadow .22s ease;
+}
+.gasto-toggle:hover { box-shadow: inset 0 0 0 1px rgba(26,26,26,.14), 0 2px 10px rgba(26,26,26,.08); }
+.gasto-toggle:focus-visible { outline: 3px solid rgba(197,165,102,.34); outline-offset: 3px; }
+.gasto-toggle.active { background: var(--gold); box-shadow: inset 0 0 0 1px rgba(26,26,26,.06), 0 2px 12px rgba(197,165,102,.28); }
+.gasto-toggle.active::after { transform: translateX(24px); background: #fff; box-shadow: 0 3px 10px rgba(26,26,26,.24), 0 1px 2px rgba(26,26,26,.14); }
+.gasto-card.active .gasto-toggle:not(.active) { background: rgba(255,255,255,.28); }
 .gasto-controls { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .gasto-controls input, .gasto-controls select { width: 100%; border: 1px solid var(--line); background: #fff; color: var(--ink); padding: 13px 12px; font: inherit; outline: none; }
 .gasto-controls input:focus, .gasto-controls select:focus { border-color: var(--gold); }
