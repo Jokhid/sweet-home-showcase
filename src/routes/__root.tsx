@@ -110,6 +110,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <body>
         {children}
         <Scripts />
+        <script src="/herramientas-home.js" />
       </body>
     </html>
   );
