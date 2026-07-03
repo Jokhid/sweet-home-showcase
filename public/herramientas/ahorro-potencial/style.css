@@ -176,3 +176,378 @@ img { display: block; max-width: 100%; }
   .footer-brand { align-items: flex-start; }
   .footer-brand strong { font-size: 20px; }
 }
+
+/* JCH_CALCULATOR_EDITORIAL_START */
+:root {
+  --ink: #F3F0EA;
+  --muted: #9A9892;
+  --line: rgba(243, 240, 234, .14);
+  --soft: #101010;
+  --gold: #C5A566;
+  --white: #FFFFFF;
+  --page: #0A0A0A;
+}
+
+html,
+body {
+  background: var(--page);
+  color: var(--ink);
+}
+
+body {
+  font-weight: 300;
+}
+
+.site-header {
+  background: rgba(10,10,10,.92);
+  border-bottom-color: var(--line);
+}
+
+.site-nav {
+  max-width: 1500px;
+  padding: 16px clamp(20px, 3vw, 44px);
+}
+
+.brand {
+  color: var(--ink);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .16em;
+}
+
+.nav-links {
+  gap: clamp(14px, 2vw, 30px);
+  color: var(--ink);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.nav-links a::after {
+  background: var(--gold);
+}
+
+.nav-cta {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid rgba(243,240,234,.28);
+  border-radius: 999px;
+  padding: 11px 16px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 500;
+}
+
+main > section {
+  background: var(--page);
+  border-top: 1px solid var(--line);
+}
+
+.tool-hero {
+  border-top: 0;
+  background: var(--page);
+}
+
+.tool-hero__inner {
+  max-width: 1500px;
+  min-height: calc(100vh - 69px);
+  padding: clamp(72px, 9vw, 140px) clamp(20px, 3vw, 44px);
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr);
+  align-items: center;
+}
+
+.tool-hero h1,
+.intro-section h2,
+.section-heading h2,
+.panel h2,
+.cta-box h2,
+.panel h3,
+.gasto-details h5 {
+  font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.tool-hero h1 {
+  max-width: 920px;
+  font-size: clamp(58px, 9vw, 136px);
+  line-height: .88;
+}
+
+.lead {
+  max-width: 720px;
+  color: rgba(243,240,234,.66);
+  font-weight: 300;
+}
+
+.eyebrow {
+  color: var(--gold);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: .18em;
+}
+
+.hero-stats {
+  background: var(--line);
+  border-color: var(--line);
+}
+
+.hero-stats div {
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--page);
+  padding: 30px;
+}
+
+.hero-stats span {
+  color: var(--gold);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(42px, 5vw, 72px);
+  font-weight: 500;
+}
+
+.hero-stats small {
+  color: var(--muted);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.container {
+  max-width: 1500px;
+  padding: 0 clamp(20px, 3vw, 44px);
+}
+
+.intro-section,
+.tool-section,
+.charts-section,
+.savings-section,
+.advice-section,
+.cta-section {
+  padding: clamp(90px, 11vw, 170px) 0;
+}
+
+.intro-section {
+  border-bottom-color: var(--line);
+}
+
+.intro-section h2,
+.section-heading h2,
+.panel h2,
+.cta-box h2 {
+  max-width: 1000px;
+  color: var(--ink);
+  font-size: clamp(48px, 6vw, 92px);
+  line-height: .96;
+}
+
+.intro-section p:not(.eyebrow),
+.section-heading p:not(.eyebrow),
+.cta-box p {
+  color: var(--muted);
+  font-weight: 300;
+}
+
+.gastos-grid,
+.resumen-grid,
+.consejos-list,
+.sim-grid {
+  gap: 1px;
+  background: var(--line);
+  border-color: var(--line);
+}
+
+.gasto-card {
+  min-height: 330px;
+  background: var(--page);
+  color: var(--ink);
+  padding: clamp(26px, 3vw, 42px);
+}
+
+.gasto-card.active {
+  background: #111;
+}
+
+.gasto-icon {
+  background: transparent;
+  border: 1px solid var(--line);
+  filter: grayscale(1);
+}
+
+.gasto-details h5 {
+  color: var(--ink);
+  font-size: clamp(24px, 2.5vw, 36px);
+}
+
+.gasto-details p,
+.gasto-annual {
+  color: var(--muted);
+}
+
+.gasto-controls input,
+.gasto-controls select {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.gasto-controls input:focus,
+.gasto-controls select:focus {
+  border-color: var(--gold);
+}
+
+.gasto-controls input:disabled,
+.gasto-controls select:disabled {
+  opacity: .32;
+}
+
+.gasto-controls select option {
+  background: var(--page);
+  color: var(--ink);
+}
+
+.gasto-toggle {
+  background: #343434;
+  box-shadow: inset 0 0 0 1px rgba(243,240,234,.08);
+}
+
+.gasto-toggle.active {
+  background: var(--gold);
+}
+
+.metric-card,
+.sim-grid div,
+.consejo-item {
+  background: var(--page);
+  color: var(--ink);
+}
+
+.metric-card {
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.metric-card h3,
+.sim-grid small {
+  color: var(--muted);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.metric-card strong,
+.sim-grid span {
+  color: var(--ink);
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 500;
+}
+
+.panel {
+  background: var(--page);
+  color: var(--ink);
+  border-color: var(--line);
+  padding: clamp(26px, 3vw, 44px);
+}
+
+.panel h3 {
+  color: var(--ink);
+  font-size: clamp(28px, 3vw, 44px);
+}
+
+.panel-title-row p,
+.comparison-row {
+  color: var(--muted);
+}
+
+.nivel-bar {
+  background: #202020;
+}
+
+.comparison-row {
+  border-bottom-color: var(--line);
+}
+
+.comparison-row strong {
+  color: var(--ink);
+}
+
+.comparativa-resultado {
+  background: #111;
+}
+
+.consejo-item {
+  color: var(--muted);
+}
+
+.cta-section {
+  background: #111;
+}
+
+.cta-box a {
+  background: var(--gold);
+  color: var(--page);
+  border-radius: 999px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.site-footer {
+  background: var(--page);
+  border-top: 1px solid var(--line);
+}
+
+.footer-brand strong {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 500;
+  text-transform: none;
+}
+
+.footer-links {
+  border-top-color: var(--line);
+}
+
+@media (max-width: 900px) {
+  .tool-hero__inner {
+    min-height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .site-nav {
+    align-items: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .tool-hero h1 {
+    font-size: clamp(52px, 16vw, 76px);
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stats div {
+    min-height: 130px;
+  }
+
+  .gasto-header {
+    align-items: flex-start;
+  }
+
+  .gasto-info {
+    min-width: 0;
+  }
+
+  .gasto-icon {
+    display: none;
+  }
+}
+/* JCH_CALCULATOR_EDITORIAL_END */
+
