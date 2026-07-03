@@ -150,7 +150,7 @@
 
   html,
   body {
-    background-color: #ffffff !important;
+    background-color: #0a0a0a !important;
   }
 
   body {
@@ -220,7 +220,7 @@ img[src="/9.jpg"] {
   body > div,
   main,
   main > section:not(:first-child) {
-    background-color: #ffffff !important;
+    background-color: #0a0a0a !important;
   }
 
   main > section:first-child {
