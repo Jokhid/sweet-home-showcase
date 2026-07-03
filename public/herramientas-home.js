@@ -236,13 +236,16 @@
     window.setTimeout(enhanceHome, 250);
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", enhanceHome, { once: true });
+  function startEnhancement() {
+    window.setTimeout(enhanceHome, 800);
+    window.setTimeout(enhanceHome, 1600);
+  }
+
+  if (document.readyState === "complete") {
+    startEnhancement();
   } else {
-    enhanceHome();
+    window.addEventListener("load", startEnhancement, { once: true });
   }
 
   document.addEventListener("click", scheduleEnhance, true);
-  window.setTimeout(enhanceHome, 500);
-  window.setTimeout(enhanceHome, 1200);
 })();
