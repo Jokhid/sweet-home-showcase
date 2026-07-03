@@ -671,10 +671,10 @@ function BlindSpotRotatingLabel({
   progress: any;
 }) {
   const configs = [
-    { range: [0, 0.18, 0.3], opacity: [1, 1, 0], y: [0, 0, -18] },
-    { range: [0.18, 0.3, 0.47, 0.59], opacity: [0, 1, 1, 0], y: [18, 0, 0, -18] },
-    { range: [0.45, 0.57, 0.72, 0.84], opacity: [0, 1, 1, 0], y: [18, 0, 0, -18] },
-    { range: [0.7, 0.82, 1], opacity: [0, 1, 1], y: [18, 0, 0] },
+    { range: [0, 0.16, 0.22], opacity: [1, 1, 0], y: [0, 0, -18] },
+    { range: [0.2, 0.24, 0.46, 0.5], opacity: [0, 1, 1, 0], y: [18, 0, 0, -18] },
+    { range: [0.48, 0.52, 0.72, 0.76], opacity: [0, 1, 1, 0], y: [18, 0, 0, -18] },
+    { range: [0.74, 0.78, 1], opacity: [0, 1, 1], y: [18, 0, 0] },
   ];
   const config = configs[index];
   const opacity = useTransform(progress, config.range, config.opacity);
