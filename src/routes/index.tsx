@@ -660,7 +660,40 @@ function Problem() {
 }
 
 
+
+function BlindSpotRotatingLabel({
+  label,
+  index,
+  progress,
+}: {
+  label: string;
+  index: number;
+  progress: any;
+}) {
+  const configs = [
+    { range: [0, 0.18, 0.3], opacity: [1, 1, 0], y: [0, 0, -18] },
+    { range: [0.18, 0.3, 0.47, 0.59], opacity: [0, 1, 1, 0], y: [18, 0, 0, -18] },
+    { range: [0.45, 0.57, 0.72, 0.84], opacity: [0, 1, 1, 0], y: [18, 0, 0, -18] },
+    { range: [0.7, 0.82, 1], opacity: [0, 1, 1], y: [18, 0, 0] },
+  ];
+  const config = configs[index];
+  const opacity = useTransform(progress, config.range, config.opacity);
+  const y = useTransform(progress, config.range, config.y);
+
+  return (
+    <motion.p style={{ opacity, y }} className="blind-spots__rotating-label">
+      {label}
+    </motion.p>
+  );
+}
+
 function BlindSpots() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start center", "end center"],
+  });
+
   const blindSpots = [
     {
       n: "01",
@@ -692,49 +725,49 @@ function BlindSpots() {
   ];
 
   return (
-    <section id="puntos-ciegos" className="blind-spots">
+    <section ref={sectionRef} id="puntos-ciegos" className="blind-spots">
       <div className="blind-spots__inner">
-        <div className="blind-spots__heading">
-          <FadeUp>
-            <p className="blind-spots__eyebrow">02 — Puntos ciegos</p>
-          </FadeUp>
-          <h2>
-            <Curtain>Lo peligroso no suele ser lo que sabes.</Curtain>
-            <Curtain delay={0.1}>
-              <span className="blind-spots__accent">Es lo que no has mirado.</span>
-            </Curtain>
-          </h2>
-        </div>
-
-        <FadeUp delay={0.12}>
-          <div className="blind-spots__risk-bar" aria-label="Riesgos habituales">
-            <span className="blind-spots__risk-label">Riesgos habituales</span>
-            {riskLabels.map((label, index) => (
-              <span key={label} className="blind-spots__risk-item">
-                <small>{String(index + 1).padStart(2, "0")}</small>
-                {label}
-              </span>
-            ))}
-          </div>
+        <FadeUp>
+          <p className="blind-spots__eyebrow">02 — Puntos ciegos</p>
         </FadeUp>
 
-        <div className="blind-spots__grid">
-          {blindSpots.map((item, index) => (
-            <FadeUp key={item.n} delay={index * 0.08}>
-              <motion.article
-                className="blind-spots__card"
-                whileHover={{ y: -5 }}
-                transition={spring}
-              >
-                <div className="blind-spots__meta">
-                  <span>{item.n}</span>
-                  <span>Riesgo</span>
-                </div>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </motion.article>
-            </FadeUp>
-          ))}
+        <h2 className="blind-spots__title">
+          <Curtain>Lo peligroso no suele ser lo que sabes.</Curtain>
+          <Curtain delay={0.1}>Es lo que no has mirado.</Curtain>
+        </h2>
+
+        <div className="blind-spots__layout">
+          <aside className="blind-spots__aside">
+            <div className="blind-spots__sticky">
+              <p className="blind-spots__risk-label">Riesgos habituales</p>
+              <div className="blind-spots__label-stage" aria-live="polite">
+                {riskLabels.map((label, index) => (
+                  <BlindSpotRotatingLabel
+                    key={label}
+                    label={label}
+                    index={index}
+                    progress={scrollYProgress}
+                  />
+                ))}
+              </div>
+            </div>
+          </aside>
+
+          <div className="blind-spots__cards">
+            {blindSpots.map((item, index) => (
+              <FadeUp key={item.n} delay={index * 0.08}>
+                <article className="blind-spots__card">
+                  <div className="blind-spots__meta">
+                    <span>{item.n}</span>
+                    <span>Riesgo</span>
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                  <div className="blind-spots__card-line" aria-hidden="true" />
+                </article>
+              </FadeUp>
+            ))}
+          </div>
         </div>
       </div>
     </section>
