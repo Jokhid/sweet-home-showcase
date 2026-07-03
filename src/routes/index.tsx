@@ -233,6 +233,7 @@ function Index() {
         <TrustStats />
         <Diagnosis />
         <Problem />
+        <BlindSpots />
         <Partners />
         <Services />
         <Method />
@@ -652,6 +653,88 @@ function Problem() {
               </FadeUp>
             ))}
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+function BlindSpots() {
+  const blindSpots = [
+    {
+      n: "01",
+      title: "Hipoteca sin preparar",
+      text: "Ir al banco sin revisar endeudamiento, ahorro, estabilidad laboral y movimientos previos puede costarte financiación, condiciones o incluso la operación.",
+    },
+    {
+      n: "02",
+      title: "Autónomo sin red",
+      text: "Si tus ingresos dependen de tu capacidad de trabajar, una baja médica o accidente puede convertirse en un problema financiero inmediato.",
+    },
+    {
+      n: "03",
+      title: "Futuro sin planificación",
+      text: "La jubilación no se arregla a última hora. Se construye con estrategia, constancia y revisiones periódicas.",
+    },
+    {
+      n: "04",
+      title: "Patrimonio inmobiliario desordenado",
+      text: "Una comunidad mal gestionada genera conflictos, morosidad, deterioro y pérdida de valor patrimonial.",
+    },
+  ];
+
+  const riskLabels = [
+    "Hipoteca mal preparada",
+    "Ingresos sin protección",
+    "Jubilación improvisada",
+    "Comunidad mal gestionada",
+  ];
+
+  return (
+    <section id="puntos-ciegos" className="blind-spots">
+      <div className="blind-spots__inner">
+        <div className="blind-spots__heading">
+          <FadeUp>
+            <p className="blind-spots__eyebrow">02 — Puntos ciegos</p>
+          </FadeUp>
+          <h2>
+            <Curtain>Lo peligroso no suele ser lo que sabes.</Curtain>
+            <Curtain delay={0.1}>
+              <span className="blind-spots__accent">Es lo que no has mirado.</span>
+            </Curtain>
+          </h2>
+        </div>
+
+        <FadeUp delay={0.12}>
+          <div className="blind-spots__risk-bar" aria-label="Riesgos habituales">
+            <span className="blind-spots__risk-label">Riesgos habituales</span>
+            {riskLabels.map((label, index) => (
+              <span key={label} className="blind-spots__risk-item">
+                <small>{String(index + 1).padStart(2, "0")}</small>
+                {label}
+              </span>
+            ))}
+          </div>
+        </FadeUp>
+
+        <div className="blind-spots__grid">
+          {blindSpots.map((item, index) => (
+            <FadeUp key={item.n} delay={index * 0.08}>
+              <motion.article
+                className="blind-spots__card"
+                whileHover={{ y: -5 }}
+                transition={spring}
+              >
+                <div className="blind-spots__meta">
+                  <span>{item.n}</span>
+                  <span>Riesgo</span>
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </motion.article>
+            </FadeUp>
+          ))}
         </div>
       </div>
     </section>
