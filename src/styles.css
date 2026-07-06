@@ -1515,3 +1515,64 @@ main h2 > .overflow-hidden {
   }
 }
 /* JCH_DESCENDER_FIX_END */
+
+/* JCH_HERO_CONTACT_REFINEMENT_START */
+#contact .contact-editorial__title,
+#contact .contact-editorial__title * {
+  color: #C5A566 !important;
+}
+
+#contact .contact-editorial__description {
+  color: #ffffff !important;
+}
+
+#contact-form.contact-form-card {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  border: 1px solid #e5e5e5;
+}
+
+#contact-form label,
+#contact-form input,
+#contact-form textarea,
+#contact-form select {
+  color: #1a1a1a !important;
+}
+
+#contact-form input,
+#contact-form textarea,
+#contact-form select {
+  border-color: #d5d5d5 !important;
+}
+
+#contact-form input::placeholder,
+#contact-form textarea::placeholder {
+  color: #777777 !important;
+}
+
+#contact-form select option {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+#contact-form p {
+  color: #1a1a1a !important;
+}
+
+@media (min-width: 901px) {
+  main > section:first-child > div {
+    align-items: start !important;
+  }
+
+  .hero-editorial__image {
+    margin-top: 3.15rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-editorial__image {
+    margin-top: 0;
+  }
+}
+/* JCH_HERO_CONTACT_REFINEMENT_END */
