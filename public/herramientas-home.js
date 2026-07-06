@@ -196,7 +196,7 @@
     section.innerHTML = `
       <div class="jc-tools-wrap">
         <p class="jc-tools-kicker">Herramientas</p>
-        <h2 class="jc-tools-title">Calculadoras para <span class="jc-tools-title__accent">decidir con números</span>, no por intuición</h2>
+        <h2 class="jc-tools-title">Herramientas para <span class="jc-tools-title__accent">decidir con números</span>, no por intuición</h2>
         <p class="jc-tools-intro">Recursos prácticos para medir ahorro, vulnerabilidad financiera y escenarios hipotecarios antes de tomar decisiones importantes.</p>
         <div class="jc-tools-grid">
           <a class="jc-tool-card" href="/herramientas/ahorro-potencial/">
