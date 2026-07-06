@@ -138,6 +138,7 @@ const method = [
   { n: "01.", title: "Analizo tu punto de partida", text: "Sin juicios. Recopilamos datos reales de tu economía actual para tener una base sólida sobre la que construir." },
   { n: "02.", title: "Detecto riesgos y debilidades", text: "Puntos ciegos donde estás asumiendo un riesgo que no conocías." },
   { n: "03.", title: "Diseño un plan accionable", text: "Recibirás recomendaciones claras y pasos a seguir que tú decides si ejecutar o no." },
+  { n: "04.", title: "Estoy a tu lado en el camino", text: "No te dejo solo con un informe. Te acompaño en cada decisión importante, revisamos el plan cuando tu vida cambia y ajustamos los siguientes pasos para que avances con seguridad." },
 ];
 
 const faqs = [
@@ -951,7 +952,7 @@ function FAQ() {
     <section id="faq" className="py-[100px] bg-[#F5F5F5]">
       <div className="max-w-3xl mx-auto px-6">
         <h2 className="text-4xl font-bold tracking-tight text-center mb-20 uppercase">
-          <Curtain>Preguntas Frecuentes</Curtain>
+          <Curtain>Dudas normales antes de decidir</Curtain>
         </h2>
         <div className="space-y-px bg-[#E5E5E5]">
           {faqs.map((f, i) => {
