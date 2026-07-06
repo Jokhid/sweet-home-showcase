@@ -1099,6 +1099,8 @@ main > section:first-child h1 {
 
   main > section:first-child > div > div:first-child {
     order: 1;
+    grid-column: auto !important;
+    min-width: 0;
   }
 
   main > section:first-child > div > div:last-child {
