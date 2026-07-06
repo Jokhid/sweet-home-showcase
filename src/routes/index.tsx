@@ -234,7 +234,6 @@ function Index() {
         <TrustStats />
         <Diagnosis />
         <Problem />
-        <BlindSpots />
         <Services />
         <Method />
         <Partners />
@@ -481,7 +480,7 @@ function Hero() {
                 transition={{ duration: 0.9, ease: easeOutExpo, delay: 0.4 }}
                 className="h-[2px] bg-[#FF6B00] block"
               />
-              HIPOTECAS, AHORRO, PENSIÓN, SEGUROS Y ADMINISTRACIÓN DE FINCAS EN ALTEA
+              HIPOTECAS, AHORRO, PENSIONES, SEGUROS Y ADMINISTRACIÓN DE FINCAS EN ALTEA
             </div>
           </FadeUp>
 
@@ -524,7 +523,7 @@ function Hero() {
           </FadeUp>
         </motion.div>
 
-        <div className="lg:col-span-5">
+        <div className="lg:col-span-5 hero-editorial__image">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -660,120 +659,6 @@ function Problem() {
   );
 }
 
-
-
-function BlindSpotRotatingLabel({
-  label,
-  index,
-  progress,
-}: {
-  label: string;
-  index: number;
-  progress: any;
-}) {
-  const configs = [
-    { range: [0, 0.16, 0.22], opacity: [1, 1, 0], y: [0, 0, -18] },
-    { range: [0.2, 0.24, 0.46, 0.5], opacity: [0, 1, 1, 0], y: [18, 0, 0, -18] },
-    { range: [0.48, 0.52, 0.72, 0.76], opacity: [0, 1, 1, 0], y: [18, 0, 0, -18] },
-    { range: [0.74, 0.78, 1], opacity: [0, 1, 1], y: [18, 0, 0] },
-  ];
-  const config = configs[index];
-  const opacity = useTransform(progress, config.range, config.opacity);
-  const y = useTransform(progress, config.range, config.y);
-
-  return (
-    <motion.p style={{ opacity, y }} className="blind-spots__rotating-label">
-      {label}
-    </motion.p>
-  );
-}
-
-function BlindSpots() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start center", "end center"],
-  });
-
-  const blindSpots = [
-    {
-      n: "01",
-      title: "Hipoteca sin preparar",
-      text: "Ir al banco sin revisar endeudamiento, ahorro, estabilidad laboral y movimientos previos puede costarte financiación, condiciones o incluso la operación.",
-    },
-    {
-      n: "02",
-      title: "Autónomo sin red",
-      text: "Si tus ingresos dependen de tu capacidad de trabajar, una baja médica o accidente puede convertirse en un problema financiero inmediato.",
-    },
-    {
-      n: "03",
-      title: "Futuro sin planificación",
-      text: "La jubilación no se arregla a última hora. Se construye con estrategia, constancia y revisiones periódicas.",
-    },
-    {
-      n: "04",
-      title: "Patrimonio inmobiliario desordenado",
-      text: "Una comunidad mal gestionada genera conflictos, morosidad, deterioro y pérdida de valor patrimonial.",
-    },
-  ];
-
-  const riskLabels = [
-    "Hipoteca mal preparada",
-    "Ingresos sin protección",
-    "Jubilación improvisada",
-    "Comunidad mal gestionada",
-  ];
-
-  return (
-    <section ref={sectionRef} id="puntos-ciegos" className="blind-spots">
-      <div className="blind-spots__inner">
-        <FadeUp>
-          <p className="blind-spots__eyebrow">02 — Puntos ciegos</p>
-        </FadeUp>
-
-        <h2 className="blind-spots__title">
-          <Curtain>Lo peligroso no suele ser lo que sabes.</Curtain>
-          <Curtain delay={0.1}>Es lo que no has mirado.</Curtain>
-        </h2>
-
-        <div className="blind-spots__layout">
-          <aside className="blind-spots__aside">
-            <div className="blind-spots__sticky">
-              <p className="blind-spots__risk-label">Riesgos habituales</p>
-              <div className="blind-spots__label-stage" aria-live="polite">
-                {riskLabels.map((label, index) => (
-                  <BlindSpotRotatingLabel
-                    key={label}
-                    label={label}
-                    index={index}
-                    progress={scrollYProgress}
-                  />
-                ))}
-              </div>
-            </div>
-          </aside>
-
-          <div className="blind-spots__cards">
-            {blindSpots.map((item, index) => (
-              <FadeUp key={item.n} delay={index * 0.08}>
-                <article className="blind-spots__card">
-                  <div className="blind-spots__meta">
-                    <span>{item.n}</span>
-                    <span>Riesgo</span>
-                  </div>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                  <div className="blind-spots__card-line" aria-hidden="true" />
-                </article>
-              </FadeUp>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 
 function Services() {
@@ -1038,11 +923,11 @@ function Contact() {
     <section id="contact" className="py-[100px]">
       <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24">
         <div className="space-y-12">
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight">
+          <h2 className="contact-editorial__title text-5xl md:text-6xl font-bold tracking-tight">
             <Curtain>Hablemos de tu <span className="text-[#FF6B00]">tranquilidad financiera</span></Curtain>
           </h2>
           <FadeUp delay={0.1}>
-            <p className="text-xl text-[#4A4A4A] leading-relaxed">
+            <p className="contact-editorial__description text-xl leading-relaxed">
               Rellena el formulario y me pondré en contacto contigo en menos de 24 horas para agendar tu diagnóstico gratuito.
             </p>
           </FadeUp>
@@ -1088,7 +973,7 @@ function Contact() {
           </FadeUp>
         </div>
         <FadeUp>
-          <form id="contact-form" className="space-y-10 scroll-mt-28" onSubmit={onSubmit}>
+          <form id="contact-form" className="contact-form-card space-y-10 scroll-mt-28" onSubmit={onSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               <Field label="Nombre" type="text" placeholder="Tu nombre" value={form.name} onChange={onChange("name")} required />
               <Field label="Teléfono" type="tel" placeholder="Tu número" value={form.phone} onChange={onChange("phone")} required />
