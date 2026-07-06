@@ -1413,7 +1413,7 @@ main > section:first-child h1 {
 .method-step__text {
   max-width: 38rem;
   margin: 0;
-  color: #ffffff;
+  color: #ffffff !important;
   line-height: 1.7;
 }
 
