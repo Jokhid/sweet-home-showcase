@@ -1496,3 +1496,22 @@ main > section:first-child h1 {
   }
 }
 /* JCH_PARTNERS_METHOD_END */
+
+/* JCH_DESCENDER_FIX_START */
+main h1 {
+  line-height: 1.04 !important;
+  padding-bottom: .1em;
+}
+
+main h1 > .overflow-hidden,
+main h2 > .overflow-hidden {
+  padding-bottom: .14em;
+  margin-bottom: -.08em;
+}
+
+@media (max-width: 640px) {
+  main h1 {
+    line-height: 1.06 !important;
+  }
+}
+/* JCH_DESCENDER_FIX_END */
