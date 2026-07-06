@@ -774,33 +774,35 @@ function BlindSpots() {
   );
 }
 
+
 function Services() {
   return (
-    <section id="services" className="py-[100px]">
-      <div className="max-w-[1200px] mx-auto px-6">
-        <div className="mb-24 space-y-6 max-w-3xl">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+    <section id="services" className="services-editorial">
+      <div className="services-editorial__inner">
+        <div className="services-editorial__heading">
+          <h2>
             <Curtain><span className="text-[#FF6B00]">Soluciones</span> para proteger tu economía</Curtain>
           </h2>
           <FadeUp delay={0.15}>
-            <p className="text-xl text-[#4A4A4A] max-w-2xl">Un enfoque integral para que todas las piezas de tu puzzle financiero encajen a la perfección.</p>
+            <p>Un enfoque integral para que todas las piezas de tu puzzle financiero encajen a la perfección.</p>
           </FadeUp>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#E5E5E5]">
-          {services.map((s, idx) => (
-            <FadeUp key={s.title} delay={(idx % 3) * 0.08}>
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={spring}
-                className="h-full bg-white p-12 hover:bg-[#FF6B00] group transition-colors"
-              >
-                <Icon name={s.icon} className="text-[#FF6B00] text-4xl mb-8 group-hover:text-white transition-colors" />
-                <h3 className="text-xl font-bold mb-4 group-hover:text-white transition-colors">{s.title}</h3>
-                <p className="text-[#4A4A4A] mb-10 group-hover:text-white/80 transition-colors">{s.text}</p>
-                <a className="text-xs font-black uppercase tracking-widest flex items-center gap-2 group-hover:text-white transition-colors" href="#contact">
-                  {s.cta} <Icon name="arrow_forward" className="text-sm" />
+
+        <div className="services-editorial__grid">
+          {services.map((service, index) => (
+            <FadeUp key={service.title} delay={(index % 3) * 0.08} className="services-editorial__item">
+              <article className="services-editorial__card">
+                <div className="services-editorial__meta">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <span>Servicio</span>
+                </div>
+                <h3>{service.title}</h3>
+                <p>{service.text}</p>
+                <a href="#contact" className="services-editorial__cta">
+                  <span aria-hidden="true" />
+                  {service.cta}
                 </a>
-              </motion.div>
+              </article>
             </FadeUp>
           ))}
         </div>
