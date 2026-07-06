@@ -585,7 +585,10 @@ function Diagnosis() {
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="mb-24 space-y-6 max-w-3xl">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-balance">
-            <Curtain>No vendo productos. <span className="text-[#FF6B00]">Ordeno decisiones</span></Curtain>
+            <Curtain>
+              <span className="block">No vendo productos.</span>
+              <span className="block text-[#FF6B00]">Ordeno decisiones</span>
+            </Curtain>
           </h2>
           <motion.div
             initial={{ scaleX: 0 }}
