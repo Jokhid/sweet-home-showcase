@@ -235,9 +235,9 @@ function Index() {
         <Diagnosis />
         <Problem />
         <BlindSpots />
-        <Partners />
         <Services />
         <Method />
+        <Partners />
         <About />
         <Testimonials />
         <FAQ />
@@ -586,7 +586,7 @@ function Diagnosis() {
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="mb-24 space-y-6 max-w-3xl">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-balance">
-            <Curtain>Antes de decidir, mira bien <span className="text-[#FF6B00]">dónde estás expuesto</span></Curtain>
+            <Curtain>No vendo productos. <span className="text-[#FF6B00]">Ordeno decisiones</span></Curtain>
           </h2>
           <motion.div
             initial={{ scaleX: 0 }}
@@ -813,30 +813,37 @@ function Services() {
 }
 
 function Method() {
+  const reduce = useReducedMotion();
+
   return (
     <section id="method" className="py-[100px] border-y border-[#E5E5E5]">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
           <div className="space-y-12">
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
               <Curtain>No se trata de contratar más. Se trata de <span className="text-[#FF6B00]">decidir mejor</span></Curtain>
             </h2>
-            <div className="space-y-12">
-              {method.map((m, idx) => (
-                <FadeUp key={m.n} delay={idx * 0.1}>
-                  <div className="flex gap-8">
-                    <span className="text-3xl font-black text-[#FF6B00]">{m.n}</span>
-                    <div>
-                      <h4 className="text-xl font-bold mb-2 uppercase tracking-tight">{m.title}</h4>
-                      <p className="text-[#4A4A4A] leading-relaxed">{m.text}</p>
-                    </div>
+            <div className="method-steps">
+              {method.map((m) => (
+                <motion.article
+                  key={m.n}
+                  className="method-step"
+                  initial={reduce ? false : { opacity: 0, y: 64 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.65 }}
+                  transition={{ duration: 0.85, ease: easeOutExpo }}
+                >
+                  <span className="method-step__number">{m.n}</span>
+                  <div>
+                    <h4 className="method-step__title">{m.title}</h4>
+                    <p className="method-step__text">{m.text}</p>
                   </div>
-                </FadeUp>
+                </motion.article>
               ))}
             </div>
           </div>
           <FadeUp delay={0.1}>
-            <div className="relative overflow-hidden aspect-square">
+            <div className="relative overflow-hidden aspect-square lg:sticky lg:top-28">
               <motion.img
                 src={IMG(9)}
                 loading="lazy"
@@ -1267,19 +1274,20 @@ const partners = [
 
 function Partners() {
   return (
-    <section aria-label="Entidades colaboradoras" className="py-16 bg-[#FAFAFA] border-y border-[#EEEEEE]">
-      <div className="max-w-[1200px] mx-auto px-6">
-        <p className="text-center text-xs font-bold uppercase tracking-[0.25em] text-[#7A7A7A] mb-10">
-          Colaboro con entidades líderes del sector
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
-          {partners.map((p) => (
-            <span
-              key={p.name}
-              className={`text-xl md:text-2xl text-[#555] opacity-80 hover:opacity-100 transition-opacity ${p.className}`}
-            >
-              {p.name}
-            </span>
+    <section aria-label="Entidades colaboradoras" className="partners-editorial">
+      <div className="partners-editorial__inner">
+        <FadeUp>
+          <p className="partners-editorial__label">
+            Colaboro con entidades líderes del sector
+          </p>
+        </FadeUp>
+        <div className="partners-editorial__list">
+          {partners.map((p, idx) => (
+            <FadeUp key={p.name} delay={idx * 0.06}>
+              <span className={`partners-editorial__name ${p.className}`}>
+                {p.name}
+              </span>
+            </FadeUp>
           ))}
         </div>
       </div>
