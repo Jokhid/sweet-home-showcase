@@ -932,7 +932,7 @@ function About() {
             <FadeUp delay={0.3}>
               <div className="flex items-center gap-4 text-[#1A1A1A] font-bold">
                 <Icon name="location_on" className="text-[#FF6B00]" />
-                <span className="text-sm uppercase tracking-widest">Altea · Benidorm · Costa Blanca · Alicante · Online</span>
+                <span className="text-sm uppercase tracking-widest text-[#C5A566]">Altea · Benidorm · Costa Blanca · Alicante · Online</span>
               </div>
             </FadeUp>
             <FadeUp delay={0.4}>
@@ -1088,7 +1088,7 @@ function Contact() {
           </FadeUp>
         </div>
         <FadeUp>
-          <form className="space-y-10" onSubmit={onSubmit}>
+          <form id="contact-form" className="space-y-10 scroll-mt-28" onSubmit={onSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               <Field label="Nombre" type="text" placeholder="Tu nombre" value={form.name} onChange={onChange("name")} required />
               <Field label="Teléfono" type="tel" placeholder="Tu número" value={form.phone} onChange={onChange("phone")} required />
