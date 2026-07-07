@@ -37,7 +37,7 @@ export const Route = createFileRoute("/")({
               url: "https://josecarlos.hilolegal.es",
               telephone: "+34647506040",
               email: "josecarlos@hilolegal.es",
-              image: "https://josecarlos.hilolegal.es/8.jpg",
+              image: "https://josecarlos.hilolegal.es/8.webp",
               sameAs: [
                 "https://www.linkedin.com/in/jos%C3%A9carloshidalgo/",
                 "https://www.instagram.com/jokhid/",
@@ -65,7 +65,7 @@ export const Route = createFileRoute("/")({
               url: "https://josecarlos.hilolegal.es",
               telephone: "+34647506040",
               email: "josecarlos@hilolegal.es",
-              image: "https://josecarlos.hilolegal.es/8.jpg",
+              image: "https://josecarlos.hilolegal.es/8.webp",
               description:
                 "Asesoramiento financiero e hipotecario para autónomos y familias en Altea, Benidorm y Alicante. Hipotecas hasta el 100%, seguros, pensiones y administración de fincas en la Costa Blanca.",
               priceRange: "€€",
