@@ -13,23 +13,25 @@ import appCss from "../styles.css?url";
 const FONT_PRIMARY = "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap";
 const FONT_ICONS = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap";
 const HERO_H1_SIZE_STYLE = "main > section:first-child h1{font-size:clamp(1.9875rem,4.8vw,4.65rem)!important;}@media(max-width:900px){main > section:first-child h1{font-size:clamp(1.875rem,9vw,3.1125rem)!important;}}";
-const CONTACT_SELECT_LABEL_SCRIPT = "document.addEventListener('DOMContentLoaded',function(){var select=document.querySelector('#contact-form select');if(select&&!select.hasAttribute('aria-label'))select.setAttribute('aria-label','¿Qué necesitas revisar?');});";
+const DIAGNOSIS_HEADING_STYLE = "main > section:nth-of-type(3) h2{max-width:64rem!important;font-size:clamp(2.2rem,5vw,4.5rem)!important;line-height:1.02!important;}main > section:nth-of-type(3) h2 span{white-space:nowrap;}@media(max-width:480px){main > section:nth-of-type(3) h2{font-size:clamp(1.85rem,10vw,2.6rem)!important;}}";
+const SERVICES_ICON_STYLE = ".services-editorial__icon{display:inline-flex!important;color:var(--jch-accent)!important;font-family:'Material Symbols Outlined'!important;font-size:2.25rem!important;font-weight:400!important;font-style:normal!important;line-height:1!important;letter-spacing:normal!important;text-transform:none!important;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 40;margin:2rem 0 0!important;}.services-editorial__icon + h3{margin-top:1.2rem!important;}";
+const PAGE_ENHANCEMENT_SCRIPT = "document.addEventListener('DOMContentLoaded',function(){var select=document.querySelector('#contact-form select');if(select&&!select.hasAttribute('aria-label'))select.setAttribute('aria-label','¿Qué necesitas revisar?');var icons=['analytics','real_estate_agent','assured_workload','trending_up','family_restroom','domain'];document.querySelectorAll('.services-editorial__card').forEach(function(card,index){if(card.querySelector('.services-editorial__icon'))return;var title=card.querySelector('h3');if(!title)return;var icon=document.createElement('span');icon.className='material-symbols-outlined services-editorial__icon';icon.setAttribute('aria-hidden','true');icon.textContent=icons[index]||'check_circle';title.parentNode.insertBefore(icon,title);});});";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">Página no encontrada</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          La página que buscas no existe o se ha movido.
         </p>
         <div className="mt-6">
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Go home
+            Volver al inicio
           </Link>
         </div>
       </div>
@@ -45,10 +47,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          Esta página no se ha podido cargar
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Algo ha fallado. Puedes actualizar la página o volver al inicio.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -58,13 +60,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
+            Intentarlo de nuevo
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Go home
+            Volver al inicio
           </a>
         </div>
       </div>
@@ -118,10 +120,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
         <HeadContent />
         <style dangerouslySetInnerHTML={{ __html: HERO_H1_SIZE_STYLE }} />
+        <style dangerouslySetInnerHTML={{ __html: DIAGNOSIS_HEADING_STYLE }} />
+        <style dangerouslySetInnerHTML={{ __html: SERVICES_ICON_STYLE }} />
         <noscript>
           <link rel="stylesheet" href={FONT_PRIMARY} />
           <link rel="stylesheet" href={FONT_ICONS} />
@@ -129,7 +133,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
-        <script dangerouslySetInnerHTML={{ __html: CONTACT_SELECT_LABEL_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: PAGE_ENHANCEMENT_SCRIPT }} />
         <Scripts />
         <script src="/herramientas-home.js" />
       </body>
