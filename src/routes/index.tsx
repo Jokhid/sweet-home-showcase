@@ -112,7 +112,7 @@ const PHONE_DISPLAY = "647 50 60 40";
 const WHATSAPP = "https://wa.me/34647506040";
 
 // Photos in /public
-const IMG = (n: number) => `/${n}.jpg`;
+const IMG = (n: number) => `/${n}.webp`;
 const LOGO = "/logo.png";
 
 const Icon = ({ name, className = "" }: { name: string; className?: string }) => (
