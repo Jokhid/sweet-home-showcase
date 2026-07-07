@@ -12,6 +12,7 @@ import appCss from "../styles.css?url";
 
 const FONT_PRIMARY = "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap";
 const FONT_ICONS = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap";
+const CONTACT_SELECT_LABEL_SCRIPT = "document.addEventListener('DOMContentLoaded',function(){var select=document.querySelector('#contact-form select');if(select&&!select.hasAttribute('aria-label'))select.setAttribute('aria-label','¿Qué necesitas revisar?');});";
 
 function NotFoundComponent() {
   return (
@@ -126,6 +127,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        <script dangerouslySetInnerHTML={{ __html: CONTACT_SELECT_LABEL_SCRIPT }} />
         <Scripts />
         <script src="/herramientas-home.js" />
       </body>
