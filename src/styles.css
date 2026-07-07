@@ -178,9 +178,9 @@
   .text-balance { text-wrap: balance; }
 }
 
-img[src="/1.jpg"],
-img[src="/8.jpg"],
-img[src="/9.jpg"] {
+img[src="/1.webp"],
+img[src="/8.webp"],
+img[src="/9.webp"] {
   filter: grayscale(100%);
 }
 
@@ -560,7 +560,7 @@ main > section:first-child h1 span[class*="text-\[\#FF6B00\]"] {
   font-weight: 400;
 }
 
-main > section:first-child img[src="/1.jpg"] {
+main > section:first-child img[src="/1.webp"] {
   width: 100%;
   aspect-ratio: 0.92;
   object-fit: cover;
@@ -569,7 +569,7 @@ main > section:first-child img[src="/1.jpg"] {
   transition: filter 600ms ease, transform 900ms cubic-bezier(.16,1,.3,1);
 }
 
-main > section:first-child [class*="group"]:hover img[src="/1.jpg"] {
+main > section:first-child [class*="group"]:hover img[src="/1.webp"] {
   filter: grayscale(0.65) sepia(0.12) contrast(1.08);
 }
 
