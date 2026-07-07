@@ -6,6 +6,7 @@
     health_and_safety: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M12 7v8"/><path d="M8 11h8"/></svg>',
     real_estate_agent: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>',
     arrow_forward: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>',
+    close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
   };
 
   function injectStyles() {
@@ -83,6 +84,44 @@
       main > section:nth-of-type(3) h2 .overflow-hidden {
         overflow: visible !important;
         padding-right: .25em;
+      }
+
+      [data-jc-tools-link="true"] svg,
+      [data-jc-close-button="true"] svg {
+        width: 1.25rem;
+        height: 1.25rem;
+        display: block;
+        flex: 0 0 auto;
+      }
+
+      [data-jc-close-button="true"] {
+        color: #1A1A1A !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+      }
+
+      [data-jc-close-button="true"]:hover {
+        color: #ffffff !important;
+        background: #FF6B00 !important;
+      }
+
+      [data-jc-mobile-tools-link="true"] {
+        animation: jc-mobile-nav-in 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+        animation-delay: 455ms;
+      }
+
+      @keyframes jc-mobile-nav-in {
+        from {
+          opacity: 0;
+          transform: translateX(54px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
       }
 
       @media (max-width: 640px) {
@@ -194,6 +233,20 @@
     return Boolean(link.closest('[role="dialog"]')) || link.className.toString().includes("rounded-2xl");
   }
 
+  function enhanceMobileCloseButton() {
+    document.querySelectorAll('[role="dialog"] button[aria-label="Cerrar menú"]').forEach((button) => {
+      if (!(button instanceof HTMLButtonElement)) return;
+      if (button.className.toString().includes("absolute inset-0")) return;
+
+      button.setAttribute("data-jc-close-button", "true");
+
+      if (button.getAttribute("data-jc-close-enhanced") === "true") return;
+
+      button.setAttribute("data-jc-close-enhanced", "true");
+      button.innerHTML = `<span aria-hidden="true">${ICONS.close}</span>`;
+    });
+  }
+
   function paintToolsLink(link, faqLink) {
     const mobile = isMobileMenuLink(faqLink || link);
 
@@ -201,8 +254,10 @@
     link.setAttribute("data-jc-tools-link", "true");
     link.className = faqLink.className;
     link.removeAttribute("style");
+    link.removeAttribute("data-jc-mobile-tools-link");
 
     if (mobile) {
+      link.setAttribute("data-jc-mobile-tools-link", "true");
       link.innerHTML = `
         <span class="absolute inset-0 origin-right scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"></span>
         <span class="relative z-10 flex items-center justify-between transition-colors group-hover:text-white">
@@ -236,7 +291,7 @@
 
       if (isMobileMenuLink(faqLink)) {
         link.addEventListener("click", () => {
-          const closeButton = document.querySelector('[aria-label="Cerrar menú"]');
+          const closeButton = document.querySelector('[role="dialog"] button[aria-label="Cerrar menú"][data-jc-close-button="true"]');
           if (closeButton instanceof HTMLButtonElement) closeButton.click();
         });
       }
@@ -287,6 +342,7 @@
   function enhanceHome() {
     if (window.location.pathname !== "/") return;
     injectStyles();
+    enhanceMobileCloseButton();
     ensureToolsNav();
     ensureToolsSection();
   }
