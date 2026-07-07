@@ -7,7 +7,10 @@
     real_estate_agent: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>',
     arrow_forward: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>',
     close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
+    menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>',
   };
+
+  let enhanceQueued = false;
 
   function injectStyles() {
     if (document.getElementById("jc-tools-styles")) return;
@@ -87,11 +90,32 @@
       }
 
       [data-jc-tools-link="true"] svg,
-      [data-jc-close-button="true"] svg {
+      [data-jc-close-button="true"] svg,
+      [data-jc-menu-button="true"] svg,
+      [data-jc-menu-title-icon="true"] svg,
+      [data-jc-mobile-nav-icon="true"] svg {
         width: 1.25rem;
         height: 1.25rem;
         display: block;
         flex: 0 0 auto;
+      }
+
+      [data-jc-menu-button="true"] svg,
+      [data-jc-close-button="true"] svg {
+        width: 1.875rem;
+        height: 1.875rem;
+      }
+
+      [data-jc-menu-title-icon="true"] {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        color: #1A1A1A !important;
+      }
+
+      [data-jc-menu-title-icon="true"] svg {
+        width: 1.5rem;
+        height: 1.5rem;
       }
 
       [data-jc-close-button="true"] {
@@ -110,6 +134,7 @@
       [data-jc-mobile-tools-link="true"] {
         animation: jc-mobile-nav-in 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
         animation-delay: 455ms;
+        will-change: opacity, transform;
       }
 
       @keyframes jc-mobile-nav-in {
@@ -233,17 +258,39 @@
     return Boolean(link.closest('[role="dialog"]')) || link.className.toString().includes("rounded-2xl");
   }
 
-  function enhanceMobileCloseButton() {
+  function replaceIcon(element, icon, attribute) {
+    element.setAttribute(attribute, "true");
+    if (element.getAttribute("data-jc-icon-enhanced") === icon) return;
+
+    element.setAttribute("data-jc-icon-enhanced", icon);
+    element.innerHTML = ICONS[icon];
+  }
+
+  function enhanceMobileMenuIcons() {
+    document.querySelectorAll('button[aria-label="Abrir menú"]').forEach((button) => {
+      if (!(button instanceof HTMLButtonElement)) return;
+      replaceIcon(button, "menu", "data-jc-menu-button");
+    });
+
     document.querySelectorAll('[role="dialog"] button[aria-label="Cerrar menú"]').forEach((button) => {
       if (!(button instanceof HTMLButtonElement)) return;
       if (button.className.toString().includes("absolute inset-0")) return;
+      replaceIcon(button, "close", "data-jc-close-button");
+    });
 
-      button.setAttribute("data-jc-close-button", "true");
+    document.querySelectorAll('[role="dialog"] .material-symbols-outlined').forEach((icon) => {
+      const name = icon.textContent ? icon.textContent.trim() : "";
+      if (name === "arrow_forward") replaceIcon(icon, "arrow_forward", "data-jc-mobile-nav-icon");
+      if (name === "close") replaceIcon(icon, "close", "data-jc-mobile-nav-icon");
+      if (name === "menu") replaceIcon(icon, "menu", "data-jc-mobile-nav-icon");
+    });
 
-      if (button.getAttribute("data-jc-close-enhanced") === "true") return;
-
-      button.setAttribute("data-jc-close-enhanced", "true");
-      button.innerHTML = `<span aria-hidden="true">${ICONS.close}</span>`;
+    document.querySelectorAll('[role="dialog"] span').forEach((span) => {
+      if (!(span instanceof HTMLSpanElement)) return;
+      if (span.textContent && span.textContent.trim() === "Menú" && span.className.toString().includes("uppercase")) {
+        span.setAttribute("aria-hidden", "true");
+        replaceIcon(span, "menu", "data-jc-menu-title-icon");
+      }
     });
   }
 
@@ -262,7 +309,7 @@
         <span class="absolute inset-0 origin-right scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"></span>
         <span class="relative z-10 flex items-center justify-between transition-colors group-hover:text-white">
           <span>Herramientas</span>
-          <span aria-hidden="true" class="text-xl text-[#FF6B00] transition-colors group-hover:text-white">${ICONS.arrow_forward}</span>
+          <span aria-hidden="true" data-jc-mobile-nav-icon="true" class="text-xl text-[#FF6B00] transition-colors group-hover:text-white">${ICONS.arrow_forward}</span>
         </span>
       `;
     } else {
@@ -342,19 +389,36 @@
   function enhanceHome() {
     if (window.location.pathname !== "/") return;
     injectStyles();
-    enhanceMobileCloseButton();
+    enhanceMobileMenuIcons();
     ensureToolsNav();
     ensureToolsSection();
   }
 
+  function queueEnhance() {
+    if (enhanceQueued) return;
+
+    enhanceQueued = true;
+    window.requestAnimationFrame(() => {
+      enhanceQueued = false;
+      enhanceHome();
+    });
+  }
+
   function scheduleEnhance() {
+    window.setTimeout(enhanceHome, 0);
     window.setTimeout(enhanceHome, 80);
     window.setTimeout(enhanceHome, 250);
   }
 
   function startEnhancement() {
+    window.setTimeout(enhanceHome, 0);
     window.setTimeout(enhanceHome, 800);
     window.setTimeout(enhanceHome, 1600);
+
+    if (!window.__jcToolsObserver) {
+      window.__jcToolsObserver = new MutationObserver(queueEnhance);
+      window.__jcToolsObserver.observe(document.body, { childList: true, subtree: true });
+    }
   }
 
   if (document.readyState === "complete") {
