@@ -10,6 +10,9 @@ import {
 
 import appCss from "../styles.css?url";
 
+const FONT_PRIMARY = "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap";
+const FONT_ICONS = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap";
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -89,10 +92,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      {
+        rel: "preload",
+        as: "image",
+        href: "/1.webp",
+        type: "image/webp",
+        fetchpriority: "high",
+        imagesizes: "(max-width: 768px) 100vw, 50vw",
+      },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" },
+      { rel: "preload", as: "style", href: FONT_PRIMARY },
+      { rel: "stylesheet", href: FONT_PRIMARY, media: "print", onload: "this.media='all'" },
+      { rel: "preload", as: "style", href: FONT_ICONS },
+      { rel: "stylesheet", href: FONT_ICONS, media: "print", onload: "this.media='all'" },
     ],
   }),
   shellComponent: RootShell,
@@ -106,6 +119,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <noscript>
+          <link rel="stylesheet" href={FONT_PRIMARY} />
+          <link rel="stylesheet" href={FONT_ICONS} />
+        </noscript>
       </head>
       <body>
         {children}
