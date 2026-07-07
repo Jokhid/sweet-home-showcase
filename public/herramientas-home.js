@@ -75,6 +75,28 @@
         color: #ffffff !important;
       }
 
+      main > section:nth-of-type(3) h2 {
+        overflow: visible !important;
+        padding-right: .25em;
+      }
+
+      main > section:nth-of-type(3) h2 .overflow-hidden {
+        overflow: visible !important;
+        padding-right: .25em;
+      }
+
+      @media (max-width: 640px) {
+        main > section:nth-of-type(3) h2 {
+          max-width: 100% !important;
+          font-size: clamp(1.45rem, 8.4vw, 2.15rem) !important;
+          line-height: 1.08 !important;
+        }
+
+        main > section:nth-of-type(3) h2 span {
+          white-space: nowrap;
+        }
+      }
+
       .jc-tools-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
