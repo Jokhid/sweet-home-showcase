@@ -1,6 +1,12 @@
 (() => {
   const GOLD = "#C5A566";
   const TOOLS_HREF = "/#herramientas";
+  const ICONS = {
+    savings: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11a7 7 0 0 1 14 0c0 5-7 10-7 10s-7-5-7-10Z"/><path d="M12 8v6"/><path d="M9.5 10.5h3.25a1.75 1.75 0 0 1 0 3.5H10"/><path d="M16.5 5.5 18 3"/><path d="M7.5 5.5 6 3"/></svg>',
+    health_and_safety: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M12 7v8"/><path d="M8 11h8"/></svg>',
+    real_estate_agent: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>',
+    arrow_forward: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>',
+  };
 
   function injectStyles() {
     if (document.getElementById("jc-tools-styles")) return;
@@ -51,6 +57,14 @@
         line-height: 1.65;
       }
 
+      .services-editorial__card h3 {
+        color: ${GOLD} !important;
+      }
+
+      .services-editorial__card p {
+        color: #ffffff !important;
+      }
+
       .jc-tools-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -78,11 +92,25 @@
       }
 
       .jc-tool-icon {
+        width: 44px;
+        height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         color: ${GOLD};
-        font-family: "Material Symbols Outlined";
-        font-size: 44px;
-        line-height: 1;
         margin-bottom: 32px;
+      }
+
+      .jc-tool-icon svg,
+      .jc-tool-action svg {
+        width: 1em;
+        height: 1em;
+        display: block;
+      }
+
+      .jc-tool-icon svg {
+        width: 44px;
+        height: 44px;
       }
 
       .jc-tool-card h3 {
@@ -147,7 +175,7 @@
         <span class="absolute inset-0 origin-right scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"></span>
         <span class="relative z-10 flex items-center justify-between transition-colors group-hover:text-white">
           <span>Herramientas</span>
-          <span aria-hidden="true" class="material-symbols-outlined text-xl text-[#FF6B00] transition-colors group-hover:text-white">arrow_forward</span>
+          <span aria-hidden="true" class="text-xl text-[#FF6B00] transition-colors group-hover:text-white">${ICONS.arrow_forward}</span>
         </span>
       `;
     } else {
@@ -200,19 +228,19 @@
         <p class="jc-tools-intro">Recursos prácticos para medir ahorro, vulnerabilidad financiera y escenarios hipotecarios antes de tomar decisiones importantes.</p>
         <div class="jc-tools-grid">
           <a class="jc-tool-card" href="/herramientas/ahorro-potencial/">
-            <span class="jc-tool-icon" aria-hidden="true">savings</span>
+            <span class="jc-tool-icon" aria-hidden="true">${ICONS.savings}</span>
             <h3>Calculadora de ahorro potencial</h3>
             <p>Calcula cuánto dinero se escapa en pequeños gastos recurrentes y visualiza tu ahorro anual recuperable.</p>
-            <span class="jc-tool-action">Abrir calculadora <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></span>
+            <span class="jc-tool-action">Abrir calculadora <span aria-hidden="true">${ICONS.arrow_forward}</span></span>
           </a>
           <article class="jc-tool-card" aria-disabled="true">
-            <span class="jc-tool-icon" aria-hidden="true">health_and_safety</span>
+            <span class="jc-tool-icon" aria-hidden="true">${ICONS.health_and_safety}</span>
             <h3>Test de vulnerabilidad financiera</h3>
             <p>Detecta puntos débiles en ingresos, protección y planificación para saber dónde conviene actuar primero.</p>
             <span class="jc-tool-action">Próximamente</span>
           </article>
           <article class="jc-tool-card" aria-disabled="true">
-            <span class="jc-tool-icon" aria-hidden="true">real_estate_agent</span>
+            <span class="jc-tool-icon" aria-hidden="true">${ICONS.real_estate_agent}</span>
             <h3>Calculadora hipotecaria</h3>
             <p>Estima cuota, intereses y escenarios de financiación para valorar una hipoteca con más criterio.</p>
             <span class="jc-tool-action">Próximamente</span>
