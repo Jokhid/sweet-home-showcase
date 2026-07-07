@@ -65,6 +65,16 @@
         color: #ffffff !important;
       }
 
+      #faq button,
+      #faq button > span:first-child {
+        color: ${GOLD} !important;
+      }
+
+      #faq button + div,
+      #faq button + div div {
+        color: #ffffff !important;
+      }
+
       .jc-tools-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
