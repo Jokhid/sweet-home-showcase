@@ -10,8 +10,6 @@
     menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>',
   };
 
-  let enhanceQueued = false;
-
   function injectStyles() {
     if (document.getElementById("jc-tools-styles")) return;
 
@@ -394,16 +392,6 @@
     ensureToolsSection();
   }
 
-  function queueEnhance() {
-    if (enhanceQueued) return;
-
-    enhanceQueued = true;
-    window.requestAnimationFrame(() => {
-      enhanceQueued = false;
-      enhanceHome();
-    });
-  }
-
   function scheduleEnhance() {
     window.setTimeout(enhanceHome, 0);
     window.setTimeout(enhanceHome, 80);
@@ -414,11 +402,6 @@
     window.setTimeout(enhanceHome, 0);
     window.setTimeout(enhanceHome, 800);
     window.setTimeout(enhanceHome, 1600);
-
-    if (!window.__jcToolsObserver) {
-      window.__jcToolsObserver = new MutationObserver(queueEnhance);
-      window.__jcToolsObserver.observe(document.body, { childList: true, subtree: true });
-    }
   }
 
   if (document.readyState === "complete") {
