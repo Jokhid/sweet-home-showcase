@@ -29,6 +29,7 @@
       main > section:nth-of-type(3) h2 .overflow-hidden { overflow: visible !important; padding-right: .25em; }
       [data-jc-tools-link="true"] svg, [data-jc-close-button="true"] svg, [data-jc-menu-button="true"] svg, [data-jc-menu-title-icon="true"] svg, [data-jc-mobile-nav-icon="true"] svg { width: 1.25rem; height: 1.25rem; display: block; flex: 0 0 auto; }
       [data-jc-menu-button="true"] svg, [data-jc-close-button="true"] svg { width: 1.875rem; height: 1.875rem; }
+      [data-jc-mobile-tools-link="true"] [data-jc-mobile-nav-icon="true"] svg { width: 1.5rem; height: 1.5rem; }
       [data-jc-menu-title-icon="true"] { display: inline-flex !important; align-items: center; justify-content: center; color: #1A1A1A !important; }
       [data-jc-menu-title-icon="true"] svg { width: 1.5rem; height: 1.5rem; }
       [data-jc-close-button="true"] { color: #1A1A1A !important; background: rgba(255, 255, 255, 0.9) !important; display: inline-flex !important; align-items: center; justify-content: center; }
@@ -95,7 +96,7 @@
     link.removeAttribute("data-jc-mobile-tools-link");
     if (mobile) {
       link.setAttribute("data-jc-mobile-tools-link", "true");
-      link.innerHTML = `<span class="absolute inset-0 origin-right scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"></span><span class="relative z-10 flex items-center justify-between transition-colors group-hover:text-white"><span>Herramientas</span><span aria-hidden="true" data-jc-mobile-nav-icon="true" class="text-xl text-[#FF6B00] transition-colors group-hover:text-white">${ICONS.arrow_forward}</span></span>`;
+      link.innerHTML = `<span class="absolute inset-0 origin-right scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"></span><span class="relative z-10 flex items-center justify-between transition-colors group-hover:text-white">Herramientas<span aria-hidden="true" class="material-symbols-outlined text-xl text-[#FF6B00] transition-colors group-hover:text-white">arrow_forward</span></span>`;
     } else {
       link.innerHTML = `<span class="transition-colors group-hover:text-[#FF6B00]">Herramientas</span><span class="absolute -bottom-1 left-0 h-[1px] w-full origin-left scale-x-0 bg-[#FF6B00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"></span>`;
     }
@@ -107,7 +108,8 @@
       if (!parent) return;
       const existingToolsLink = parent.querySelector('a[href="/#herramientas"]');
       if (existingToolsLink) {
-        if (existingToolsLink.getAttribute("data-jc-tools-link") !== "true" || !existingToolsLink.textContent.includes("Herramientas")) paintToolsLink(existingToolsLink, faqLink);
+        const needsMobileRefresh = isMobileMenuLink(existingToolsLink) && !existingToolsLink.querySelector('.material-symbols-outlined');
+        if (existingToolsLink.getAttribute("data-jc-tools-link") !== "true" || !existingToolsLink.textContent.includes("Herramientas") || needsMobileRefresh) paintToolsLink(existingToolsLink, faqLink);
         return;
       }
       const link = document.createElement("a");
@@ -135,9 +137,9 @@
   function enhanceHome() {
     if (window.location.pathname !== "/") return;
     injectStyles();
-    enhanceMobileMenuIcons();
     ensureToolsNav();
     ensureToolsSection();
+    enhanceMobileMenuIcons();
   }
 
   function scheduleMenuEnhance() {
