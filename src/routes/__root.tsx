@@ -11,7 +11,6 @@ import {
 import appCss from "../styles.css?url";
 
 const FONT_PRIMARY = "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap";
-const FONT_ICONS = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap";
 const HERO_H1_SIZE_STYLE = "main > section:first-child h1{font-size:clamp(1.9875rem,4.8vw,4.65rem)!important;}@media(max-width:900px){main > section:first-child h1{font-size:clamp(1.875rem,9vw,3.1125rem)!important;}}";
 const DIAGNOSIS_HEADING_STYLE = "main > section:nth-of-type(3) h2{max-width:64rem!important;font-size:clamp(2.2rem,5vw,4.5rem)!important;line-height:1.02!important;}main > section:nth-of-type(3) h2 span{white-space:nowrap;}@media(max-width:480px){main > section:nth-of-type(3) h2{font-size:clamp(1.85rem,10vw,2.6rem)!important;}}";
 const DIAGNOSIS_IMAGE_STYLE = "main > section:nth-of-type(3) article > div.relative.overflow-hidden{aspect-ratio:1/1!important;width:100%!important;}main > section:nth-of-type(3) article > div.relative.overflow-hidden img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;}";
@@ -109,8 +108,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "preload", as: "style", href: FONT_PRIMARY },
       { rel: "stylesheet", href: FONT_PRIMARY, media: "print", onload: "this.media='all'" },
-      { rel: "preload", as: "style", href: FONT_ICONS },
-      { rel: "stylesheet", href: FONT_ICONS, media: "print", onload: "this.media='all'" },
     ],
   }),
   shellComponent: RootShell,
@@ -130,7 +127,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <style dangerouslySetInnerHTML={{ __html: SERVICES_ICON_STYLE }} />
         <noscript>
           <link rel="stylesheet" href={FONT_PRIMARY} />
-          <link rel="stylesheet" href={FONT_ICONS} />
         </noscript>
       </head>
       <body>
