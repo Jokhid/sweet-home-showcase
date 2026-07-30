@@ -336,12 +336,7 @@ function Header() {
 
             <div className="relative z-10 flex h-full flex-col">
               <div className="flex items-center justify-between border-b border-white/70 bg-white/76 px-6 py-5 backdrop-blur-xl">
-                <a
-                  href="https://hilolegal.es"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3"
-                >
+                <div className="flex items-center gap-3">
                   <img
                     src={LOGO}
                     alt="Logo José Carlos Hidalgo"
@@ -350,7 +345,7 @@ function Header() {
                   <span className="text-base font-bold uppercase tracking-tight text-[#1A1A1A]">
                     Menú
                   </span>
-                </a>
+                </div>
 
                 <button
                   type="button"
