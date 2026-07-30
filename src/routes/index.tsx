@@ -404,7 +404,7 @@ function Header() {
         className="sticky top-0 z-50 w-full border-b border-[#E5E5E5] bg-white/85 backdrop-blur-xl"
       >
         <nav className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-6 py-5">
-          <a className="group flex items-center gap-3" href="#">
+          <a className="group flex items-center gap-3" href="https://hilolegal.es" target="_blank" rel="noopener noreferrer">
             <motion.img
               src={LOGO}
               alt="Logo José Carlos Hidalgo"
