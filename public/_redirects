@@ -1,0 +1,5 @@
+/blog https://hilolegal.es/blog 301
+/blog/* https://hilolegal.es/blog/:splat 301
+/herramientas/ahorro-potencial https://hilolegal.es/herramientas/ahorro-potencial/index.html 301
+/herramientas/ahorro-potencial/* https://hilolegal.es/herramientas/ahorro-potencial/index.html 301
+/* https://hilolegal.es/josecarlos/ 301

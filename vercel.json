@@ -1,4 +1,31 @@
 {
+  "redirects": [
+    {
+      "source": "/blog",
+      "destination": "https://hilolegal.es/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "https://hilolegal.es/blog/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/herramientas/ahorro-potencial",
+      "destination": "https://hilolegal.es/herramientas/ahorro-potencial/index.html",
+      "permanent": true
+    },
+    {
+      "source": "/herramientas/ahorro-potencial/:path*",
+      "destination": "https://hilolegal.es/herramientas/ahorro-potencial/index.html",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://hilolegal.es/josecarlos/",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/herramientas-home.js",
