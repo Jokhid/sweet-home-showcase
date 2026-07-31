@@ -336,6 +336,7 @@ function Header() {
 
             <div className="relative z-10 flex h-full flex-col">
               <div className="flex items-center justify-between border-b border-white/70 bg-white/76 px-6 py-5 backdrop-blur-xl">
+                <a
   href="https://hilolegal.es"
   target="_blank"
   rel="noopener noreferrer"
